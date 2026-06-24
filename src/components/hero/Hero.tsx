@@ -1,4 +1,9 @@
-import { motion, useReducedMotion } from "framer-motion";
+import {
+  motion,
+  useReducedMotion,
+  useScroll,
+  useTransform,
+} from "framer-motion";
 import { Button } from "../ui/Button";
 import { Eyebrow } from "../ui/Eyebrow";
 import { primaryCta } from "@/lib/site";
@@ -8,6 +13,10 @@ const EASE = [0.16, 1, 0.3, 1] as const;
 
 export function Hero() {
   const reduce = useReducedMotion();
+  const { scrollY } = useScroll();
+  const contentY = useTransform(scrollY, [0, 520], [0, -44]);
+  const contentOpacity = useTransform(scrollY, [0, 420], [1, 0]);
+
   const rise = (delay: number) =>
     reduce
       ? {}
@@ -19,7 +28,7 @@ export function Hero() {
 
   return (
     <section className="relative isolate min-h-[100dvh] overflow-hidden bg-navy">
-      <TehuacanScene className="absolute inset-0 -z-20 h-full w-full" />
+      <TehuacanScene />
 
       {/* Scrim so the white headline stays legible over the scene */}
       <div
@@ -39,7 +48,10 @@ export function Hero() {
       />
 
       <div className="container-px relative flex min-h-[100dvh] flex-col justify-center pb-24 pt-28">
-        <div className="max-w-xl lg:max-w-[42rem]">
+        <motion.div
+          style={reduce ? undefined : { y: contentY, opacity: contentOpacity }}
+          className="max-w-xl lg:max-w-[42rem]"
+        >
           <motion.div {...rise(0)}>
             <Eyebrow tone="dark">MAQUILA · EMBOTELLADO · MARCA PRIVADA</Eyebrow>
           </motion.div>
@@ -72,7 +84,7 @@ export function Hero() {
               Ver servicios
             </Button>
           </motion.div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

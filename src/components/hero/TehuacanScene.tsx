@@ -1,144 +1,178 @@
+import { useRef } from "react";
+import {
+  motion,
+  useMotionValue,
+  useReducedMotion,
+  useScroll,
+  useSpring,
+  useTransform,
+  type MotionStyle,
+  type MotionValue,
+} from "framer-motion";
+
 /**
- * Bespoke flat editorial illustration of the Tehuacán valley, in MOG's brand
- * palette: sierra + spring (manantial) + bottling plant + premium bottle.
- * Pure vector (crisp, themeable, no external asset). Subtle motion on clouds
- * and water; collapses to static under prefers-reduced-motion.
- *
- * Story left->right: origin (mountains + spring) -> plant -> finished bottle.
+ * Bespoke flat editorial illustration of the Tehuacán valley (sierra, sunset
+ * spring, columnar cacti), in MOG's palette. Rendered as separate parallax
+ * layers that drift on scroll + subtle pointer. Brand-owned vector, no
+ * external asset. Static under prefers-reduced-motion.
  */
-export function TehuacanScene({ className = "" }: { className?: string }) {
+
+const VB = "0 0 1440 900";
+const slice = "xMidYMid slice";
+const layerSvg = "absolute inset-0 h-full w-full";
+
+function Cactus() {
   return (
-    <svg
-      viewBox="0 0 1440 900"
-      preserveAspectRatio="xMidYMid slice"
-      className={className}
+    <g fill="#0C2741">
+      <path d="M-15,0 L-15,-78 Q-15,-95 0,-95 Q15,-95 15,-78 L15,0 Z" />
+      <path d="M15,-44 L33,-44 Q44,-44 44,-58 L44,-74 Q44,-86 55,-86 Q66,-86 66,-74 L66,-30 L48,-30 Q15,-30 15,-44 Z" />
+      <path d="M-15,-54 L-30,-54 Q-40,-54 -40,-66 L-40,-80 Q-40,-90 -49,-90 Q-58,-90 -58,-80 L-58,-40 L-42,-40 Q-15,-40 -15,-54 Z" />
+    </g>
+  );
+}
+
+export function TehuacanScene() {
+  const reduce = useReducedMotion();
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollY } = useScroll();
+  const D = 760;
+
+  const yFar = useTransform(scrollY, [0, D], [0, 55]);
+  const yMid = useTransform(scrollY, [0, D], [0, 28]);
+  const yWater = useTransform(scrollY, [0, D], [0, -14]);
+  const yFg = useTransform(scrollY, [0, D], [0, -72]);
+  const ySun = useTransform(scrollY, [0, D], [0, 88]);
+
+  const mx = useMotionValue(0);
+  const sunX = useSpring(useTransform(mx, [-0.5, 0.5], [16, -16]), {
+    stiffness: 60,
+    damping: 20,
+  });
+  const farX = useSpring(useTransform(mx, [-0.5, 0.5], [9, -9]), {
+    stiffness: 60,
+    damping: 20,
+  });
+  const fgX = useSpring(useTransform(mx, [-0.5, 0.5], [-22, 22]), {
+    stiffness: 60,
+    damping: 20,
+  });
+
+  const onMove = (e: React.MouseEvent) => {
+    if (reduce) return;
+    mx.set(e.clientX / window.innerWidth - 0.5);
+  };
+
+  // helper to build style, disabled when reduce
+  const s = (
+    y: MotionValue<number>,
+    x?: MotionValue<number>,
+  ): MotionStyle =>
+    reduce ? { scale: 1.12 } : x ? { y, x, scale: 1.12 } : { y, scale: 1.12 };
+
+  return (
+    <div
+      ref={ref}
+      onMouseMove={onMove}
+      className="absolute inset-0 -z-20 overflow-hidden"
       aria-hidden="true"
     >
-      <defs>
-        <linearGradient id="sky" x1="0" y1="0" x2="1440" y2="900" gradientUnits="userSpaceOnUse">
-          <stop offset="0" stopColor="#0A2038" />
-          <stop offset="0.5" stopColor="#1E7FB8" />
-          <stop offset="1" stopColor="#2BA6D9" />
-        </linearGradient>
-        <radialGradient id="sun" cx="0.5" cy="0.5" r="0.5">
-          <stop offset="0" stopColor="#E7B468" stopOpacity="0.95" />
-          <stop offset="0.35" stopColor="#C9892F" stopOpacity="0.55" />
-          <stop offset="1" stopColor="#C9892F" stopOpacity="0" />
-        </radialGradient>
-        <linearGradient id="bottle" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="#F2F9FC" />
-          <stop offset="1" stopColor="#CFE8F2" />
-        </linearGradient>
-        <linearGradient id="water" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="#CFE8F2" />
-          <stop offset="1" stopColor="#2BA6D9" />
-        </linearGradient>
-      </defs>
+      {/* Sky (static) */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            "linear-gradient(180deg, #0A2038 0%, #1E7FB8 40%, #5AAAD2 64%, #D7ECF4 80%)",
+        }}
+      />
 
-      {/* Sky */}
-      <rect width="1440" height="900" fill="url(#sky)" />
-
-      {/* Sun glow + core (upper right) */}
-      <circle cx="1170" cy="210" r="230" fill="url(#sun)" className="motion-safe:animate-drift" />
-      <circle cx="1170" cy="210" r="62" fill="#E7B468" opacity="0.9" />
-
-      {/* Clouds */}
-      <g fill="#F2F9FC" className="motion-safe:animate-drift">
-        <g opacity="0.45">
-          <ellipse cx="330" cy="180" rx="90" ry="26" />
-          <ellipse cx="400" cy="166" rx="60" ry="22" />
-          <ellipse cx="260" cy="172" rx="52" ry="20" />
+      {/* Sun + birds */}
+      <motion.svg viewBox={VB} preserveAspectRatio={slice} className={layerSvg} style={s(ySun, sunX)}>
+        <defs>
+          <radialGradient id="sunGlow" cx="0.5" cy="0.5" r="0.5">
+            <stop offset="0" stopColor="#F3C57E" stopOpacity="0.95" />
+            <stop offset="0.4" stopColor="#C9892F" stopOpacity="0.4" />
+            <stop offset="1" stopColor="#C9892F" stopOpacity="0" />
+          </radialGradient>
+        </defs>
+        <circle cx="1015" cy="450" r="300" fill="url(#sunGlow)" />
+        <circle cx="1015" cy="450" r="58" fill="#F4CE89" />
+        <g stroke="#0A2038" strokeWidth="3" fill="none" strokeLinecap="round" opacity="0.45">
+          <path d="M700,235 q14,-12 28,0 q14,-12 28,0" />
+          <path d="M766,272 q10,-9 20,0 q10,-9 20,0" />
+          <path d="M650,288 q11,-9 22,0 q11,-9 22,0" />
         </g>
-      </g>
-      <g fill="#CFE8F2" opacity="0.4">
-        <ellipse cx="880" cy="120" rx="70" ry="20" />
-        <ellipse cx="940" cy="110" rx="46" ry="16" />
-      </g>
+      </motion.svg>
 
-      {/* Back sierra */}
-      <path
-        d="M0,470 C240,400 360,360 540,420 C720,480 860,300 1020,380 C1200,470 1320,430 1440,470 L1440,900 L0,900 Z"
-        fill="#0A2038"
-      />
-      {/* snow/light caps hint */}
-      <path d="M1020,380 C1075,408 1110,430 1150,440 C1110,432 1070,432 1035,452 Z" fill="#CFE8F2" opacity="0.5" />
+      {/* Far sierra */}
+      <motion.svg viewBox={VB} preserveAspectRatio={slice} className={layerSvg} style={s(yFar, farX)}>
+        <defs>
+          <linearGradient id="far" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stopColor="#A9CBDF" /><stop offset="1" stopColor="#8AB4CF" />
+          </linearGradient>
+          <linearGradient id="haze" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stopColor="#EAF5FB" stopOpacity="0" />
+            <stop offset="0.5" stopColor="#EAF5FB" stopOpacity="0.55" />
+            <stop offset="1" stopColor="#EAF5FB" stopOpacity="0" />
+          </linearGradient>
+        </defs>
+        <path d="M0,512 L120,468 L210,498 L330,432 L440,500 L560,452 L690,508 L835,446 L980,498 L1130,436 L1270,492 L1380,458 L1440,486 L1440,900 L0,900 Z" fill="url(#far)" />
+        <rect x="0" y="486" width="1440" height="110" fill="url(#haze)" />
+      </motion.svg>
 
-      {/* Mid hill */}
-      <path
-        d="M0,585 C300,520 480,560 720,540 C960,520 1150,585 1440,560 L1440,900 L0,900 Z"
-        fill="#143D5E"
-      />
+      {/* Mid sierra */}
+      <motion.svg viewBox={VB} preserveAspectRatio={slice} className={layerSvg} style={s(yMid)}>
+        <defs>
+          <linearGradient id="mid" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stopColor="#5A93B8" /><stop offset="1" stopColor="#3F7396" />
+          </linearGradient>
+          <linearGradient id="haze2" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stopColor="#EAF5FB" stopOpacity="0" />
+            <stop offset="0.5" stopColor="#EAF5FB" stopOpacity="0.55" />
+            <stop offset="1" stopColor="#EAF5FB" stopOpacity="0" />
+          </linearGradient>
+        </defs>
+        <path d="M0,602 L170,536 L330,592 L520,494 L700,584 L900,512 L1080,588 L1280,534 L1440,584 L1440,900 L0,900 Z" fill="url(#mid)" />
+        <rect x="0" y="582" width="1440" height="90" fill="url(#haze2)" opacity="0.7" />
+      </motion.svg>
 
-      {/* Bottling plant on the mid hill */}
-      <g>
-        <rect x="556" y="486" width="120" height="62" rx="3" fill="#0A2038" />
-        <rect x="676" y="500" width="46" height="48" rx="3" fill="#0A2038" />
-        <rect x="600" y="456" width="30" height="34" rx="15" fill="#0A2038" />
-        <path d="M556,486 L616,462 L676,486 Z" fill="#0A2038" />
-        {/* lit windows */}
-        <rect x="572" y="506" width="12" height="12" rx="2" fill="#E7B468" opacity="0.9" />
-        <rect x="592" y="506" width="12" height="12" rx="2" fill="#E7B468" opacity="0.9" />
-        <rect x="612" y="506" width="12" height="12" rx="2" fill="#E7B468" opacity="0.9" />
-        <rect x="688" y="514" width="10" height="10" rx="2" fill="#E7B468" opacity="0.9" />
-        <rect x="704" y="514" width="10" height="10" rx="2" fill="#E7B468" opacity="0.9" />
-      </g>
+      {/* Water + reflection */}
+      <motion.svg viewBox={VB} preserveAspectRatio={slice} className={layerSvg} style={s(yWater)}>
+        <defs>
+          <linearGradient id="water" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stopColor="#CFE8F2" />
+            <stop offset="0.3" stopColor="#5FAFD5" />
+            <stop offset="1" stopColor="#1C5C86" />
+          </linearGradient>
+          <linearGradient id="sunRefl" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stopColor="#F3C57E" stopOpacity="0.7" />
+            <stop offset="1" stopColor="#F3C57E" stopOpacity="0" />
+          </linearGradient>
+        </defs>
+        <rect x="0" y="628" width="1440" height="272" fill="url(#water)" />
+        <path d="M983,630 L1047,630 L1024,812 L1006,812 Z" fill="url(#sunRefl)" opacity="0.65" />
+        <g stroke="#F4CE89" strokeLinecap="round" opacity="0.5">
+          <path d="M992,672 h46" strokeWidth="3" />
+          <path d="M1001,742 h28" strokeWidth="3" />
+        </g>
+        <g stroke="#EAF5FB" strokeLinecap="round" fill="none" opacity="0.38">
+          <path d="M150,696 q55,-7 110,0 t110,0" strokeWidth="3" />
+          <path d="M470,732 q70,-8 140,0 t140,0" strokeWidth="3" opacity="0.8" />
+        </g>
+      </motion.svg>
 
-      {/* Aqua hill */}
-      <path
-        d="M0,665 C360,620 600,685 900,652 C1140,626 1320,675 1440,658 L1440,900 L0,900 Z"
-        fill="#1E7FB8"
-      />
-
-      {/* Spring / waterfall from the hill into the pool */}
-      <path d="M735,548 C742,610 738,660 744,742 L772,742 C770,660 772,610 766,548 Z" fill="url(#water)" opacity="0.85" className="motion-safe:animate-drift" />
-
-      {/* Foreground hill */}
-      <path
-        d="M0,752 C320,712 560,772 860,746 C1140,722 1320,762 1440,750 L1440,900 L0,900 Z"
-        fill="#2BA6D9"
-      />
-      {/* amber sunlit rim on foreground hill (right) */}
-      <path
-        d="M860,746 C1060,729 1260,748 1440,740 L1440,762 C1260,768 1080,752 880,769 Z"
-        fill="#C9892F"
-        opacity="0.5"
-      />
-
-      {/* Water pool with foam line */}
-      <path d="M0,832 C300,812 600,846 900,826 C1140,810 1320,838 1440,828 L1440,900 L0,900 Z" fill="#1E7FB8" />
-      <path
-        d="M0,832 C300,812 600,846 900,826 C1140,810 1320,838 1440,828"
-        fill="none"
-        stroke="#CFE8F2"
-        strokeWidth="4"
-        opacity="0.6"
-        className="motion-safe:animate-drift"
-      />
-
-      {/* Premium bottle in the foreground (right) */}
-      <g transform="translate(1086 600)">
-        <ellipse cx="44" cy="232" rx="42" ry="9" fill="#0A2038" opacity="0.25" />
-        <path
-          d="M30,8 L58,8 L58,40 C58,52 70,58 70,86 L70,210 C70,224 60,232 44,232 C28,232 18,224 18,210 L18,86 C18,58 30,52 30,40 Z"
-          fill="url(#bottle)"
-          stroke="#CFE8F2"
-          strokeWidth="1.5"
-        />
-        {/* water level */}
-        <path d="M18,150 L70,150 L70,210 C70,224 60,232 44,232 C28,232 18,224 18,210 Z" fill="#2BA6D9" opacity="0.85" />
-        {/* label */}
-        <rect x="22" y="120" width="44" height="40" rx="3" fill="#0E2A47" />
-        <rect x="28" y="133" width="32" height="4" rx="2" fill="#2BA6D9" />
-        <rect x="28" y="143" width="22" height="3" rx="1.5" fill="#CFE8F2" opacity="0.8" />
-        {/* cap */}
-        <rect x="30" y="0" width="28" height="12" rx="3" fill="#C9892F" />
-        {/* highlight */}
-        <path d="M30,60 C28,110 28,170 32,214" fill="none" stroke="#FFFFFF" strokeWidth="3" opacity="0.45" strokeLinecap="round" />
-      </g>
-
-      {/* droplets */}
-      <circle cx="1060" cy="690" r="5" fill="#CFE8F2" opacity="0.8" className="motion-safe:animate-drift" />
-      <circle cx="1210" cy="730" r="4" fill="#CFE8F2" opacity="0.7" />
-    </svg>
+      {/* Foreground bank + cacti */}
+      <motion.svg viewBox={VB} preserveAspectRatio={slice} className={layerSvg} style={s(yFg, fgX)}>
+        <defs>
+          <linearGradient id="fg" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stopColor="#123150" /><stop offset="1" stopColor="#0A2038" />
+          </linearGradient>
+        </defs>
+        <path d="M0,800 C220,762 470,792 720,778 C1000,762 1240,800 1440,784 L1440,900 L0,900 Z" fill="url(#fg)" />
+        <g transform="translate(150,812) scale(1.15)"><Cactus /></g>
+        <g transform="translate(255,820) scale(0.8)"><Cactus /></g>
+        <g transform="translate(1230,806) scale(1.25)"><Cactus /></g>
+        <g transform="translate(1330,816) scale(0.85)"><Cactus /></g>
+      </motion.svg>
+    </div>
   );
 }
