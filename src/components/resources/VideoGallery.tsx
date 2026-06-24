@@ -3,6 +3,9 @@ import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Play, X } from "@phosphor-icons/react";
 import { Reveal } from "../ui/Reveal";
 import { videos, type VideoResource } from "@/lib/site";
+import { media } from "@/lib/media";
+
+const posters = [media.fillingLine, media.bottlingLine, media.waterPour];
 
 function embedUrl(v: VideoResource) {
   if (!v.videoId) return "";
@@ -105,33 +108,20 @@ export function VideoGallery() {
               onClick={() => setActive(i)}
               className="group block w-full text-left"
             >
-              <div className="relative aspect-video overflow-hidden rounded-card bg-gradient-to-br from-navy to-navy-deep ring-1 ring-line">
-                <svg
+              <div className="relative aspect-video overflow-hidden rounded-card bg-navy ring-1 ring-line">
+                <img
+                  src={posters[i % posters.length]}
+                  alt=""
                   aria-hidden="true"
-                  className="absolute inset-0 h-full w-full opacity-30"
-                  viewBox="0 0 400 225"
-                  preserveAspectRatio="xMidYMid slice"
-                >
-                  {[40, 80, 120, 160].map((r, k) => (
-                    <circle
-                      key={r}
-                      cx="200"
-                      cy="112"
-                      r={r}
-                      fill="none"
-                      stroke="#2BA6D9"
-                      strokeWidth="1"
-                      opacity={0.22 - k * 0.04}
-                    />
-                  ))}
-                </svg>
+                  loading="lazy"
+                  decoding="async"
+                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 ease-water group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-navy/45 transition-colors duration-300 group-hover:bg-navy/30" />
                 <span className="absolute inset-0 grid place-items-center">
                   <span className="grid h-16 w-16 place-items-center rounded-full bg-white/95 text-navy shadow-lift transition-transform duration-300 ease-water group-hover:scale-110">
                     <Play size={26} weight="fill" className="ml-1" />
                   </span>
-                </span>
-                <span className="absolute bottom-3 left-3 text-[10px] font-semibold uppercase tracking-eyebrow text-aqua/80">
-                  Reemplazar miniatura
                 </span>
               </div>
               <h3 className="mt-4 font-display text-lg font-semibold tracking-tight text-navy">

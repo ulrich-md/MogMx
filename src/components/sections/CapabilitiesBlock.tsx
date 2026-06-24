@@ -4,6 +4,7 @@ import { Reveal } from "../ui/Reveal";
 import { Button } from "../ui/Button";
 import { MediaPlaceholder } from "../ui/MediaPlaceholder";
 import { waterTypes } from "@/lib/site";
+import { media } from "@/lib/media";
 
 export function CapabilitiesBlock() {
   return (
@@ -42,7 +43,7 @@ export function CapabilitiesBlock() {
           <Reveal className="grid grid-cols-2 gap-4">
             <div className="col-span-2">
               <MediaPlaceholder
-                // REEMPLAZAR: foto de la línea de embotellado en operación
+                src={media.bottlingLine}
                 label="Línea de embotellado en operación"
                 alt="Línea de embotellado de MOG México en operación"
                 aspect="16/9"

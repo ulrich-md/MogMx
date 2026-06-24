@@ -7,6 +7,7 @@ import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { WaveDivider } from "@/components/ui/WaveDivider";
 import { values } from "@/lib/site";
+import { media } from "@/lib/media";
 
 export default function About() {
   return (
@@ -48,9 +49,9 @@ export default function About() {
           <div className="lg:col-span-6">
             <Reveal>
               <MediaPlaceholder
-                // REEMPLAZAR: foto de planta / región / equipo
+                src={media.bottlesGroup}
                 label="Planta de embotellado o región de Tehuacán"
-                alt="Planta de embotellado de MOG México en Tehuacán, Puebla"
+                alt="Botellas de agua de MOG México sobre fondo claro"
                 aspect="4/3"
               />
             </Reveal>

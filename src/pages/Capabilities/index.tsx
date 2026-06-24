@@ -14,6 +14,7 @@ import {
   exampleMetrics,
   qualityPoints,
 } from "@/lib/site";
+import { media } from "@/lib/media";
 
 const strip = (s: string) => s.replace(/\s*\/\/ EDITABLE.*$/, "");
 
@@ -63,9 +64,9 @@ export default function Capabilities() {
           <div className="lg:col-span-7">
             <Reveal>
               <MediaPlaceholder
-                // REEMPLAZAR: foto de planta / interior de la línea
+                src={media.fillingLine}
                 label="Interior de planta y línea de embotellado"
-                alt="Interior de la planta de embotellado de MOG México"
+                alt="Detalle de llenado y tapado en la línea de MOG México"
                 aspect="4/3"
                 tone="navy"
               />

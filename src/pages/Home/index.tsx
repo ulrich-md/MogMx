@@ -1,6 +1,7 @@
 import { Seo, organizationJsonLd } from "@/lib/seo";
 import { Hero } from "@/components/hero/Hero";
 import { ServicesStrip } from "@/components/sections/ServicesStrip";
+import { StatementBand } from "@/components/sections/StatementBand";
 import { ProcessPreview } from "@/components/sections/ProcessPreview";
 import { CapabilitiesBlock } from "@/components/sections/CapabilitiesBlock";
 import { TrustStrip } from "@/components/sections/TrustStrip";
@@ -18,6 +19,7 @@ export default function Home() {
       />
       <Hero />
       <ServicesStrip />
+      <StatementBand />
       <ProcessPreview />
       <CapabilitiesBlock />
       <TrustStrip />

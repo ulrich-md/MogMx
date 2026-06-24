@@ -32,7 +32,7 @@ export function SectionHeading({
         </Eyebrow>
       ) : null}
       <h2
-        className={`font-display text-[1.9rem] leading-[1.06] tracking-tight sm:text-4xl md:text-[2.7rem] ${
+        className={`font-display text-[2rem] font-bold leading-[1.04] tracking-tight sm:text-4xl md:text-[2.9rem] ${
           isDark ? "text-white" : "text-navy"
         }`}
       >

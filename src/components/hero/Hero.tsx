@@ -1,9 +1,9 @@
 import { motion, useReducedMotion } from "framer-motion";
-import { WaterBackdrop } from "./WaterBackdrop";
+import { ArrowDown } from "@phosphor-icons/react";
 import { Button } from "../ui/Button";
 import { Eyebrow } from "../ui/Eyebrow";
-import { MediaPlaceholder } from "../ui/MediaPlaceholder";
 import { primaryCta } from "@/lib/site";
+import { media } from "@/lib/media";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -18,28 +18,52 @@ export function Hero() {
           transition: { duration: 0.7, delay, ease: EASE },
         };
 
-  return (
-    <section className="relative isolate flex min-h-[100dvh] items-center overflow-hidden pb-20 pt-24">
-      <WaterBackdrop />
+  const scrollDown = () =>
+    window.scrollTo({
+      top: Math.round(window.innerHeight * 0.92),
+      behavior: reduce ? "auto" : "smooth",
+    });
 
-      <div className="container-px grid w-full items-center gap-12 lg:grid-cols-12">
-        <div className="lg:col-span-7">
+  return (
+    <section className="relative isolate min-h-[100dvh] overflow-hidden bg-gradient-to-br from-foam via-white to-mist">
+      {/* Full-bleed product photography */}
+      <img
+        src={media.heroBottle}
+        alt="Botella de agua premium con un dinámico splash de agua sobre fondo claro"
+        className="absolute inset-0 -z-10 h-full w-full object-cover"
+        fetchPriority="high"
+        decoding="async"
+      />
+      {/* Legibility scrim (lighter toward the bottle on the right) */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 -z-10"
+        style={{
+          background:
+            "linear-gradient(102deg, #ffffff 0%, rgba(255,255,255,0.86) 40%, rgba(255,255,255,0.30) 68%, rgba(255,255,255,0) 100%)",
+        }}
+      />
+
+      <div className="container-px relative flex min-h-[100dvh] flex-col justify-center pb-28 pt-28">
+        <div className="max-w-xl lg:max-w-2xl">
           <motion.div {...rise(0)}>
             <Eyebrow>MAQUILA · EMBOTELLADO · MARCA PRIVADA</Eyebrow>
           </motion.div>
 
           <motion.h1
             {...rise(0.08)}
-            className="mt-5 font-display text-[2.3rem] font-bold leading-[1.04] tracking-tight text-navy sm:text-5xl lg:text-[3.25rem]"
+            className="mt-6 font-display text-[2.9rem] font-bold uppercase leading-[0.92] tracking-tight text-navy sm:text-6xl lg:text-7xl xl:text-[5.4rem]"
           >
-            Embotellamos tu marca,
+            Embotellamos
+            <br />
+            tu marca,
             <br />
             <span className="text-blue">tú creces.</span>
           </motion.h1>
 
           <motion.p
             {...rise(0.16)}
-            className="mt-6 max-w-prose text-[1.075rem] leading-[1.7] text-slate"
+            className="mt-7 max-w-md text-[1.075rem] leading-[1.7] text-slate"
           >
             Maquila, embotellado y marca privada de agua mineral y purificada en
             Tehuacán, Puebla. Producimos tu línea de principio a fin.
@@ -57,27 +81,21 @@ export function Hero() {
             </Button>
           </motion.div>
         </div>
-
-        <div className="lg:col-span-5">
-          <motion.div
-            initial={reduce ? false : { opacity: 0, scale: 0.96 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.9, delay: 0.2, ease: EASE }}
-            className="relative mx-auto max-w-md lg:ml-auto lg:max-w-none"
-          >
-            {/* Double-bezel frame: glass tray holding the product photo */}
-            <div className="rounded-[2rem] bg-white/70 p-2 shadow-lift ring-1 ring-white/70">
-              <MediaPlaceholder
-                // REEMPLAZAR: foto de producto (botella sobre fondo claro)
-                label="Botella de agua / vidrio sobre fondo claro, con gotas"
-                alt="Botella de agua mineral de MOG México sobre fondo claro"
-                aspect="4/3"
-                rounded="rounded-[calc(2rem-0.5rem)]"
-              />
-            </div>
-          </motion.div>
-        </div>
       </div>
+
+      {/* Scroll affordance (amber accent) */}
+      <button
+        type="button"
+        onClick={scrollDown}
+        aria-label="Desplázate para explorar"
+        className="group absolute bottom-8 left-5 z-10 grid h-14 w-14 place-items-center rounded-full bg-amber text-navy shadow-amber transition-transform duration-300 ease-water hover:-translate-y-0.5 sm:left-8"
+      >
+        <ArrowDown
+          size={20}
+          weight="bold"
+          className="transition-transform duration-300 ease-water group-hover:translate-y-0.5 motion-safe:animate-drift"
+        />
+      </button>
     </section>
   );
 }
