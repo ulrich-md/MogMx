@@ -1,6 +1,6 @@
 import { Seo } from "@/lib/seo";
 import { PageHero } from "@/components/sections/PageHero";
-import { ServiceCard } from "@/components/ui/ServiceCard";
+import { ServiceRow } from "@/components/ui/ServiceRow";
 import { Reveal } from "@/components/ui/Reveal";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { WaveDivider } from "@/components/ui/WaveDivider";
@@ -22,10 +22,10 @@ export default function Services() {
 
       <section className="bg-white">
         <div className="container-px pb-24">
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="border-b border-line">
             {services.map((service, i) => (
-              <Reveal key={service.slug} delay={i * 0.06}>
-                <ServiceCard service={service} detailed />
+              <Reveal key={service.slug} delay={i * 0.04}>
+                <ServiceRow service={service} index={i} detailed />
               </Reveal>
             ))}
           </div>

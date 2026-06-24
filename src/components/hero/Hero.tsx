@@ -1,7 +1,6 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowDown } from "@phosphor-icons/react";
 import { Button } from "../ui/Button";
-import { Eyebrow } from "../ui/Eyebrow";
 import { primaryCta } from "@/lib/site";
 import { media } from "@/lib/media";
 
@@ -26,11 +25,10 @@ export function Hero() {
 
   return (
     <section className="relative isolate min-h-[100dvh] overflow-hidden bg-gradient-to-br from-foam via-white to-mist">
-      {/* Full-bleed product photography */}
       <img
         src={media.heroBottle}
         alt="Botella de agua premium con un dinámico splash de agua sobre fondo claro"
-        className="absolute inset-0 -z-10 h-full w-full object-cover"
+        className="absolute inset-0 -z-20 h-full w-full object-cover"
         fetchPriority="high"
         decoding="async"
       />
@@ -40,62 +38,90 @@ export function Hero() {
         className="absolute inset-0 -z-10"
         style={{
           background:
-            "linear-gradient(102deg, #ffffff 0%, rgba(255,255,255,0.86) 40%, rgba(255,255,255,0.30) 68%, rgba(255,255,255,0) 100%)",
+            "linear-gradient(101deg, #ffffff 0%, rgba(255,255,255,0.88) 42%, rgba(255,255,255,0.32) 70%, rgba(255,255,255,0) 100%)",
+        }}
+      />
+      {/* Editorial grid (retícula) */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 -z-10"
+        style={{
+          backgroundImage:
+            "repeating-linear-gradient(to right, rgba(14,42,71,0.06) 0, rgba(14,42,71,0.06) 1px, transparent 1px, transparent calc(100% / 6))",
         }}
       />
 
-      <div className="container-px relative flex min-h-[100dvh] flex-col justify-center pb-28 pt-28">
-        <div className="max-w-xl lg:max-w-2xl">
-          <motion.div {...rise(0)}>
-            <Eyebrow>MAQUILA · EMBOTELLADO · MARCA PRIVADA</Eyebrow>
-          </motion.div>
+      <div className="container-px relative flex min-h-[100dvh] flex-col pb-8 pt-24">
+        {/* Top meta labels */}
+        <div className="flex items-center justify-between pt-4 text-[11px] font-semibold uppercase tracking-eyebrow">
+          <span className="text-blue-deep">Tehuacán · Puebla</span>
+          <span className="hidden text-navy/60 sm:block">
+            Maquila / Embotellado / Private label
+          </span>
+        </div>
 
-          <motion.h1
-            {...rise(0.08)}
-            className="mt-6 font-display text-[2.9rem] font-bold uppercase leading-[0.92] tracking-tight text-navy sm:text-6xl lg:text-7xl xl:text-[5.4rem]"
-          >
-            Embotellamos
-            <br />
-            tu marca,
-            <br />
-            <span className="text-blue">tú creces.</span>
-          </motion.h1>
+        {/* Giant headline */}
+        <div className="flex flex-1 items-center py-10">
+          <div className="max-w-3xl">
+            <motion.h1
+              {...rise(0.05)}
+              className="font-display text-[2.9rem] font-bold uppercase leading-[0.88] tracking-tight text-navy sm:text-6xl md:text-7xl lg:text-[4.6rem] xl:text-[5.4rem]"
+            >
+              Embotellamos
+              <br />
+              tu marca,
+              <br />
+              <span className="text-blue">tú creces.</span>
+            </motion.h1>
 
-          <motion.p
-            {...rise(0.16)}
-            className="mt-7 max-w-md text-[1.075rem] leading-[1.7] text-slate"
-          >
-            Maquila, embotellado y marca privada de agua mineral y purificada en
-            Tehuacán, Puebla. Producimos tu línea de principio a fin.
-          </motion.p>
+            <motion.p
+              {...rise(0.16)}
+              className="mt-7 max-w-md text-[1.075rem] leading-[1.7] text-slate"
+            >
+              Maquila, embotellado y marca privada de agua mineral y purificada en
+              Tehuacán, Puebla. Producimos tu línea de principio a fin.
+            </motion.p>
 
-          <motion.div
-            {...rise(0.24)}
-            className="mt-9 flex flex-wrap items-center gap-3"
+            <motion.div
+              {...rise(0.24)}
+              className="mt-9 flex flex-wrap items-center gap-3"
+            >
+              <Button to={primaryCta.to} withArrow size="lg">
+                {primaryCta.label}
+              </Button>
+              <Button to="/servicios" variant="secondary" size="lg">
+                Ver servicios
+              </Button>
+            </motion.div>
+          </div>
+        </div>
+
+        {/* Bottom row: scroll affordance + claim */}
+        <div className="flex items-end justify-between gap-6">
+          <button
+            type="button"
+            onClick={scrollDown}
+            aria-label="Desplázate para explorar"
+            className="group grid h-14 w-14 shrink-0 place-items-center rounded-full bg-amber text-navy shadow-amber transition-transform duration-300 ease-water hover:-translate-y-0.5"
           >
-            <Button to={primaryCta.to} withArrow size="lg">
-              {primaryCta.label}
-            </Button>
-            <Button to="/servicios" variant="secondary" size="lg">
-              Ver servicios
-            </Button>
-          </motion.div>
+            <ArrowDown
+              size={20}
+              weight="bold"
+              className="motion-safe:animate-drift"
+            />
+          </button>
+
+          <div className="hidden max-w-xs border-l-2 border-amber pl-4 text-left sm:block">
+            <p className="font-display text-lg font-bold leading-tight text-navy">
+              Tu agua, nuestra planta.
+            </p>
+            <p className="mt-1 text-[13px] leading-snug text-slate">
+              Producción por contrato con control de calidad y trazabilidad por
+              lote.
+            </p>
+          </div>
         </div>
       </div>
-
-      {/* Scroll affordance (amber accent) */}
-      <button
-        type="button"
-        onClick={scrollDown}
-        aria-label="Desplázate para explorar"
-        className="group absolute bottom-8 left-5 z-10 grid h-14 w-14 place-items-center rounded-full bg-amber text-navy shadow-amber transition-transform duration-300 ease-water hover:-translate-y-0.5 sm:left-8"
-      >
-        <ArrowDown
-          size={20}
-          weight="bold"
-          className="transition-transform duration-300 ease-water group-hover:translate-y-0.5 motion-safe:animate-drift"
-        />
-      </button>
     </section>
   );
 }

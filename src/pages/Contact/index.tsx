@@ -1,19 +1,18 @@
-import { WhatsappLogo, EnvelopeSimple, Phone, MapPin } from "@phosphor-icons/react";
+import {
+  WhatsappLogo,
+  EnvelopeSimple,
+  Phone,
+  MapPin,
+  Clock,
+  ArrowUpRight,
+} from "@phosphor-icons/react";
 import { Seo } from "@/lib/seo";
 import { PageHero } from "@/components/sections/PageHero";
-import { QuoteForm } from "@/components/contact/QuoteForm";
-import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
+import { Button } from "@/components/ui/Button";
 import { WaveDivider } from "@/components/ui/WaveDivider";
 import { site, whatsappHref, mailtoHref } from "@/lib/site";
 
-const channels = [
-  {
-    icon: WhatsappLogo,
-    label: "WhatsApp",
-    value: site.contact.whatsappDisplay,
-    href: whatsappHref("Hola, me interesa cotizar un proyecto de embotellado."),
-    external: true,
-  },
+const directChannels = [
   {
     icon: EnvelopeSimple,
     label: "Correo",
@@ -35,21 +34,46 @@ export default function Contact() {
     <>
       <Seo
         title="Contacto"
-        description="Cotiza tu proyecto de maquila, embotellado o marca privada. WhatsApp, correo y ubicación en Tehuacán, Puebla."
+        description="Contáctanos por WhatsApp, correo o teléfono. MOG México, embotellado y marca privada de agua en Tehuacán, Puebla."
         path="/contacto"
       />
       <PageHero
         eyebrow="Contacto"
-        title="Cotiza tu proyecto"
-        lead="Cuéntanos sobre tu marca y tu proyecto. Te respondemos con una propuesta clara, sin compromiso."
+        title="Hablemos de tu marca"
+        lead="Escríbenos o llámanos directo. Te respondemos con una propuesta clara para tu proyecto de embotellado, sin compromiso."
       />
 
       <section className="bg-white">
-        <div className="container-px grid gap-12 pb-24 lg:grid-cols-12">
-          {/* Channels + map */}
-          <div className="lg:col-span-5">
-            <ul className="space-y-3">
-              {channels.map((c) => {
+        <div className="container-px grid gap-12 pb-24 lg:grid-cols-2 lg:gap-16">
+          {/* Direct channels (company info only) */}
+          <div>
+            <div className="rounded-card bg-navy p-7 sm:p-8">
+              <h2 className="font-display text-2xl font-bold tracking-tight text-white sm:text-[1.7rem]">
+                Escríbenos por WhatsApp
+              </h2>
+              <p className="mt-2.5 text-[15px] leading-relaxed text-mist">
+                Cuéntanos tu proyecto (tipo de agua, formato y volumen estimado)
+                y te enviamos una cotización.
+              </p>
+              <div className="mt-6">
+                <Button
+                  href={whatsappHref(
+                    "Hola, me interesa cotizar un proyecto de embotellado.",
+                  )}
+                  target="_blank"
+                  size="lg"
+                  withArrow
+                >
+                  <span className="inline-flex items-center gap-2">
+                    <WhatsappLogo size={18} weight="fill" />
+                    Abrir WhatsApp
+                  </span>
+                </Button>
+              </div>
+            </div>
+
+            <ul className="mt-8 border-t border-line">
+              {directChannels.map((c) => {
                 const Ico = c.icon;
                 return (
                   <li key={c.label}>
@@ -57,51 +81,75 @@ export default function Contact() {
                       href={c.href}
                       target={c.external ? "_blank" : undefined}
                       rel={c.external ? "noopener noreferrer" : undefined}
-                      className="group flex items-center gap-4 rounded-card bg-white p-5 shadow-soft ring-1 ring-line transition-all duration-300 ease-water hover:-translate-y-0.5 hover:shadow-lift"
+                      className="group flex items-center gap-4 border-b border-line py-5 transition-colors duration-300 hover:bg-foam"
                     >
-                      <span className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-mist text-blue transition-colors duration-300 group-hover:bg-blue group-hover:text-white">
-                        <Ico size={22} weight="regular" />
+                      <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-mist text-blue transition-colors duration-300 group-hover:bg-blue group-hover:text-white">
+                        <Ico size={20} weight="regular" />
                       </span>
-                      <span>
-                        <span className="block text-[12px] font-semibold uppercase tracking-eyebrow text-slate">
+                      <span className="flex-1">
+                        <span className="block text-[11px] font-semibold uppercase tracking-eyebrow text-slate">
                           {c.label}
                         </span>
-                        <span className="block font-display text-[15px] font-semibold text-navy">
+                        <span className="block font-display text-lg font-bold text-navy">
                           {c.value}
                         </span>
                       </span>
+                      <ArrowUpRight
+                        size={18}
+                        weight="bold"
+                        className="text-slate transition-all duration-300 ease-water group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-navy"
+                      />
                     </a>
                   </li>
                 );
               })}
-              <li className="flex items-center gap-4 rounded-card bg-foam p-5 ring-1 ring-line">
-                <span className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-white text-blue shadow-soft">
-                  <MapPin size={22} weight="regular" />
+
+              <li className="flex items-center gap-4 border-b border-line py-5">
+                <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-mist text-blue">
+                  <MapPin size={20} weight="regular" />
                 </span>
-                <span>
-                  <span className="block text-[12px] font-semibold uppercase tracking-eyebrow text-slate">
+                <span className="flex-1">
+                  <span className="block text-[11px] font-semibold uppercase tracking-eyebrow text-slate">
                     Ubicación
                   </span>
-                  <span className="block font-display text-[15px] font-semibold text-navy">
+                  <span className="block font-display text-lg font-bold text-navy">
                     {site.location.label}
                   </span>
                 </span>
               </li>
-            </ul>
 
-            <div className="mt-5">
-              <MediaPlaceholder
-                // REEMPLAZAR: insertar mapa de Google Maps (Tehuacán, Puebla)
-                label="Mapa de ubicación - Tehuacán, Puebla (insertar Google Maps)"
-                alt="Mapa de ubicación de MOG México en Tehuacán, Puebla"
-                aspect="16/9"
-              />
-            </div>
+              <li className="flex items-center gap-4 border-b border-line py-5">
+                <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-mist text-blue">
+                  <Clock size={20} weight="regular" />
+                </span>
+                <span className="flex-1">
+                  <span className="block text-[11px] font-semibold uppercase tracking-eyebrow text-slate">
+                    Horario
+                  </span>
+                  {/* EDITABLE: horario real de atención */}
+                  <span className="block font-display text-lg font-bold text-navy">
+                    [horario de atención]
+                  </span>
+                </span>
+              </li>
+            </ul>
           </div>
 
-          {/* Quote form */}
-          <div className="lg:col-span-7">
-            <QuoteForm />
+          {/* Real embedded map */}
+          <div className="flex flex-col">
+            <div className="overflow-hidden rounded-card shadow-soft ring-1 ring-line">
+              {/* EDITABLE: cambia la consulta por la dirección/coordenadas exactas de la planta */}
+              <iframe
+                title="Ubicación de MOG México en Tehuacán, Puebla"
+                src="https://www.google.com/maps?q=Tehuac%C3%A1n%2C%20Puebla%2C%20M%C3%A9xico&output=embed"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="h-[460px] w-full border-0 lg:h-full lg:min-h-[460px]"
+              />
+            </div>
+            <p className="mt-3 text-[13px] text-slate">
+              {site.location.label}
+            </p>
           </div>
         </div>
       </section>

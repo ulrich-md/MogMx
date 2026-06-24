@@ -1,5 +1,5 @@
 import { SectionHeading } from "../ui/SectionHeading";
-import { ServiceCard } from "../ui/ServiceCard";
+import { ServiceRow } from "../ui/ServiceRow";
 import { Reveal } from "../ui/Reveal";
 import { Button } from "../ui/Button";
 import { services } from "@/lib/site";
@@ -21,10 +21,10 @@ export function ServicesStrip() {
           </div>
         </div>
 
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-12 border-b border-line">
           {services.map((service, i) => (
-            <Reveal key={service.slug} delay={i * 0.06}>
-              <ServiceCard service={service} />
+            <Reveal key={service.slug} delay={i * 0.04}>
+              <ServiceRow service={service} index={i} />
             </Reveal>
           ))}
         </div>
