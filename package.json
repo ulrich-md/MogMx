@@ -1,0 +1,36 @@
+{
+  "name": "mogmx",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "MOG México - Maquila, embotellado y marca privada de agua mineral en Tehuacán, Puebla.",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@fontsource/inter": "^5.1.0",
+    "@fontsource/space-grotesk": "^5.1.0",
+    "@phosphor-icons/react": "^2.1.7",
+    "framer-motion": "^11.11.7",
+    "gsap": "^3.12.5",
+    "lenis": "^1.1.17",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-helmet-async": "^2.0.5",
+    "react-router-dom": "^6.27.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.7.5",
+    "@types/react": "^18.3.11",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.2",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.47",
+    "tailwindcss": "^3.4.14",
+    "typescript": "^5.6.3",
+    "vite": "^5.4.9"
+  }
+}

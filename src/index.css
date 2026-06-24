@@ -1,0 +1,113 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ------------------------------------------------------------------ */
+/*  MOG Mexico - design tokens (single source of truth, mirrored in    */
+/*  tailwind.config.js). Amber is reserved for CTAs only.              */
+/* ------------------------------------------------------------------ */
+:root {
+  --navy: #0e2a47;
+  --navy-deep: #0a2038;
+  --blue: #1e7fb8;
+  --blue-deep: #176fa3;
+  --aqua: #2ba6d9;
+  --mist: #cfe8f2;
+  --foam: #f2f9fc;
+  --slate: #5b6b78;
+  --amber: #c9892f; /* EDITABLE: liga al color de las marcas de la familia */
+  --line: #e3edf3;
+  --white: #ffffff;
+}
+
+@layer base {
+  * {
+    border-color: var(--line);
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply bg-white font-sans text-navy antialiased;
+    font-feature-settings: "cv11", "ss01";
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background: var(--aqua);
+    color: var(--white);
+  }
+
+  /* Accessible focus ring (keyboard only) */
+  :focus-visible {
+    outline: 2px solid var(--aqua);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  /* Lenis smooth-scroll plumbing */
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+}
+
+@layer components {
+  /* Section wrapper: generous, airy vertical rhythm (VISUAL_DENSITY 3) */
+  .section {
+    @apply py-20 md:py-28;
+  }
+  .container-px {
+    @apply mx-auto w-full max-w-[1240px] px-5 sm:px-8;
+  }
+
+  /* Small uppercase label above a heading. Used sparingly. */
+  .eyebrow {
+    @apply inline-flex items-center gap-2 font-sans text-[11px] font-semibold uppercase tracking-eyebrow text-blue-deep;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  /* Thin sheen used on the loader / glass surfaces */
+  .mask-fade-b {
+    -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/*  Reduced motion: collapse every decorative animation to static.     */
+/* ------------------------------------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

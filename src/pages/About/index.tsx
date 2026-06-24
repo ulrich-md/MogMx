@@ -1,0 +1,95 @@
+import { Seo } from "@/lib/seo";
+import { PageHero } from "@/components/sections/PageHero";
+import { SectionHeading } from "@/components/ui/SectionHeading";
+import { Icon } from "@/components/ui/Icon";
+import { Reveal } from "@/components/ui/Reveal";
+import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
+import { CtaBand } from "@/components/sections/CtaBand";
+import { WaveDivider } from "@/components/ui/WaveDivider";
+import { values } from "@/lib/site";
+
+export default function About() {
+  return (
+    <>
+      <Seo
+        title="Nosotros"
+        description="MOG México produce agua mineral y purificada en Tehuacán, Puebla, región históricamente conocida como cuna del agua mineral en México."
+        path="/nosotros"
+      />
+      <PageHero
+        eyebrow="Nosotros"
+        title="Agua, oficio y la cuna del agua mineral"
+        lead="Producimos desde Tehuacán, Puebla, una región históricamente ligada al agua mineral en México."
+      />
+
+      {/* Tehuacán context (city context is affirmable; no company metrics) */}
+      <section className="bg-white">
+        <div className="container-px section grid gap-12 lg:grid-cols-12 lg:items-center">
+          <div className="lg:col-span-6">
+            <SectionHeading title="Hechos en Tehuacán, Puebla" />
+            <div className="mt-6 space-y-4 text-[1.02rem] leading-[1.75] text-slate">
+              <p>
+                Tehuacán es históricamente conocida como una de las cunas del
+                agua mineral en México, una región asociada por generaciones a
+                sus manantiales y a la cultura del agua mineral.
+              </p>
+              <p>
+                Desde aquí operamos como maquiladora y embotelladora: producimos
+                agua mineral y purificada para empresas, distribuidores y marcas
+                que quieren su propia línea embotellada, cuidando el perfil del
+                agua y la consistencia en cada lote.
+              </p>
+              <p>
+                Nuestro enfoque es simple: tú haces crecer tu marca, nosotros nos
+                encargamos de producirla bien.
+              </p>
+            </div>
+          </div>
+          <div className="lg:col-span-6">
+            <Reveal>
+              <MediaPlaceholder
+                // REEMPLAZAR: foto de planta / región / equipo
+                label="Planta de embotellado o región de Tehuacán"
+                alt="Planta de embotellado de MOG México en Tehuacán, Puebla"
+                aspect="4/3"
+              />
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
+      {/* Valores */}
+      <section className="bg-foam">
+        <div className="container-px section">
+          <SectionHeading
+            eyebrow="Lo que nos guía"
+            title="Cómo cuidamos tu producto"
+          />
+          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {values.map((v, i) => (
+              <Reveal key={v.title} delay={i * 0.06}>
+                <div className="h-full rounded-card bg-white p-7 shadow-soft ring-1 ring-line">
+                  <span className="grid h-12 w-12 place-items-center rounded-xl bg-mist text-blue">
+                    <Icon name={v.icon} size={24} />
+                  </span>
+                  <h3 className="mt-5 font-display text-lg font-semibold text-navy">
+                    {v.title}
+                  </h3>
+                  <p className="mt-2 text-[14.5px] leading-relaxed text-slate">
+                    {v.description}
+                  </p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <WaveDivider nextColor="#0E2A47" className="bg-foam" />
+      <CtaBand
+        title="Produce tu marca con nosotros"
+        lead="Llevamos tu idea del concepto al producto terminado, listo para tu canal de venta."
+      />
+    </>
+  );
+}
