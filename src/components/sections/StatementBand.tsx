@@ -1,4 +1,5 @@
-import { motion, useReducedMotion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { Button } from "../ui/Button";
 import { Eyebrow } from "../ui/Eyebrow";
 import { media } from "@/lib/media";
@@ -8,14 +9,22 @@ const EASE = [0.16, 1, 0.3, 1] as const;
 /** Cinematic navy editorial band. Amber accent is valid on dark. */
 export function StatementBand() {
   const reduce = useReducedMotion();
+  const ref = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+  const imgY = useTransform(scrollYProgress, [0, 1], [-55, 55]);
+
   return (
-    <section className="relative isolate overflow-hidden bg-navy">
-      <img
+    <section ref={ref} className="relative isolate overflow-hidden bg-navy">
+      <motion.img
         src={media.waterPour}
         alt=""
         aria-hidden="true"
         loading="lazy"
         decoding="async"
+        style={reduce ? undefined : { y: imgY, scale: 1.18 }}
         className="absolute inset-0 -z-10 h-full w-full object-cover opacity-45"
       />
       <div

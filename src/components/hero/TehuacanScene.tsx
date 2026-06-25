@@ -94,11 +94,27 @@ export function TehuacanScene() {
           </defs>
           <circle cx="1015" cy="450" r="300" fill="url(#sunGlow)" />
           <circle cx="1015" cy="450" r="58" fill="#F4CE89" />
-          <g stroke="#0A2038" strokeWidth="3" fill="none" strokeLinecap="round" opacity="0.45">
+          {/* birds flying across (loop) */}
+          <motion.g
+            stroke="#0A2038"
+            strokeWidth="3"
+            fill="none"
+            strokeLinecap="round"
+            opacity="0.45"
+            animate={reduce ? undefined : { x: [-840, 900], y: [0, -16, 8, 0] }}
+            transition={
+              reduce
+                ? undefined
+                : {
+                    x: { duration: 27, repeat: Infinity, ease: "linear" },
+                    y: { duration: 7, repeat: Infinity, ease: "easeInOut" },
+                  }
+            }
+          >
             <path d="M700,235 q14,-12 28,0 q14,-12 28,0" />
             <path d="M766,272 q10,-9 20,0 q10,-9 20,0" />
             <path d="M650,288 q11,-9 22,0 q11,-9 22,0" />
-          </g>
+          </motion.g>
         </motion.svg>
       </motion.div>
 
@@ -160,12 +176,52 @@ export function TehuacanScene() {
               <rect x="818" y="600" width="8" height="10" /><rect x="832" y="600" width="8" height="10" /><rect x="846" y="600" width="8" height="10" />
             </g>
           </g>
-          <g stroke="#F4CE89" strokeLinecap="round" opacity="0.5">
-            <path d="M992,672 h46" strokeWidth="3" /><path d="M1001,742 h28" strokeWidth="3" />
-          </g>
-          <g stroke="#EAF5FB" strokeLinecap="round" fill="none" opacity="0.38">
-            <path d="M150,696 q55,-7 110,0 t110,0" strokeWidth="3" /><path d="M470,732 q70,-8 140,0 t140,0" strokeWidth="3" opacity="0.8" />
-          </g>
+          {/* steam rising from the plant stack (loop) */}
+          {!reduce ? (
+            <g fill="#EAF5FB">
+              {[0, 1.8, 3.6].map((d, i) => (
+                <motion.ellipse
+                  key={i}
+                  cx="850.5"
+                  cy="508"
+                  rx="7"
+                  ry="6"
+                  style={{ transformBox: "fill-box", transformOrigin: "center" }}
+                  initial={{ opacity: 0, scale: 0.6 }}
+                  animate={{
+                    y: [0, -120],
+                    x: [0, -16, 8, -12],
+                    opacity: [0, 0.4, 0],
+                    scale: [0.6, 1.7, 2.6],
+                  }}
+                  transition={{ duration: 5.4, delay: d, repeat: Infinity, ease: "easeOut" }}
+                />
+              ))}
+            </g>
+          ) : null}
+          {/* sun-reflection shimmer (loop) */}
+          <motion.g
+            stroke="#F4CE89"
+            strokeLinecap="round"
+            opacity="0.5"
+            animate={reduce ? undefined : { opacity: [0.35, 0.62, 0.35] }}
+            transition={reduce ? undefined : { duration: 3.2, repeat: Infinity, ease: "easeInOut" }}
+          >
+            <path d="M992,672 h46" strokeWidth="3" />
+            <path d="M1001,742 h28" strokeWidth="3" />
+          </motion.g>
+          {/* running-water ripples (loop) */}
+          <motion.g
+            stroke="#EAF5FB"
+            strokeLinecap="round"
+            fill="none"
+            opacity="0.38"
+            animate={reduce ? undefined : { x: [0, 16, 0], opacity: [0.3, 0.46, 0.3] }}
+            transition={reduce ? undefined : { duration: 6, repeat: Infinity, ease: "easeInOut" }}
+          >
+            <path d="M150,696 q55,-7 110,0 t110,0" strokeWidth="3" />
+            <path d="M470,732 q70,-8 140,0 t140,0" strokeWidth="3" opacity="0.8" />
+          </motion.g>
         </motion.svg>
       </motion.div>
 
