@@ -11,10 +11,10 @@ import {
 
 /**
  * Bespoke flat illustration of the Tehuacán valley (sierra, sunset spring,
- * bottling plant, columnar cacti) in MOG's palette. Separate layers with:
- *  - a cinematic staggered entrance (rise + fade, plays when in view), and
- *  - scroll + pointer parallax.
- * All motion disabled under prefers-reduced-motion.
+ * bottling plant, columnar cacti) in MOG's palette. The lake dissolves to
+ * white at the bottom so the hero blends naturally into the section below.
+ * Layers have a staggered entrance + scroll/pointer parallax. No looping
+ * ambient motion. All motion disabled under prefers-reduced-motion.
  */
 
 const VB = "0 0 1440 900";
@@ -39,24 +39,22 @@ export function TehuacanScene() {
 
   const yFar = useTransform(scrollY, [0, D], [0, 55]);
   const yMid = useTransform(scrollY, [0, D], [0, 30]);
-  const yWater = useTransform(scrollY, [0, D], [0, -14]);
-  const yFg = useTransform(scrollY, [0, D], [0, -74]);
-  const ySun = useTransform(scrollY, [0, D], [0, 92]);
+  const yWater = useTransform(scrollY, [0, D], [0, -12]);
+  const yFg = useTransform(scrollY, [0, D], [0, -64]);
+  const ySun = useTransform(scrollY, [0, D], [0, 88]);
 
   const mx = useMotionValue(0);
   const sunX = useSpring(useTransform(mx, [-0.5, 0.5], [18, -18]), { stiffness: 60, damping: 20 });
   const farX = useSpring(useTransform(mx, [-0.5, 0.5], [10, -10]), { stiffness: 60, damping: 20 });
-  const fgX = useSpring(useTransform(mx, [-0.5, 0.5], [-24, 24]), { stiffness: 60, damping: 20 });
+  const fgX = useSpring(useTransform(mx, [-0.5, 0.5], [-22, 22]), { stiffness: 60, damping: 20 });
 
   const onMove = (e: React.MouseEvent) => {
     if (!reduce) mx.set(e.clientX / window.innerWidth - 0.5);
   };
 
-  // scroll/pointer parallax style for the inner svg
   const par = (y: MotionValue<number>, x?: MotionValue<number>): MotionStyle =>
     reduce ? { scale: 1.12 } : x ? { y, x, scale: 1.12 } : { y, scale: 1.12 };
 
-  // staggered entrance for the outer layer wrapper
   const enter = (delay: number, y: number, scale?: number) =>
     reduce
       ? {}
@@ -69,7 +67,7 @@ export function TehuacanScene() {
 
   return (
     <div onMouseMove={onMove} className="absolute inset-0 -z-20 overflow-hidden" aria-hidden="true">
-      {/* Sky (static gradient, fades in) */}
+      {/* Sky */}
       <motion.div
         className="absolute inset-0"
         style={{
@@ -82,7 +80,7 @@ export function TehuacanScene() {
         transition={{ duration: 0.8, ease: EASE }}
       />
 
-      {/* Sun + birds */}
+      {/* Sun + (static) birds */}
       <motion.div className="absolute inset-0" {...enter(0.1, 0, 0.7)}>
         <motion.svg viewBox={VB} preserveAspectRatio={SLICE} className={LAYER} style={par(ySun, sunX)}>
           <defs>
@@ -94,36 +92,11 @@ export function TehuacanScene() {
           </defs>
           <circle cx="1015" cy="450" r="300" fill="url(#sunGlow)" />
           <circle cx="1015" cy="450" r="58" fill="#F4CE89" />
-          {/* birds gliding across the bright sky near the sun (loop) */}
-          <motion.g
-            stroke="#0A2038"
-            strokeWidth="4"
-            fill="none"
-            strokeLinecap="round"
-            animate={
-              reduce
-                ? { opacity: 0.6 }
-                : { x: [-360, 360], y: [0, -14, 8, 0], opacity: [0, 0.6, 0.6, 0.6, 0] }
-            }
-            transition={
-              reduce
-                ? undefined
-                : {
-                    x: { duration: 18, repeat: Infinity, ease: "linear" },
-                    y: { duration: 6, repeat: Infinity, ease: "easeInOut" },
-                    opacity: {
-                      duration: 18,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                      times: [0, 0.12, 0.5, 0.88, 1],
-                    },
-                  }
-            }
-          >
+          <g stroke="#0A2038" strokeWidth="4" fill="none" strokeLinecap="round" opacity="0.55">
             <path d="M1030,360 q16,-13 32,0 q16,-13 32,0" />
             <path d="M1108,393 q12,-10 24,0 q12,-10 24,0" />
             <path d="M988,399 q13,-11 26,0 q13,-11 26,0" />
-          </motion.g>
+          </g>
         </motion.svg>
       </motion.div>
 
@@ -155,22 +128,24 @@ export function TehuacanScene() {
         </motion.svg>
       </motion.div>
 
-      {/* Water + plant + reflection */}
-      <motion.div className="absolute inset-0" {...enter(0.5, 48)}>
+      {/* Lake (fades to white) + plant */}
+      <motion.div className="absolute inset-0" {...enter(0.5, 40)}>
         <motion.svg viewBox={VB} preserveAspectRatio={SLICE} className={LAYER} style={par(yWater)}>
           <defs>
-            <linearGradient id="water" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0" stopColor="#CFE8F2" /><stop offset="0.3" stopColor="#5FAFD5" /><stop offset="1" stopColor="#1C5C86" />
+            <linearGradient id="waterFade" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stopColor="#CFE8F2" /><stop offset="0.34" stopColor="#5FAFD5" /><stop offset="0.66" stopColor="#A6D7EA" /><stop offset="1" stopColor="#FFFFFF" />
             </linearGradient>
             <linearGradient id="sunRefl" x1="0" y1="0" x2="0" y2="1">
               <stop offset="0" stopColor="#F3C57E" stopOpacity="0.7" /><stop offset="1" stopColor="#F3C57E" stopOpacity="0" />
             </linearGradient>
           </defs>
-          <rect x="0" y="628" width="1440" height="272" fill="url(#water)" />
-          <path d="M983,630 L1047,630 L1024,812 L1006,812 Z" fill="url(#sunRefl)" opacity="0.6" />
-          <g transform="matrix(1,0,0,-1,0,1256)" opacity="0.2" fill="#0A2038">
+          <rect x="0" y="628" width="1440" height="272" fill="url(#waterFade)" />
+          <path d="M985,630 L1045,630 L1020,762 L1010,762 Z" fill="url(#sunRefl)" opacity="0.55" />
+          {/* plant reflection */}
+          <g transform="matrix(1,0,0,-1,0,1256)" opacity="0.16" fill="#0A2038">
             <rect x="686" y="584" width="34" height="44" /><rect x="722" y="574" width="88" height="54" /><rect x="808" y="545" width="52" height="83" /><rect x="846" y="510" width="9" height="40" />
           </g>
+          {/* bottling plant */}
           <g>
             <rect x="686" y="584" width="34" height="44" fill="#0C2741" /><ellipse cx="703" cy="584" rx="17" ry="6" fill="#1A3C5C" />
             <rect x="722" y="574" width="88" height="54" fill="#0C2741" />
@@ -182,69 +157,22 @@ export function TehuacanScene() {
               <rect x="731" y="607" width="9" height="9" /><rect x="747" y="607" width="9" height="9" /><rect x="763" y="607" width="9" height="9" /><rect x="779" y="607" width="9" height="9" />
               <rect x="818" y="560" width="8" height="10" /><rect x="832" y="560" width="8" height="10" /><rect x="846" y="560" width="8" height="10" />
               <rect x="818" y="580" width="8" height="10" /><rect x="832" y="580" width="8" height="10" /><rect x="846" y="580" width="8" height="10" />
-              <rect x="818" y="600" width="8" height="10" /><rect x="832" y="600" width="8" height="10" /><rect x="846" y="600" width="8" height="10" />
             </g>
           </g>
-          {/* steam rising from the plant stack (loop) */}
-          {!reduce ? (
-            <g fill="#F2F9FC">
-              {[0, 1.4, 2.8, 4.2].map((d, i) => (
-                <motion.ellipse
-                  key={i}
-                  cx="850.5"
-                  cy="506"
-                  rx="9"
-                  ry="8"
-                  style={{ transformBox: "fill-box", transformOrigin: "center" }}
-                  initial={{ opacity: 0, scale: 0.7 }}
-                  animate={{
-                    y: [0, -130],
-                    x: [0, -18, 10, -14],
-                    opacity: [0, 0.65, 0],
-                    scale: [0.7, 1.9, 3],
-                  }}
-                  transition={{ duration: 5.6, delay: d, repeat: Infinity, ease: "easeOut" }}
-                />
-              ))}
-            </g>
-          ) : null}
-          {/* sun-reflection shimmer (loop) */}
-          <motion.g
-            stroke="#F4CE89"
-            strokeLinecap="round"
-            opacity="0.5"
-            animate={reduce ? undefined : { opacity: [0.35, 0.62, 0.35] }}
-            transition={reduce ? undefined : { duration: 3.2, repeat: Infinity, ease: "easeInOut" }}
-          >
-            <path d="M992,672 h46" strokeWidth="3" />
-            <path d="M1001,742 h28" strokeWidth="3" />
-          </motion.g>
-          {/* running-water ripples (loop) */}
-          <motion.g
-            stroke="#EAF5FB"
-            strokeLinecap="round"
-            fill="none"
-            opacity="0.38"
-            animate={reduce ? undefined : { x: [0, 16, 0], opacity: [0.3, 0.46, 0.3] }}
-            transition={reduce ? undefined : { duration: 6, repeat: Infinity, ease: "easeInOut" }}
-          >
-            <path d="M150,696 q55,-7 110,0 t110,0" strokeWidth="3" />
-            <path d="M470,732 q70,-8 140,0 t140,0" strokeWidth="3" opacity="0.8" />
-          </motion.g>
+          {/* still ripples */}
+          <g stroke="#EAF5FB" strokeLinecap="round" fill="none" opacity="0.34">
+            <path d="M150,688 q55,-7 110,0 t110,0" strokeWidth="3" />
+            <path d="M470,724 q70,-8 140,0 t140,0" strokeWidth="3" opacity="0.8" />
+          </g>
         </motion.svg>
       </motion.div>
 
-      {/* Foreground bank + cacti */}
-      <motion.div className="absolute inset-0" {...enter(0.42, 110)}>
+      {/* Foreground cacti (bottom corners, on the light water edge) */}
+      <motion.div className="absolute inset-0" {...enter(0.4, 80)}>
         <motion.svg viewBox={VB} preserveAspectRatio={SLICE} className={LAYER} style={par(yFg, fgX)}>
-          <defs>
-            <linearGradient id="fg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#123150" /><stop offset="1" stopColor="#0A2038" /></linearGradient>
-          </defs>
-          <path d="M0,800 C220,762 470,792 720,778 C1000,762 1240,800 1440,784 L1440,900 L0,900 Z" fill="url(#fg)" />
-          <g transform="translate(150,812) scale(1.15)"><Cactus /></g>
-          <g transform="translate(255,820) scale(0.8)"><Cactus /></g>
-          <g transform="translate(1230,806) scale(1.25)"><Cactus /></g>
-          <g transform="translate(1330,816) scale(0.85)"><Cactus /></g>
+          <g transform="translate(132,902) scale(1.05)"><Cactus /></g>
+          <g transform="translate(232,905) scale(0.72)"><Cactus /></g>
+          <g transform="translate(1312,900) scale(1.12)"><Cactus /></g>
         </motion.svg>
       </motion.div>
     </div>

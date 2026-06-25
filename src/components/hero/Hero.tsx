@@ -76,12 +76,6 @@ export function Hero() {
           </motion.div>
         </motion.div>
       </div>
-
-      {/* Blend the hero into the white section below (soft scroll transition) */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-32 bg-gradient-to-b from-transparent to-white sm:h-44"
-      />
     </section>
   );
 }
