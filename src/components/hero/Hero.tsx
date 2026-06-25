@@ -48,7 +48,7 @@ export function Hero() {
       <div className="container-px relative flex min-h-[100dvh] flex-col justify-center pb-24 pt-28">
         <motion.div
           style={reduce ? undefined : { y: contentY, opacity: contentOpacity }}
-          className="max-w-xl lg:max-w-[42rem]"
+          className="max-w-2xl lg:max-w-[48rem]"
         >
           <motion.div {...rise(0.5)}>
             <Eyebrow tone="dark">MAQUILA · EMBOTELLADO · MARCA PRIVADA</Eyebrow>
@@ -56,19 +56,19 @@ export function Hero() {
 
           <motion.h1
             {...rise(0.6)}
-            className="mt-5 font-display text-[2.25rem] font-extrabold leading-[1.06] tracking-tight text-white sm:text-5xl lg:text-[3.5rem]"
+            className="mt-5 font-display text-[3rem] font-extrabold leading-[0.92] tracking-[-0.02em] text-white sm:text-6xl md:text-7xl lg:text-[6.2rem] xl:text-[7rem]"
           >
-            Tu marca de agua, embotellada en{" "}
-            <span className="text-[#3FC2EC]">Tehuacán</span>.
+            Tu marca
+            <br />
+            de <span className="text-[#3FC2EC]">agua</span>.
           </motion.h1>
 
           <motion.p
             {...rise(0.72)}
-            className="mt-5 max-w-md text-[1.0625rem] leading-[1.65] text-mist"
+            className="mt-6 max-w-md text-[1.0625rem] leading-[1.6] text-mist"
           >
-            Maquila, embotellado y marca privada de agua mineral y purificada,
-            desde la cuna del agua mineral en México. Producimos tu línea de
-            principio a fin.
+            Embotellada en Tehuacán, la cuna del agua mineral. Maquila y
+            embotellado de tu línea, de principio a fin.
           </motion.p>
 
           <motion.div
