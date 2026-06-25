@@ -94,26 +94,35 @@ export function TehuacanScene() {
           </defs>
           <circle cx="1015" cy="450" r="300" fill="url(#sunGlow)" />
           <circle cx="1015" cy="450" r="58" fill="#F4CE89" />
-          {/* birds flying across (loop) */}
+          {/* birds gliding across the bright sky near the sun (loop) */}
           <motion.g
             stroke="#0A2038"
-            strokeWidth="3"
+            strokeWidth="4"
             fill="none"
             strokeLinecap="round"
-            opacity="0.45"
-            animate={reduce ? undefined : { x: [-840, 900], y: [0, -16, 8, 0] }}
+            animate={
+              reduce
+                ? { opacity: 0.6 }
+                : { x: [-360, 360], y: [0, -14, 8, 0], opacity: [0, 0.6, 0.6, 0.6, 0] }
+            }
             transition={
               reduce
                 ? undefined
                 : {
-                    x: { duration: 27, repeat: Infinity, ease: "linear" },
-                    y: { duration: 7, repeat: Infinity, ease: "easeInOut" },
+                    x: { duration: 18, repeat: Infinity, ease: "linear" },
+                    y: { duration: 6, repeat: Infinity, ease: "easeInOut" },
+                    opacity: {
+                      duration: 18,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                      times: [0, 0.12, 0.5, 0.88, 1],
+                    },
                   }
             }
           >
-            <path d="M700,235 q14,-12 28,0 q14,-12 28,0" />
-            <path d="M766,272 q10,-9 20,0 q10,-9 20,0" />
-            <path d="M650,288 q11,-9 22,0 q11,-9 22,0" />
+            <path d="M1030,360 q16,-13 32,0 q16,-13 32,0" />
+            <path d="M1108,393 q12,-10 24,0 q12,-10 24,0" />
+            <path d="M988,399 q13,-11 26,0 q13,-11 26,0" />
           </motion.g>
         </motion.svg>
       </motion.div>
@@ -178,23 +187,23 @@ export function TehuacanScene() {
           </g>
           {/* steam rising from the plant stack (loop) */}
           {!reduce ? (
-            <g fill="#EAF5FB">
-              {[0, 1.8, 3.6].map((d, i) => (
+            <g fill="#F2F9FC">
+              {[0, 1.4, 2.8, 4.2].map((d, i) => (
                 <motion.ellipse
                   key={i}
                   cx="850.5"
-                  cy="508"
-                  rx="7"
-                  ry="6"
+                  cy="506"
+                  rx="9"
+                  ry="8"
                   style={{ transformBox: "fill-box", transformOrigin: "center" }}
-                  initial={{ opacity: 0, scale: 0.6 }}
+                  initial={{ opacity: 0, scale: 0.7 }}
                   animate={{
-                    y: [0, -120],
-                    x: [0, -16, 8, -12],
-                    opacity: [0, 0.4, 0],
-                    scale: [0.6, 1.7, 2.6],
+                    y: [0, -130],
+                    x: [0, -18, 10, -14],
+                    opacity: [0, 0.65, 0],
+                    scale: [0.7, 1.9, 3],
                   }}
-                  transition={{ duration: 5.4, delay: d, repeat: Infinity, ease: "easeOut" }}
+                  transition={{ duration: 5.6, delay: d, repeat: Infinity, ease: "easeOut" }}
                 />
               ))}
             </g>
