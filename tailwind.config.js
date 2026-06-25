@@ -13,6 +13,8 @@ export default {
         // Deep mineral navy: dark sections + primary text
         navy: "#0E2A47",
         "navy-deep": "#0A2038",
+        // Near-black navy for the high-contrast hero panel
+        ink: "#08182B",
         // Water blues: accents, used sparingly
         blue: "#1E7FB8",
         // AA-safe deeper blue for small body text / links on light surfaces (>=5.4:1)
@@ -33,6 +35,7 @@ export default {
       fontFamily: {
         display: ['"Plus Jakarta Sans"', "ui-sans-serif", "system-ui", "sans-serif"],
         sans: ["Inter", "ui-sans-serif", "system-ui", "sans-serif"],
+        mono: ['"JetBrains Mono"', "ui-monospace", "SFMono-Regular", "monospace"],
       },
       letterSpacing: {
         eyebrow: "0.24em",

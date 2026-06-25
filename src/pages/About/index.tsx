@@ -3,11 +3,10 @@ import { PageHero } from "@/components/sections/PageHero";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Icon } from "@/components/ui/Icon";
 import { Reveal } from "@/components/ui/Reveal";
-import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
+import { TehuacanScene } from "@/components/hero/TehuacanScene";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { WaveDivider } from "@/components/ui/WaveDivider";
 import { values } from "@/lib/site";
-import { media } from "@/lib/media";
 
 export default function About() {
   return (
@@ -48,12 +47,9 @@ export default function About() {
           </div>
           <div className="lg:col-span-6">
             <Reveal>
-              <MediaPlaceholder
-                src={media.bottlesGroup}
-                label="Planta de embotellado o región de Tehuacán"
-                alt="Botellas de agua de MOG México sobre fondo claro"
-                aspect="4/3"
-              />
+              <div className="relative aspect-[4/3] overflow-hidden rounded-card ring-1 ring-line">
+                <TehuacanScene />
+              </div>
             </Reveal>
           </div>
         </div>
