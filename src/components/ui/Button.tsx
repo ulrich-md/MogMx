@@ -47,7 +47,7 @@ const variants: Record<Variant, string> = {
   secondary:
     "bg-white text-navy ring-1 ring-line hover:ring-navy/25 hover:bg-foam",
   ghostDark:
-    "bg-white/0 text-white ring-1 ring-white/30 hover:bg-white/10 hover:ring-white/50",
+    "bg-white/5 text-white ring-1 ring-white/40 hover:bg-white/15 hover:ring-white/60",
 };
 
 function Inner({
