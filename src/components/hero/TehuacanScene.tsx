@@ -149,7 +149,42 @@ export function TehuacanScene() {
           </linearGradient>
         </defs>
         <rect x="0" y="628" width="1440" height="272" fill="url(#water)" />
-        <path d="M983,630 L1047,630 L1024,812 L1006,812 Z" fill="url(#sunRefl)" opacity="0.65" />
+        <path d="M983,630 L1047,630 L1024,812 L1006,812 Z" fill="url(#sunRefl)" opacity="0.6" />
+        {/* bottling plant reflection */}
+        <g transform="matrix(1,0,0,-1,0,1256)" opacity="0.2" fill="#0A2038">
+          <rect x="686" y="584" width="34" height="44" />
+          <rect x="722" y="574" width="88" height="54" />
+          <rect x="808" y="545" width="52" height="83" />
+          <rect x="846" y="510" width="9" height="40" />
+        </g>
+        {/* bottling plant (maquila / embotelladora) */}
+        <g>
+          <rect x="686" y="584" width="34" height="44" fill="#0C2741" />
+          <ellipse cx="703" cy="584" rx="17" ry="6" fill="#1A3C5C" />
+          <rect x="722" y="574" width="88" height="54" fill="#0C2741" />
+          <rect x="808" y="545" width="52" height="83" fill="#0E2C46" />
+          <rect x="846" y="510" width="9" height="40" fill="#0C2741" />
+          <rect x="722" y="574" width="88" height="5" fill="#1A3C5C" />
+          <g fill="#F4CE89">
+            <rect x="731" y="590" width="9" height="9" />
+            <rect x="747" y="590" width="9" height="9" />
+            <rect x="763" y="590" width="9" height="9" />
+            <rect x="779" y="590" width="9" height="9" />
+            <rect x="731" y="607" width="9" height="9" />
+            <rect x="747" y="607" width="9" height="9" />
+            <rect x="763" y="607" width="9" height="9" />
+            <rect x="779" y="607" width="9" height="9" />
+            <rect x="818" y="560" width="8" height="10" />
+            <rect x="832" y="560" width="8" height="10" />
+            <rect x="846" y="560" width="8" height="10" />
+            <rect x="818" y="580" width="8" height="10" />
+            <rect x="832" y="580" width="8" height="10" />
+            <rect x="846" y="580" width="8" height="10" />
+            <rect x="818" y="600" width="8" height="10" />
+            <rect x="832" y="600" width="8" height="10" />
+            <rect x="846" y="600" width="8" height="10" />
+          </g>
+        </g>
         <g stroke="#F4CE89" strokeLinecap="round" opacity="0.5">
           <path d="M992,672 h46" strokeWidth="3" />
           <path d="M1001,742 h28" strokeWidth="3" />
