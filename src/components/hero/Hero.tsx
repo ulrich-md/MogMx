@@ -56,7 +56,7 @@ export function Hero() {
 
           <motion.h1
             {...rise(0.6)}
-            className="mt-5 font-display text-[3rem] font-extrabold leading-[0.92] tracking-[-0.02em] text-white sm:text-6xl md:text-7xl lg:text-[6.2rem] xl:text-[7rem]"
+            className="mt-5 font-display text-[3.5rem] font-extrabold leading-[0.92] tracking-[-0.02em] text-white sm:text-6xl md:text-7xl lg:text-[6.2rem] xl:text-[7rem]"
           >
             Tu marca
             <br />
