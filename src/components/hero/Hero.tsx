@@ -26,14 +26,14 @@ export function Hero() {
     <section className="relative isolate min-h-[100dvh] overflow-hidden bg-navy">
       <TehuacanScene />
 
-      {/* Scrim: vertical (top, for mobile) + diagonal (left, for desktop) so the
-          whole text block keeps WCAG-AA contrast over the illustration. */}
+      {/* Scrim: top fade + a centered radial that darkens the area behind the
+          centered text, so it keeps WCAG-AA contrast over the illustration. */}
       <div
         aria-hidden="true"
         className="absolute inset-0 -z-10"
         style={{
           background:
-            "linear-gradient(180deg, rgba(8,20,38,0.55) 0%, rgba(8,20,38,0.24) 32%, rgba(8,20,38,0) 60%)",
+            "linear-gradient(180deg, rgba(8,20,38,0.5) 0%, rgba(8,20,38,0.12) 30%, rgba(8,20,38,0) 55%)",
         }}
       />
       <div
@@ -41,14 +41,14 @@ export function Hero() {
         className="absolute inset-0 -z-10"
         style={{
           background:
-            "linear-gradient(100deg, rgba(8,20,38,0.9) 0%, rgba(8,20,38,0.66) 30%, rgba(8,20,38,0.4) 50%, rgba(8,20,38,0.1) 72%, rgba(8,20,38,0) 86%)",
+            "radial-gradient(ellipse 64% 62% at 50% 44%, rgba(8,20,38,0.78) 0%, rgba(8,20,38,0.48) 50%, rgba(8,20,38,0.05) 82%, rgba(8,20,38,0) 100%)",
         }}
       />
 
-      <div className="container-px relative flex min-h-[100dvh] flex-col justify-center pb-24 pt-28">
+      <div className="container-px relative flex min-h-[100dvh] flex-col items-center justify-center pb-24 pt-28 text-center">
         <motion.div
           style={reduce ? undefined : { y: contentY, opacity: contentOpacity }}
-          className="max-w-2xl lg:max-w-[48rem]"
+          className="mx-auto max-w-[52rem]"
         >
           <motion.div {...rise(0.5)}>
             <Eyebrow tone="dark">MAQUILA · EMBOTELLADO · MARCA PRIVADA</Eyebrow>
@@ -65,7 +65,7 @@ export function Hero() {
 
           <motion.p
             {...rise(0.72)}
-            className="mt-6 max-w-md text-[1.0625rem] leading-[1.6] text-mist"
+            className="mx-auto mt-6 max-w-xl text-[1.0625rem] leading-[1.6] text-mist"
           >
             Embotellada en Tehuacán, la cuna del agua mineral. Maquila y
             embotellado de tu línea, de principio a fin.
@@ -73,7 +73,7 @@ export function Hero() {
 
           <motion.div
             {...rise(0.84)}
-            className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center"
+            className="mt-8 flex flex-col justify-center gap-3 sm:flex-row sm:items-center"
           >
             <Button
               to={primaryCta.to}

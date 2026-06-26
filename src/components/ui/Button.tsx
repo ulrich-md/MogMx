@@ -36,45 +36,36 @@ const base =
   "group inline-flex items-center justify-center gap-2.5 rounded-full font-sans font-semibold tracking-tight transition-all duration-300 ease-water active:translate-y-px active:scale-[0.985] focus-visible:outline-none disabled:opacity-50 disabled:pointer-events-none";
 
 const sizes: Record<Size, string> = {
-  md: "px-5 py-2.5 text-[14px]",
-  lg: "px-6 py-3.5 text-[15px]",
+  md: "px-5 py-3 text-[14px]",
+  lg: "px-7 py-4 text-[15px]",
 };
 
-// Amber is the ONLY accent and is reserved for these primary CTAs.
-// Navy text on amber = ~5.3:1 contrast (passes WCAG AA).
 const variants: Record<Variant, string> = {
+  // Amber primary (single accent). Navy text on amber = ~5.3:1 (AA).
   primary: "bg-amber text-navy shadow-amber hover:-translate-y-0.5 hover:shadow-lift",
-  secondary:
-    "bg-white text-navy ring-1 ring-line hover:ring-navy/25 hover:bg-foam",
-  ghostDark:
-    "bg-white/5 text-white ring-1 ring-white/40 hover:bg-white/15 hover:ring-white/60",
+  // Light surface pill, for light sections.
+  secondary: "bg-white text-navy ring-1 ring-line hover:ring-navy/25 hover:bg-foam",
+  // Solid white pill, for dark backgrounds (hero, dark bands).
+  ghostDark: "bg-white text-navy shadow-soft hover:-translate-y-0.5 hover:bg-mist",
 };
 
 function Inner({
   children,
   withArrow,
-  variant,
 }: {
   children: ReactNode;
   withArrow?: boolean;
-  variant: Variant;
 }) {
-  const circle =
-    variant === "primary"
-      ? "bg-navy/12 text-navy"
-      : variant === "ghostDark"
-        ? "bg-white/15 text-white"
-        : "bg-navy/8 text-navy";
   return (
     <>
       <span>{children}</span>
       {withArrow ? (
-        <span
+        <ArrowRight
+          size={17}
+          weight="bold"
           aria-hidden="true"
-          className={`grid h-6 w-6 place-items-center rounded-full transition-transform duration-300 ease-water group-hover:translate-x-0.5 group-hover:-translate-y-px ${circle}`}
-        >
-          <ArrowRight size={13} weight="bold" />
-        </span>
+          className="transition-transform duration-300 ease-water group-hover:translate-x-1"
+        />
       ) : null}
     </>
   );
@@ -89,11 +80,7 @@ export function Button(props: ButtonProps) {
     className = "",
   } = props;
   const cls = `${base} ${sizes[size]} ${variants[variant]} ${className}`;
-  const inner = (
-    <Inner withArrow={withArrow} variant={variant}>
-      {children}
-    </Inner>
-  );
+  const inner = <Inner withArrow={withArrow}>{children}</Inner>;
 
   if ("to" in props && props.to) {
     return (
