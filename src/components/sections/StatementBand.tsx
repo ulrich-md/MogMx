@@ -47,7 +47,7 @@ export function StatementBand() {
           <h2 className="mt-5 font-display text-[2.4rem] font-bold uppercase leading-[0.95] tracking-tight text-white sm:text-5xl lg:text-[3.6rem]">
             Del agua de origen
             <br />
-            <span className="text-amber">a tu marca.</span>
+            <span className="text-mint">a tu marca.</span>
           </h2>
           <p className="mt-6 max-w-xl text-[1.075rem] leading-[1.7] text-mist">
             Maquila y embotellado con control de calidad y trazabilidad por lote.

@@ -25,9 +25,11 @@ export default {
         foam: "#F2F9FC",
         // Secondary text
         slate: "#5B6B78",
-        // Single warm CTA accent (ties to the brand family). CTAs only.
-        amber: "#C9892F",
-        "amber-deep": "#A8701C",
+        // Single emerald CTA accent ("azul noche + esmeralda"). CTAs only.
+        accent: "#16B57E",
+        "accent-deep": "#0E8F61",
+        // Mint: type highlight on dark surfaces (hero "agua"). Not a CTA color.
+        mint: "#52E6B0",
         // Hairlines / dividers
         line: "#E3EDF3",
         white: "#FFFFFF",
@@ -51,7 +53,7 @@ export default {
         // Tinted to the brand navy hue, never pure black
         soft: "0 2px 10px -3px rgba(14,42,71,0.08), 0 12px 40px -16px rgba(14,42,71,0.12)",
         lift: "0 18px 50px -18px rgba(14,42,71,0.22)",
-        amber: "0 12px 30px -10px rgba(201,137,47,0.45)",
+        accent: "0 12px 30px -10px rgba(22,181,126,0.42)",
         inset: "inset 0 1px 0 rgba(255,255,255,0.6)",
       },
       transitionTimingFunction: {

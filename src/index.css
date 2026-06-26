@@ -4,7 +4,7 @@
 
 /* ------------------------------------------------------------------ */
 /*  MOG Mexico - design tokens (single source of truth, mirrored in    */
-/*  tailwind.config.js). Amber is reserved for CTAs only.              */
+/*  tailwind.config.js). Emerald accent is reserved for CTAs only.     */
 /* ------------------------------------------------------------------ */
 :root {
   --navy: #0e2a47;
@@ -15,7 +15,9 @@
   --mist: #cfe8f2;
   --foam: #f2f9fc;
   --slate: #5b6b78;
-  --amber: #c9892f; /* EDITABLE: liga al color de las marcas de la familia */
+  --accent: #16b57e; /* EDITABLE: acento esmeralda, solo para CTAs */
+  --accent-deep: #0e8f61;
+  --mint: #52e6b0; /* realce tipográfico sobre fondos oscuros */
   --line: #e3edf3;
   --white: #ffffff;
 }

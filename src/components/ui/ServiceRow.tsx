@@ -25,7 +25,7 @@ export function ServiceRow({
       className="group relative block border-t border-line py-7 transition-colors duration-300 ease-water hover:bg-foam"
     >
       <div className="grid items-start gap-x-6 gap-y-4 md:grid-cols-12">
-        <div className="font-display text-lg font-bold text-slate/45 transition-colors duration-300 group-hover:text-amber md:col-span-1">
+        <div className="font-display text-lg font-bold text-slate/45 transition-colors duration-300 group-hover:text-accent md:col-span-1">
           {n}
         </div>
 

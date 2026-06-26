@@ -41,8 +41,8 @@ const sizes: Record<Size, string> = {
 };
 
 const variants: Record<Variant, string> = {
-  // Amber primary (single accent). Navy text on amber = ~5.3:1 (AA).
-  primary: "bg-amber text-navy shadow-amber hover:-translate-y-0.5 hover:shadow-lift",
+  // Emerald primary (single accent). Navy text on emerald = ~5.5:1 (AA).
+  primary: "bg-accent text-navy shadow-accent hover:-translate-y-0.5 hover:shadow-lift",
   // Light surface pill, for light sections.
   secondary: "bg-white text-navy ring-1 ring-line hover:ring-navy/25 hover:bg-foam",
   // Solid white pill, for dark backgrounds (hero, dark bands).
