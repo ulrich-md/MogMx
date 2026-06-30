@@ -2,7 +2,7 @@ import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion
 import { Button } from "../ui/Button";
 import { Eyebrow } from "../ui/Eyebrow";
 import { Spotlight } from "../ui/spotlight";
-import { WaterBottle } from "./WaterBottle";
+import { SplineRobot } from "./SplineRobot";
 import { primaryCta } from "@/lib/site";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
@@ -55,40 +55,40 @@ export function Hero() {
       />
       <div
         aria-hidden="true"
-        className="absolute right-[8%] top-1/2 -z-10 hidden h-[58%] w-[34%] -translate-y-1/2 rounded-full bg-[radial-gradient(circle,_rgba(124,240,204,0.18)_0%,_transparent_66%)] blur-3xl lg:block"
+        className="absolute right-[6%] top-1/2 -z-10 hidden h-[64%] w-[40%] -translate-y-1/2 rounded-full bg-[radial-gradient(circle,_rgba(124,240,204,0.16)_0%,_transparent_66%)] blur-3xl lg:block"
       />
       <Spotlight className="-top-40 left-0 md:-top-24 md:left-20" fill="#8FE8C9" />
 
+      {/* Interactive 3D scene, behind the copy and draggable (desktop). */}
+      <div className="absolute inset-y-0 right-[-6%] z-0 hidden w-[58%] lg:block">
+        <SplineRobot />
+      </div>
+
       <motion.div
         style={reduce ? undefined : { y: contentY, opacity: contentOpacity }}
-        className="container-px relative flex min-h-[100dvh] flex-col justify-center pb-16 pt-24"
+        className="container-px pointer-events-none relative z-10 flex min-h-[100dvh] flex-col justify-center pb-16 pt-24"
       >
         <motion.div {...rise(0.35)}>
           <Eyebrow tone="dark">MAQUILA · EMBOTELLADO · MARCA PRIVADA</Eyebrow>
         </motion.div>
 
-        {/* DESKTOP: the object pierces between the two headline lines.
-            Line 1 sits behind (z-10), the bottle between (z-20, absolute so it
-            can tower without inflating the layout), line 2 in front (z-30). */}
-        <h1 className="relative mt-6 hidden lg:block">
+        {/* DESKTOP: giant type in front of the scene (the object reads behind). */}
+        <h1 className="mt-6 hidden lg:block">
           <motion.span
             {...clip(0.45)}
-            className={`relative z-10 block text-[clamp(5rem,8.4vw,8.8rem)] ${HEADLINE}`}
+            className={`block text-[clamp(5rem,8.4vw,8.8rem)] [text-shadow:_0_6px_28px_rgba(4,12,28,0.55)] ${HEADLINE}`}
           >
             Tu marca
           </motion.span>
           <motion.span
             {...clip(0.6)}
-            className={`relative z-30 block text-[clamp(5rem,8.4vw,8.8rem)] [text-shadow:_0_6px_28px_rgba(4,12,28,0.5)] ${HEADLINE}`}
+            className={`block text-[clamp(5rem,8.4vw,8.8rem)] [text-shadow:_0_6px_28px_rgba(4,12,28,0.55)] ${HEADLINE}`}
           >
             De <span className="text-mint">agua</span>.
           </motion.span>
         </h1>
-        <div className="pointer-events-none absolute right-[5%] top-1/2 z-20 hidden aspect-[260/600] h-[76vh] max-h-[780px] -translate-y-1/2 lg:block">
-          <WaterBottle />
-        </div>
 
-        {/* MOBILE/TABLET: clean stack, no overlap */}
+        {/* MOBILE/TABLET: clean stack with the scene below the headline. */}
         <div className="lg:hidden">
           <motion.h1
             {...rise(0.45)}
@@ -98,8 +98,11 @@ export function Hero() {
             <br />
             De <span className="text-mint">agua</span>.
           </motion.h1>
-          <motion.div {...rise(0.55)} className="mx-auto mt-6 h-[290px] w-full max-w-[320px]">
-            <WaterBottle />
+          <motion.div
+            {...rise(0.55)}
+            className="pointer-events-auto mx-auto mt-4 h-[320px] w-full max-w-[440px]"
+          >
+            <SplineRobot />
           </motion.div>
         </div>
 
@@ -113,7 +116,7 @@ export function Hero() {
 
         <motion.div
           {...rise(0.84)}
-          className="mt-8 flex flex-col justify-center gap-3 sm:flex-row sm:items-center lg:justify-start"
+          className="pointer-events-auto mt-8 flex flex-col justify-center gap-3 sm:flex-row sm:items-center lg:justify-start"
         >
           <Button to={primaryCta.to} withArrow size="lg" className="w-full sm:w-auto">
             {primaryCta.label}
