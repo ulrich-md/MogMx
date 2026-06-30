@@ -33,6 +33,11 @@ export default {
         // Hairlines / dividers
         line: "#E3EDF3",
         white: "#FFFFFF",
+        // shadcn-compatible aliases so primitives from the registry (Card, etc.)
+        // resolve to our palette instead of undefined HSL vars.
+        card: "#FFFFFF",
+        "card-foreground": "#0E2A47",
+        "muted-foreground": "#5B6B78",
       },
       fontFamily: {
         display: ['"Bricolage Grotesque"', "ui-sans-serif", "system-ui", "sans-serif"],
@@ -73,11 +78,17 @@ export default {
           "0%": { transform: "translateX(-120%)" },
           "100%": { transform: "translateX(120%)" },
         },
+        // Aceternity Spotlight entrance (fade + slide + scale).
+        spotlight: {
+          "0%": { opacity: "0", transform: "translate(-72%, -62%) scale(0.5)" },
+          "100%": { opacity: "1", transform: "translate(-50%, -40%) scale(1)" },
+        },
       },
       animation: {
         "wave-slow": "wave-x 18s linear infinite",
         "wave-mid": "wave-x 12s linear infinite",
         drift: "drift 7s ease-in-out infinite",
+        spotlight: "spotlight 2s ease 0.75s 1 forwards",
       },
     },
   },
