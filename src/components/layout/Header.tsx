@@ -14,14 +14,24 @@ import { Button } from "../ui/Button";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
-function DesktopLink({ to, label }: { to: string; label: string }) {
+function DesktopLink({
+  to,
+  label,
+  light,
+}: {
+  to: string;
+  label: string;
+  light?: boolean;
+}) {
+  const active = light ? "text-white" : "text-navy";
+  const idle = light ? "text-white/75 hover:text-white" : "text-slate hover:text-navy";
   return (
     <NavLink
       to={to}
       end={to === "/"}
       className={({ isActive }) =>
         `relative whitespace-nowrap text-[13.5px] font-medium transition-colors duration-200 ${
-          isActive ? "text-navy" : "text-slate hover:text-navy"
+          isActive ? active : idle
         }`
       }
     >
@@ -29,7 +39,11 @@ function DesktopLink({ to, label }: { to: string; label: string }) {
         <>
           {label}
           {isActive ? (
-            <span className="absolute -bottom-2 left-0 h-[2px] w-full rounded-full bg-aqua" />
+            <span
+              className={`absolute -bottom-2 left-0 h-[2px] w-full rounded-full ${
+                light ? "bg-mint" : "bg-aqua"
+              }`}
+            />
           ) : null}
         </>
       )}
@@ -45,6 +59,9 @@ export function Header() {
   const { pathname } = useLocation();
 
   useMotionValueEvent(scrollY, "change", (v) => setScrolled(v > 12));
+
+  // The home hero is dark, so at the very top its chrome must be light.
+  const overHero = pathname === "/" && !scrolled && !open;
 
   // Close menu on route change
   useEffect(() => {
@@ -67,19 +84,19 @@ export function Header() {
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ease-water ${
         scrolled || open
-          ? "border-b border-line bg-white/85 shadow-soft backdrop-blur-xl"
+          ? "border-b border-line bg-white/70 shadow-soft backdrop-blur-xl backdrop-saturate-150"
           : "border-b border-transparent bg-transparent"
       }`}
     >
       <div className="container-px flex h-[68px] items-center justify-between gap-4">
-        <Logo />
+        <Logo tone={overHero ? "white" : "navy"} />
 
         <nav
           className="hidden items-center gap-x-6 lg:flex"
           aria-label="Navegación principal"
         >
           {nav.map((item) => (
-            <DesktopLink key={item.to} to={item.to} label={item.label} />
+            <DesktopLink key={item.to} to={item.to} label={item.label} light={overHero} />
           ))}
         </nav>
 
@@ -94,7 +111,11 @@ export function Header() {
           onClick={() => setOpen(true)}
           aria-label="Abrir menú"
           aria-expanded={open}
-          className="grid h-11 w-11 place-items-center rounded-full text-navy ring-1 ring-line transition-colors hover:bg-foam lg:hidden"
+          className={`grid h-11 w-11 place-items-center rounded-full ring-1 transition-colors lg:hidden ${
+            overHero
+              ? "text-white ring-white/30 hover:bg-white/10"
+              : "text-navy ring-line hover:bg-foam"
+          }`}
         >
           <List size={22} weight="regular" />
         </button>

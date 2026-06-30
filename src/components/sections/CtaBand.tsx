@@ -1,5 +1,6 @@
 import { WhatsappLogo } from "@phosphor-icons/react";
 import { Button } from "../ui/Button";
+import { GlassEffect } from "../ui/liquid-glass";
 import { Reveal } from "../ui/Reveal";
 import { primaryCta, whatsappHref } from "@/lib/site";
 
@@ -11,7 +12,13 @@ export function CtaBand({
   lead?: string;
 }) {
   return (
-    <section className="relative overflow-hidden bg-navy">
+    <section
+      className="relative overflow-hidden bg-navy"
+      style={{
+        background:
+          "linear-gradient(135deg, #0A2038 0%, #0E2A47 42%, #14538A 100%)",
+      }}
+    >
       {/* Decorative water ripples */}
       <svg
         aria-hidden="true"
@@ -43,19 +50,17 @@ export function CtaBand({
             <Button to={primaryCta.to} withArrow size="lg">
               {primaryCta.label}
             </Button>
-            <Button
+            <GlassEffect
               href={whatsappHref(
                 "Hola, me interesa cotizar un proyecto de embotellado.",
               )}
-              target="_blank"
-              variant="ghostDark"
-              size="lg"
+              className="rounded-full px-7 py-4"
             >
-              <span className="inline-flex items-center gap-2">
+              <span className="inline-flex items-center gap-2 text-[15px] font-semibold text-white">
                 <WhatsappLogo size={18} weight="fill" />
                 WhatsApp
               </span>
-            </Button>
+            </GlassEffect>
           </div>
         </Reveal>
       </div>
