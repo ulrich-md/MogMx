@@ -50,6 +50,8 @@ export default {
       borderRadius: {
         card: "1.25rem",
         input: "0.75rem",
+        // Used by the liquid-glass primitives (Tailwind 3 has no 4xl by default).
+        "4xl": "2rem",
       },
       maxWidth: {
         prose: "65ch",

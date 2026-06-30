@@ -99,6 +99,11 @@
     mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
   }
 
+  /* Let inner layers inherit the parent's radius (liquid-glass primitives). */
+  .rounded-inherit {
+    border-radius: inherit;
+  }
+
   /* Spinner for lazy 3D / Spline fallbacks (emerald accent on dark). */
   .loader {
     width: 38px;
@@ -117,6 +122,16 @@
     .loader {
       animation-duration: 1.6s;
     }
+  }
+}
+
+/* Slow vertical pan for liquid-glass demo backgrounds. */
+@keyframes moveBackground {
+  from {
+    background-position: 0% 0%;
+  }
+  to {
+    background-position: 0% -1000%;
   }
 }
 
