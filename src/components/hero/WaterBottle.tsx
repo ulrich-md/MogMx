@@ -11,19 +11,19 @@ const EASE = [0.16, 1, 0.3, 1] as const;
 
 /**
  * Lightweight, premium water-bottle "hero object" (pure SVG, no 3D runtime).
- * Gentle float + pointer parallax + entrance; all motion off under
- * prefers-reduced-motion. Stands in for an interactive 3D scene at a fraction
- * of the weight.
+ * Pointer-driven 3D tilt + gentle float + entrance, with an emerald glow.
+ * Fills its parent; the Hero controls size and placement. All motion is
+ * disabled under prefers-reduced-motion. Stands in for an interactive 3D
+ * scene at a fraction of the weight (and can be swapped for a Spline scene).
  */
 export function WaterBottle() {
   const reduce = useReducedMotion();
 
-  // Pointer parallax (subtle translate + tilt), smoothed.
   const px = useMotionValue(0);
   const py = useMotionValue(0);
-  const x = useSpring(useTransform(px, [-0.5, 0.5], [-16, 16]), { stiffness: 50, damping: 18 });
-  const rot = useSpring(useTransform(px, [-0.5, 0.5], [-5, 5]), { stiffness: 50, damping: 18 });
-  const glowX = useSpring(useTransform(px, [-0.5, 0.5], [22, -22]), { stiffness: 40, damping: 20 });
+  const rotateY = useSpring(useTransform(px, [-0.5, 0.5], [-18, 18]), { stiffness: 60, damping: 18 });
+  const rotateX = useSpring(useTransform(py, [-0.5, 0.5], [12, -12]), { stiffness: 60, damping: 18 });
+  const glowX = useSpring(useTransform(px, [-0.5, 0.5], [26, -26]), { stiffness: 40, damping: 20 });
 
   useEffect(() => {
     if (reduce) return;
@@ -36,29 +36,28 @@ export function WaterBottle() {
   }, [px, py, reduce]);
 
   return (
-    <div className="relative flex h-[340px] items-center justify-center md:h-[560px]">
-      {/* Emerald glow behind the bottle */}
+    <div className="relative flex h-full w-full items-center justify-center">
       <motion.div
         aria-hidden="true"
         style={reduce ? undefined : { x: glowX }}
-        className="absolute h-[78%] w-[78%] rounded-full bg-[radial-gradient(circle,_rgba(82,230,176,0.32)_0%,_rgba(82,230,176,0.10)_42%,_transparent_70%)] blur-2xl"
+        className="absolute h-[72%] w-[78%] rounded-full bg-[radial-gradient(circle,_rgba(82,230,176,0.34)_0%,_rgba(82,230,176,0.10)_42%,_transparent_70%)] blur-2xl"
       />
 
-      {/* Entrance */}
       <motion.div
-        className="relative h-full"
-        initial={reduce ? false : { opacity: 0, y: 36, scale: 0.95 }}
+        className="relative flex h-full items-center justify-center"
+        initial={reduce ? false : { opacity: 0, y: 40, scale: 0.94 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
-        transition={{ duration: 1.1, delay: 0.3, ease: EASE }}
+        transition={{ duration: 1.1, delay: 0.35, ease: EASE }}
       >
-        {/* Float loop */}
         <motion.div
-          className="h-full"
+          className="flex h-full items-center justify-center"
           animate={reduce ? undefined : { y: [0, -12, 0] }}
           transition={{ duration: 6.5, repeat: Infinity, ease: "easeInOut" }}
         >
-          {/* Pointer parallax */}
-          <motion.div className="h-full" style={reduce ? undefined : { x, rotateZ: rot }}>
+          <motion.div
+            className="h-full"
+            style={reduce ? undefined : { rotateX, rotateY, transformPerspective: 1000 }}
+          >
             <Bottle />
           </motion.div>
         </motion.div>
@@ -71,7 +70,7 @@ function Bottle() {
   return (
     <svg
       viewBox="0 0 260 600"
-      className="h-full w-auto drop-shadow-[0_40px_60px_rgba(4,12,28,0.55)]"
+      className="h-full w-auto drop-shadow-[0_46px_64px_rgba(4,12,28,0.6)]"
       role="img"
       aria-label="Botella de agua de marca MOG"
     >
@@ -96,23 +95,14 @@ function Bottle() {
         </radialGradient>
       </defs>
 
-      {/* floor shadow */}
       <ellipse cx="130" cy="574" rx="92" ry="18" fill="url(#bottle-floor)" />
-
-      {/* cap */}
       <rect x="100" y="6" width="60" height="20" rx="5" fill="#0A1A30" />
       <rect x="100" y="24" width="60" height="20" rx="4" fill="#102544" />
-      {/* neck */}
       <path d="M111,44 L149,44 L160,90 L100,90 Z" fill="url(#bottle-neck)" />
-      {/* body */}
       <rect x="66" y="86" width="128" height="456" rx="46" fill="url(#bottle-water)" />
-      {/* gloss highlight */}
       <rect x="82" y="112" width="26" height="404" rx="13" fill="url(#bottle-gloss)" opacity="0.85" />
-      {/* right shade */}
       <rect x="162" y="112" width="20" height="404" rx="10" fill="#0E3D63" opacity="0.3" />
-      {/* water surface line */}
       <path d="M70,150 q60,-16 120,0" stroke="#FFFFFF" strokeOpacity="0.4" strokeWidth="2.5" fill="none" />
-      {/* label */}
       <rect x="72" y="300" width="116" height="132" rx="10" fill="#FFFFFF" fillOpacity="0.16" />
       <rect x="72" y="300" width="116" height="132" rx="10" fill="none" stroke="#FFFFFF" strokeOpacity="0.22" />
       <path d="M100,352 q15,-16 30,0 q15,16 30,0" stroke="#52E6B0" strokeWidth="3.4" fill="none" strokeLinecap="round" />
