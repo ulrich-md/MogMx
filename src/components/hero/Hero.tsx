@@ -1,129 +1,92 @@
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { Link } from "react-router-dom";
 import { Button } from "../ui/Button";
 import { Eyebrow } from "../ui/Eyebrow";
-import { Spotlight } from "../ui/spotlight";
-import { SplineRobot } from "./SplineRobot";
+import { WaterHeadline } from "./WaterHeadline";
 import { primaryCta } from "@/lib/site";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
-const HEADLINE = "uppercase font-extrabold leading-[0.84] tracking-[-0.03em] text-white";
 
 export function Hero() {
   const reduce = useReducedMotion();
   const { scrollY } = useScroll();
-  const contentY = useTransform(scrollY, [0, 520], [0, -36]);
+  const contentY = useTransform(scrollY, [0, 520], [0, -44]);
   const contentOpacity = useTransform(scrollY, [0, 480], [1, 0]);
 
   const rise = (delay: number) =>
     reduce
       ? {}
       : {
-          initial: { opacity: 0, y: 26 },
+          initial: { opacity: 0, y: 22 },
           animate: { opacity: 1, y: 0 },
           transition: { duration: 0.8, delay, ease: EASE },
         };
 
-  // Headline lines reveal with a clip so the type "wipes" up into place.
-  const clip = (delay: number) =>
-    reduce
-      ? {}
-      : {
-          initial: { opacity: 0, y: "0.5em", clipPath: "inset(0 0 100% 0)" },
-          animate: { opacity: 1, y: 0, clipPath: "inset(0 0 -10% 0)" },
-          transition: { duration: 0.9, delay, ease: EASE },
-        };
-
   return (
-    <section className="relative isolate min-h-[100dvh] overflow-hidden bg-[#070F20]">
-      {/* Night-blue base + dot texture + emerald glow behind the object */}
+    <section className="relative isolate flex min-h-[100dvh] flex-col items-center justify-center overflow-hidden bg-[#03141A] px-5 text-center">
+      {/* Deep-water base */}
       <div
         aria-hidden="true"
         className="absolute inset-0 -z-20"
         style={{
           background:
-            "radial-gradient(120% 100% at 60% 6%, #153563 0%, #0B1F3C 46%, #070F20 100%)",
+            "radial-gradient(125% 85% at 50% -12%, #0E3A44 0%, #07232C 46%, #03141A 100%)",
         }}
       />
+      {/* Light filtering down from the surface */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 -z-20 opacity-70"
+        className="absolute inset-x-0 top-0 -z-10 h-[42%]"
         style={{
-          backgroundImage:
-            "radial-gradient(circle, rgba(127,167,200,0.08) 1.4px, transparent 1.4px)",
-          backgroundSize: "28px 28px",
+          background:
+            "radial-gradient(60% 100% at 50% 0%, rgba(124,237,236,0.16) 0%, rgba(124,237,236,0) 70%)",
         }}
       />
-      <div
+      {/* Faint caustic ripples near the surface */}
+      <svg
         aria-hidden="true"
-        className="absolute right-[6%] top-1/2 -z-10 hidden h-[64%] w-[40%] -translate-y-1/2 rounded-full bg-[radial-gradient(circle,_rgba(124,240,204,0.16)_0%,_transparent_66%)] blur-3xl lg:block"
-      />
-      <Spotlight className="-top-40 left-0 md:-top-24 md:left-20" fill="#8FE8C9" />
-
-      {/* Interactive 3D scene, behind the copy and draggable (desktop). */}
-      <div className="absolute inset-y-0 right-[-6%] z-0 hidden w-[58%] lg:block">
-        <SplineRobot />
-      </div>
+        className="absolute inset-x-0 top-[14%] -z-10 h-24 w-full opacity-[0.07]"
+        viewBox="0 0 1440 120"
+        preserveAspectRatio="none"
+      >
+        <g stroke="#BFF0FB" strokeWidth="2" fill="none">
+          <path d="M0,40 q180,-26 360,0 t360,0 t360,0 t360,0" />
+          <path d="M0,78 q200,26 400,0 t400,0 t400,0" />
+        </g>
+      </svg>
 
       <motion.div
         style={reduce ? undefined : { y: contentY, opacity: contentOpacity }}
-        className="container-px pointer-events-none relative z-10 flex min-h-[100dvh] flex-col justify-center pb-16 pt-24"
+        className="relative z-10 flex w-full max-w-[1180px] flex-col items-center"
       >
-        <motion.div {...rise(0.35)}>
+        <motion.div {...rise(0.2)}>
           <Eyebrow tone="dark">MAQUILA · EMBOTELLADO · MARCA PRIVADA</Eyebrow>
         </motion.div>
 
-        {/* DESKTOP: giant type in front of the scene (the object reads behind). */}
-        <h1 className="mt-6 hidden lg:block">
-          <motion.span
-            {...clip(0.45)}
-            className={`block text-[clamp(5rem,8.4vw,8.8rem)] [text-shadow:_0_6px_28px_rgba(4,12,28,0.55)] ${HEADLINE}`}
-          >
-            Tu marca
-          </motion.span>
-          <motion.span
-            {...clip(0.6)}
-            className={`block text-[clamp(5rem,8.4vw,8.8rem)] [text-shadow:_0_6px_28px_rgba(4,12,28,0.55)] ${HEADLINE}`}
-          >
-            De <span className="text-mint">agua</span>.
-          </motion.span>
-        </h1>
-
-        {/* MOBILE/TABLET: clean stack with the scene below the headline. */}
-        <div className="lg:hidden">
-          <motion.h1
-            {...rise(0.45)}
-            className={`mt-6 text-center text-[clamp(2.9rem,13vw,5rem)] ${HEADLINE}`}
-          >
-            Tu marca
-            <br />
-            De <span className="text-mint">agua</span>.
-          </motion.h1>
-          <motion.div
-            {...rise(0.55)}
-            className="pointer-events-auto mx-auto mt-4 h-[320px] w-full max-w-[440px]"
-          >
-            <SplineRobot />
-          </motion.div>
-        </div>
+        <h1 className="sr-only">Tu marca de agua</h1>
+        <WaterHeadline className="mt-7 w-full max-w-[1060px]" />
 
         <motion.p
-          {...rise(0.72)}
-          className="mt-8 max-w-md text-center text-[1.0625rem] leading-[1.6] text-mist lg:text-left"
+          {...rise(0.5)}
+          className="mx-auto mt-7 max-w-xl text-[1.0625rem] leading-[1.6] text-[#B7DDE3]"
         >
           Embotellada en Tehuacán, la cuna del agua mineral. Maquila y
           embotellado de tu línea, de principio a fin.
         </motion.p>
 
         <motion.div
-          {...rise(0.84)}
-          className="pointer-events-auto mt-8 flex flex-col justify-center gap-3 sm:flex-row sm:items-center lg:justify-start"
+          {...rise(0.62)}
+          className="mt-9 flex flex-col items-center gap-4 sm:flex-row sm:gap-6"
         >
           <Button to={primaryCta.to} withArrow size="lg" className="w-full sm:w-auto">
             {primaryCta.label}
           </Button>
-          <Button to="/servicios" variant="outlineDark" size="lg" className="w-full sm:w-auto">
+          <Link
+            to="/servicios"
+            className="text-[15px] font-semibold text-white underline-offset-[6px] transition-colors hover:text-mint hover:underline"
+          >
             Ver servicios
-          </Button>
+          </Link>
         </motion.div>
       </motion.div>
     </section>
