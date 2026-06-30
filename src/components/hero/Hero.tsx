@@ -1,78 +1,63 @@
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { Button } from "../ui/Button";
 import { Eyebrow } from "../ui/Eyebrow";
+import { Spotlight } from "../ui/spotlight";
+import { WaterBottle } from "./WaterBottle";
 import { primaryCta } from "@/lib/site";
-import { TehuacanScene } from "./TehuacanScene";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
 export function Hero() {
   const reduce = useReducedMotion();
   const { scrollY } = useScroll();
-  const contentY = useTransform(scrollY, [0, 520], [0, -48]);
-  const contentOpacity = useTransform(scrollY, [0, 440], [1, 0]);
+  const contentY = useTransform(scrollY, [0, 520], [0, -40]);
+  const contentOpacity = useTransform(scrollY, [0, 460], [1, 0]);
 
-  // content enters after the scene has begun rising
   const rise = (delay: number) =>
     reduce
       ? {}
       : {
-          initial: { opacity: 0, y: 26 },
+          initial: { opacity: 0, y: 24 },
           animate: { opacity: 1, y: 0 },
           transition: { duration: 0.8, delay, ease: EASE },
         };
 
   return (
-    <section className="relative isolate min-h-[100dvh] overflow-hidden bg-navy">
-      <TehuacanScene />
-
-      {/* Soft top fade keeps the fixed nav legible over the bright sky. The
-          frosted panel below carries the main text contrast. */}
+    <section className="relative isolate min-h-[100dvh] overflow-hidden bg-navy-deep">
+      {/* Dark night-blue base + subtle dot texture */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 -z-10"
+        className="absolute inset-0 -z-20"
         style={{
           background:
-            "linear-gradient(180deg, rgba(8,20,38,0.55) 0%, rgba(8,20,38,0.14) 28%, rgba(8,20,38,0) 52%)",
+            "radial-gradient(120% 90% at 78% 12%, #12325C 0%, #0B1F3C 48%, #081426 100%)",
         }}
       />
-      {/* Gentle center anchor (kept low so the frosted glass still reveals the
-          blurred valley behind it). */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 -z-10"
+        className="absolute inset-0 -z-20 opacity-70"
         style={{
-          background:
-            "radial-gradient(ellipse 62% 60% at 50% 46%, rgba(8,20,38,0.42) 0%, rgba(8,20,38,0.22) 52%, rgba(8,20,38,0) 84%)",
+          backgroundImage:
+            "radial-gradient(circle, rgba(127,167,200,0.08) 1.4px, transparent 1.4px)",
+          backgroundSize: "26px 26px",
         }}
       />
+      <Spotlight className="-top-40 left-0 md:-top-24 md:left-32" fill="#8FE8C9" />
 
-      <div className="container-px relative flex min-h-[100dvh] flex-col items-center justify-center pb-24 pt-28 text-center">
-        <motion.div
-          style={reduce ? undefined : { y: contentY, opacity: contentOpacity }}
-          className="mx-auto w-full max-w-[54rem]"
-        >
-          {/* Apple-style frosted glass panel: translucent dark gradient + blur +
-              hairline border and a top inner highlight. */}
-          <div
-            className="relative overflow-hidden rounded-[2rem] border border-white/[0.14] px-6 py-12 shadow-[0_30px_90px_-32px_rgba(4,12,28,0.8)] backdrop-blur-2xl backdrop-saturate-150 sm:rounded-[2.5rem] sm:px-14 sm:py-16"
-            style={{
-              background:
-                "linear-gradient(180deg, rgba(22,48,92,0.40) 0%, rgba(10,24,48,0.52) 100%)",
-            }}
+      <div className="container-px relative flex min-h-[100dvh] flex-col justify-center pb-20 pt-28 md:pb-28">
+        <div className="grid items-center gap-10 md:grid-cols-2 md:gap-6">
+          {/* Copy */}
+          <motion.div
+            style={reduce ? undefined : { y: contentY, opacity: contentOpacity }}
+            className="order-2 text-center md:order-1 md:text-left"
           >
-            <div
-              aria-hidden="true"
-              className="pointer-events-none absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent"
-            />
-
-            <motion.div {...rise(0.5)}>
+            <motion.div {...rise(0.45)}>
               <Eyebrow tone="dark">MAQUILA · EMBOTELLADO · MARCA PRIVADA</Eyebrow>
             </motion.div>
 
             <motion.h1
-              {...rise(0.6)}
-              className="mt-5 font-display text-[3.5rem] font-extrabold leading-[0.92] tracking-[-0.02em] text-white sm:text-6xl md:text-7xl lg:text-[5.6rem] xl:text-[6.2rem]"
+              {...rise(0.55)}
+              className="mt-5 font-display text-[3.5rem] font-extrabold leading-[0.92] tracking-[-0.02em] text-white sm:text-6xl md:text-[4.6rem] lg:text-[5.6rem]"
             >
               Tu marca
               <br />
@@ -80,36 +65,36 @@ export function Hero() {
             </motion.h1>
 
             <motion.p
-              {...rise(0.72)}
-              className="mx-auto mt-6 max-w-xl text-[1.0625rem] leading-[1.6] text-mist"
+              {...rise(0.67)}
+              className="mx-auto mt-6 max-w-md text-[1.0625rem] leading-[1.6] text-mist md:mx-0"
             >
               Embotellada en Tehuacán, la cuna del agua mineral. Maquila y
               embotellado de tu línea, de principio a fin.
             </motion.p>
 
             <motion.div
-              {...rise(0.84)}
-              className="mt-8 flex flex-col justify-center gap-3 sm:flex-row sm:items-center"
+              {...rise(0.79)}
+              className="mt-8 flex flex-col justify-center gap-3 sm:flex-row sm:items-center md:justify-start"
             >
-              <Button
-                to={primaryCta.to}
-                withArrow
-                size="lg"
-                className="w-full sm:w-auto"
-              >
+              <Button to={primaryCta.to} withArrow size="lg" className="w-full sm:w-auto">
                 {primaryCta.label}
               </Button>
               <Button
                 to="/servicios"
-                variant="ghostDark"
+                variant="outlineDark"
                 size="lg"
                 className="w-full sm:w-auto"
               >
                 Ver servicios
               </Button>
             </motion.div>
+          </motion.div>
+
+          {/* Product object */}
+          <div className="order-1 md:order-2">
+            <WaterBottle />
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

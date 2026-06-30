@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { ArrowRight } from "@phosphor-icons/react";
 import type { ReactNode } from "react";
 
-type Variant = "primary" | "secondary" | "ghostDark";
+type Variant = "primary" | "secondary" | "ghostDark" | "outlineDark";
 type Size = "md" | "lg";
 
 type CommonProps = {
@@ -47,6 +47,9 @@ const variants: Record<Variant, string> = {
   secondary: "bg-white text-navy ring-1 ring-line hover:ring-navy/25 hover:bg-foam",
   // Solid white pill, for dark backgrounds (hero, dark bands).
   ghostDark: "bg-white text-navy shadow-soft hover:-translate-y-0.5 hover:bg-mist",
+  // Outline pill on dark surfaces (product hero) - no accent color.
+  outlineDark:
+    "border border-white/40 text-white hover:border-white/70 hover:bg-white/10",
 };
 
 function Inner({
