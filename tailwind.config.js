@@ -10,34 +10,34 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Deep mineral navy: dark sections + primary text
-        navy: "#0E2A47",
-        "navy-deep": "#0A2038",
-        // Near-black navy for the high-contrast hero panel
-        ink: "#08182B",
-        // Water blues: accents, used sparingly
-        blue: "#1E7FB8",
-        // AA-safe deeper blue for small body text / links on light surfaces (>=5.4:1)
-        "blue-deep": "#176FA3",
-        aqua: "#2BA6D9",
-        // Very light blue: soft backgrounds
-        mist: "#CFE8F2",
-        foam: "#F2F9FC",
-        // Secondary text
-        slate: "#5B6B78",
+        // Deep-water ink: dark sections + primary text (teal family, matches hero)
+        navy: "#0B2B33",
+        "navy-deep": "#07232C",
+        // Abyss: the hero's deepest surface
+        ink: "#03141A",
+        // Water teals: accents, used sparingly
+        blue: "#1893A6",
+        // AA-safe deeper teal for small body text / links on light surfaces (>=5.4:1)
+        "blue-deep": "#10707F",
+        aqua: "#2FC1CF",
+        // Very light aqua: soft backgrounds
+        mist: "#CDEDF2",
+        foam: "#EFF9FA",
+        // Secondary text (teal-gray, AA on white)
+        slate: "#56707A",
         // Single warm coral CTA accent (pops against the deep-water palette).
         accent: "#FB6F57",
         "accent-deep": "#E2553C",
         // Aqua/mint: type highlight on dark surfaces. Not a CTA color.
         mint: "#5FE0E6",
         // Hairlines / dividers
-        line: "#E3EDF3",
+        line: "#DDEDF0",
         white: "#FFFFFF",
         // shadcn-compatible aliases so primitives from the registry (Card, etc.)
         // resolve to our palette instead of undefined HSL vars.
         card: "#FFFFFF",
-        "card-foreground": "#0E2A47",
-        "muted-foreground": "#5B6B78",
+        "card-foreground": "#0B2B33",
+        "muted-foreground": "#56707A",
       },
       fontFamily: {
         display: ['"Bricolage Grotesque"', "ui-sans-serif", "system-ui", "sans-serif"],
@@ -57,9 +57,9 @@ export default {
         prose: "65ch",
       },
       boxShadow: {
-        // Tinted to the brand navy hue, never pure black
-        soft: "0 2px 10px -3px rgba(14,42,71,0.08), 0 12px 40px -16px rgba(14,42,71,0.12)",
-        lift: "0 18px 50px -18px rgba(14,42,71,0.22)",
+        // Tinted to the deep-water ink hue, never pure black
+        soft: "0 2px 10px -3px rgba(11,43,51,0.08), 0 12px 40px -16px rgba(11,43,51,0.12)",
+        lift: "0 18px 50px -18px rgba(11,43,51,0.24)",
         accent: "0 14px 34px -12px rgba(251,111,87,0.5)",
         inset: "inset 0 1px 0 rgba(255,255,255,0.6)",
       },
@@ -89,6 +89,7 @@ export default {
       animation: {
         "wave-slow": "wave-x 18s linear infinite",
         "wave-mid": "wave-x 12s linear infinite",
+        marquee: "wave-x 44s linear infinite",
         drift: "drift 7s ease-in-out infinite",
         spotlight: "spotlight 2s ease 0.75s 1 forwards",
       },

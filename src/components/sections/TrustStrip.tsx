@@ -1,50 +1,56 @@
+import { Drop } from "@phosphor-icons/react";
 import { Reveal } from "../ui/Reveal";
 
 /**
- * Placeholder logo strip. Brand/client names are NOT invented here; these
- * are neutral geometric marks standing in for real client logos.
- * // REEMPLAZAR: logos reales de clientes y aliados (SVG).
+ * Kinetic capability strip (the page's single marquee). Giant ghost words
+ * drift horizontally; each word inks in on hover, and hovering pauses the
+ * band. Content is limited to affirmed services/types (no invented clients),
+ * replacing the old placeholder logo wall.
  */
-const marks = [
-  <circle key="c" cx="22" cy="22" r="13" />,
-  <rect key="s" x="9" y="9" width="26" height="26" rx="6" transform="rotate(45 22 22)" />,
-  <path key="d" d="M22 7c6 7.5 10 12.6 10 17.4C32 30.8 27.6 35 22 35s-10-4.2-10-10.6C12 19.6 16 14.5 22 7Z" />,
-  <polygon key="t" points="22,8 36,34 8,34" />,
-  <rect key="p" x="8" y="16" width="28" height="12" rx="6" />,
-  <path key="h" d="M22 7l13 7.5v15L22 37 9 29.5v-15L22 7Z" />,
+const words = [
+  "Agua mineral",
+  "Agua purificada",
+  "Marca privada",
+  "Maquila de bebidas",
+  "Etiquetado",
+  "Envasado",
 ];
+
+function Band({ ariaHidden = false }: { ariaHidden?: boolean }) {
+  return (
+    <ul
+      aria-hidden={ariaHidden || undefined}
+      className="flex w-max shrink-0 items-center"
+    >
+      {words.map((word) => (
+        <li key={word} className="flex items-center">
+          <span className="whitespace-nowrap px-6 font-display text-[2.6rem] font-extrabold uppercase leading-none tracking-tight text-navy/[0.14] transition-colors duration-300 hover:text-blue-deep sm:px-8 sm:text-6xl">
+            {word}
+          </span>
+          <Drop size={18} weight="fill" aria-hidden="true" className="text-aqua/40" />
+        </li>
+      ))}
+    </ul>
+  );
+}
 
 export function TrustStrip() {
   return (
-    <section className="bg-foam">
-      <div className="container-px section">
+    <section className="overflow-hidden border-y border-line bg-foam">
+      <div className="container-px pt-14">
         <Reveal>
           <p className="text-center text-[15px] text-slate">
-            Producimos para marcas y distribuidores que quieren su propia agua
-            embotellada.
+            Producimos para marcas y distribuidores que quieren su propia
+            bebida embotellada.
           </p>
         </Reveal>
-        <Reveal delay={0.08}>
-          <ul
-            aria-label="Espacio reservado para logotipos de clientes"
-            className="mt-9 grid grid-cols-3 items-center gap-x-6 gap-y-8 sm:grid-cols-6"
-          >
-            {marks.map((mark, i) => (
-              <li key={i} className="flex justify-center">
-                <svg
-                  width="44"
-                  height="44"
-                  viewBox="0 0 44 44"
-                  aria-hidden="true"
-                  className="fill-none stroke-slate/40 [&_*]:fill-none [&_*]:stroke-slate/40 opacity-70 transition-opacity duration-300 hover:opacity-100"
-                  strokeWidth="1.5"
-                >
-                  {mark}
-                </svg>
-              </li>
-            ))}
-          </ul>
-        </Reveal>
+      </div>
+
+      <div className="group relative py-12" aria-label="Servicios y tipos de producto">
+        <div className="flex w-max motion-safe:animate-marquee group-hover:[animation-play-state:paused]">
+          <Band />
+          <Band ariaHidden />
+        </div>
       </div>
     </section>
   );

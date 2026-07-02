@@ -2,6 +2,7 @@ import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion
 import { Link } from "react-router-dom";
 import { Button } from "../ui/Button";
 import { Eyebrow } from "../ui/Eyebrow";
+import { WaveDivider } from "../ui/WaveDivider";
 import { WaterHeadline } from "./WaterHeadline";
 import { primaryCta } from "@/lib/site";
 
@@ -23,7 +24,7 @@ export function Hero() {
         };
 
   return (
-    <section className="relative isolate flex min-h-[100dvh] flex-col items-center justify-center overflow-hidden bg-[#03141A] px-5 text-center">
+    <section className="relative isolate flex min-h-[100dvh] flex-col items-center justify-center overflow-hidden bg-[#03141A] px-5 pb-24 pt-20 text-center">
       {/* Deep-water base */}
       <div
         aria-hidden="true"
@@ -63,15 +64,15 @@ export function Hero() {
           <Eyebrow tone="dark">MAQUILA · EMBOTELLADO · MARCA PRIVADA</Eyebrow>
         </motion.div>
 
-        <h1 className="sr-only">Tu marca de agua</h1>
+        <h1 className="sr-only">Tu marca, embotellada</h1>
         <WaterHeadline className="mt-7 w-full max-w-[1060px]" />
 
         <motion.p
           {...rise(0.5)}
           className="mx-auto mt-7 max-w-xl text-[1.0625rem] leading-[1.6] text-[#B7DDE3]"
         >
-          Embotellada en Tehuacán, la cuna del agua mineral. Maquila y
-          embotellado de tu línea, de principio a fin.
+          Maquila y embotellado de agua y bebidas en Tehuacán, la cuna del
+          agua mineral. Tu línea, de principio a fin.
         </motion.p>
 
         <motion.div
@@ -89,6 +90,12 @@ export function Hero() {
           </Link>
         </motion.div>
       </motion.div>
+
+      {/* Water surface: the white of the next section laps into the hero,
+          so scrolling down reads as rising out of the water. */}
+      <div className="absolute inset-x-0 bottom-0 z-10">
+        <WaveDivider nextColor="#FFFFFF" />
+      </div>
     </section>
   );
 }

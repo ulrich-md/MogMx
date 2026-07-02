@@ -32,7 +32,7 @@ export default function Services() {
         </div>
       </section>
 
-      <WaveDivider nextColor="#0E2A47" className="bg-white" />
+      <WaveDivider nextColor="#07232C" className="bg-white" />
       <CtaBand
         title="¿Qué servicio necesitas?"
         lead="Cuéntanos en qué etapa estás y preparamos una propuesta a la medida de tu proyecto."

@@ -32,7 +32,7 @@ export function StatementBand() {
         className="absolute inset-0 -z-10"
         style={{
           background:
-            "linear-gradient(90deg, #0E2A47 0%, rgba(14,42,71,0.88) 46%, rgba(14,42,71,0.55) 100%)",
+            "linear-gradient(90deg, #07232C 0%, rgba(7,35,44,0.88) 46%, rgba(7,35,44,0.55) 100%)",
         }}
       />
       <div className="container-px section relative">
@@ -45,7 +45,7 @@ export function StatementBand() {
         >
           <Eyebrow tone="dark">Pureza + capacidad</Eyebrow>
           <h2 className="mt-5 font-display text-[2.4rem] font-bold uppercase leading-[0.95] tracking-tight text-white sm:text-5xl lg:text-[3.6rem]">
-            Del agua de origen
+            Del origen
             <br />
             <span className="text-mint">a tu marca.</span>
           </h2>
@@ -54,8 +54,8 @@ export function StatementBand() {
             Cuidamos el detalle para que tu producto sea siempre el mismo.
           </p>
           <div className="mt-9">
-            <Button to="/proceso" variant="ghostDark" size="lg" withArrow>
-              Conoce el proceso
+            <Button to="/contacto" size="lg" withArrow>
+              Cotiza tu proyecto
             </Button>
           </div>
         </motion.div>

@@ -16,7 +16,7 @@ export function CtaBand({
       className="relative overflow-hidden bg-navy"
       style={{
         background:
-          "linear-gradient(135deg, #0A2038 0%, #0E2A47 42%, #14538A 100%)",
+          "linear-gradient(135deg, #03141A 0%, #07232C 42%, #0F4C58 100%)",
       }}
     >
       {/* Decorative water ripples */}
@@ -32,7 +32,7 @@ export function CtaBand({
             cy="200"
             r={r}
             fill="none"
-            stroke="#2BA6D9"
+            stroke="#2FC1CF"
             strokeWidth="1.5"
           />
         ))}

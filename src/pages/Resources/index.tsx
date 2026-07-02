@@ -44,7 +44,7 @@ export default function Resources() {
         </div>
       </section>
 
-      <WaveDivider nextColor="#0E2A47" className="bg-foam" />
+      <WaveDivider nextColor="#07232C" className="bg-foam" />
       <CtaBand />
     </>
   );

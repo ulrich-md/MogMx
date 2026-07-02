@@ -30,7 +30,7 @@ function DesktopLink({
       to={to}
       end={to === "/"}
       className={({ isActive }) =>
-        `relative whitespace-nowrap text-[13.5px] font-medium transition-colors duration-200 ${
+        `group relative whitespace-nowrap text-[13.5px] font-medium transition-colors duration-200 ${
           isActive ? active : idle
         }`
       }
@@ -38,13 +38,13 @@ function DesktopLink({
       {({ isActive }) => (
         <>
           {label}
-          {isActive ? (
-            <span
-              className={`absolute -bottom-2 left-0 h-[2px] w-full rounded-full ${
-                light ? "bg-mint" : "bg-aqua"
-              }`}
-            />
-          ) : null}
+          {/* Animated underline: grows from the left on hover, full when active */}
+          <span
+            aria-hidden="true"
+            className={`absolute -bottom-2 left-0 h-[2px] w-full origin-left rounded-full transition-transform duration-300 ease-water ${
+              light ? "bg-mint" : "bg-aqua"
+            } ${isActive ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`}
+          />
         </>
       )}
     </NavLink>

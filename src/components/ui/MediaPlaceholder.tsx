@@ -38,13 +38,15 @@ export function MediaPlaceholder({
 }) {
   if (src) {
     return (
-      <img
-        src={src}
-        alt={alt}
-        loading="lazy"
-        decoding="async"
-        className={`${aspectClass[aspect]} w-full object-cover ${rounded} ${className}`}
-      />
+      <div className={`overflow-hidden ${rounded} ${className}`}>
+        <img
+          src={src}
+          alt={alt}
+          loading="lazy"
+          decoding="async"
+          className={`${aspectClass[aspect]} w-full object-cover transition-transform duration-700 ease-water hover:scale-[1.03]`}
+        />
+      </div>
     );
   }
 
@@ -54,7 +56,7 @@ export function MediaPlaceholder({
     : "bg-gradient-to-br from-mist via-foam to-white";
   const ring = isNavy ? "ring-white/10" : "ring-line";
   const ink = isNavy ? "text-mist" : "text-slate";
-  const ripple = isNavy ? "#2BA6D9" : "#1E7FB8";
+  const ripple = isNavy ? "#2FC1CF" : "#1893A6";
 
   return (
     <div

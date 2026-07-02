@@ -7,18 +7,19 @@
 /*  tailwind.config.js). Emerald accent is reserved for CTAs only.     */
 /* ------------------------------------------------------------------ */
 :root {
-  --navy: #0e2a47;
-  --navy-deep: #0a2038;
-  --blue: #1e7fb8;
-  --blue-deep: #176fa3;
-  --aqua: #2ba6d9;
-  --mist: #cfe8f2;
-  --foam: #f2f9fc;
-  --slate: #5b6b78;
+  --navy: #0b2b33;
+  --navy-deep: #07232c;
+  --ink: #03141a;
+  --blue: #1893a6;
+  --blue-deep: #10707f;
+  --aqua: #2fc1cf;
+  --mist: #cdedf2;
+  --foam: #eff9fa;
+  --slate: #56707a;
   --accent: #fb6f57; /* EDITABLE: acento coral, solo para CTAs */
   --accent-deep: #e2553c;
   --mint: #5fe0e6; /* realce tipográfico sobre fondos oscuros (aqua) */
-  --line: #e3edf3;
+  --line: #ddedf0;
   --white: #ffffff;
 }
 

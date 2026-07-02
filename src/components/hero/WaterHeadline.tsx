@@ -1,14 +1,19 @@
 import { motion, useReducedMotion } from "framer-motion";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
-const L1 = "TU MARCA";
-const L2 = "DE AGUA";
+const L1 = "TU MARCA,";
+const L2 = "EMBOTELLADA.";
 const TYPE = {
   fontFamily: "'Bricolage Grotesque', sans-serif",
   fontWeight: 800,
-  letterSpacing: "-8",
+  letterSpacing: "-6",
   textAnchor: "middle" as const,
 };
+// Per-line sizes calibrated so both lines run near full width (12 vs 9 glyphs).
+const S1 = 157;
+const S2 = 123;
+const Y1 = 138;
+const Y2 = 298;
 
 /**
  * The headline rendered as a window into water: the glyphs mask a teal water
@@ -21,16 +26,16 @@ export function WaterHeadline({ className }: { className?: string }) {
   const reduce = useReducedMotion();
 
   const bubbles = [
-    { cx: 360, r: 7, delay: 0 },
-    { cx: 545, r: 4, delay: 1.4 },
-    { cx: 690, r: 9, delay: 0.6 },
-    { cx: 840, r: 5, delay: 2.1 },
-    { cx: 980, r: 6, delay: 1 },
+    { cx: 300, r: 6, delay: 0 },
+    { cx: 495, r: 4, delay: 1.4 },
+    { cx: 640, r: 8, delay: 0.6 },
+    { cx: 810, r: 5, delay: 2.1 },
+    { cx: 950, r: 6, delay: 1 },
   ];
 
   return (
     <svg
-      viewBox="0 0 1200 430"
+      viewBox="0 0 1200 340"
       className={className}
       preserveAspectRatio="xMidYMid meet"
       aria-hidden="true"
@@ -42,31 +47,31 @@ export function WaterHeadline({ className }: { className?: string }) {
           <stop offset="1" stopColor="#0C5867" />
         </linearGradient>
         <mask id="wh-mask">
-          <rect width="1200" height="430" fill="black" />
+          <rect width="1200" height="340" fill="black" />
           <g fill="white" {...TYPE}>
-            <text x="600" y="186" fontSize="190">{L1}</text>
-            <text x="600" y="378" fontSize="190">{L2}</text>
+            <text x="600" y={Y1} fontSize={S1}>{L1}</text>
+            <text x="600" y={Y2} fontSize={S2}>{L2}</text>
           </g>
         </mask>
       </defs>
 
       {/* ghost fill so the letters read before/while the water rises */}
       <g fill="#0E3942" fillOpacity="0.55" {...TYPE}>
-        <text x="600" y="186" fontSize="190">{L1}</text>
-        <text x="600" y="378" fontSize="190">{L2}</text>
+        <text x="600" y={Y1} fontSize={S1}>{L1}</text>
+        <text x="600" y={Y2} fontSize={S2}>{L2}</text>
       </g>
 
       <g mask="url(#wh-mask)">
         <motion.g
-          initial={reduce ? false : { y: 470 }}
+          initial={reduce ? false : { y: 380 }}
           animate={{ y: 0 }}
           transition={{ duration: 1.7, delay: 0.3, ease: EASE }}
         >
-          <rect x="-40" y="-30" width="1280" height="490" fill="url(#wh-water)" />
+          <rect x="-40" y="-30" width="1280" height="400" fill="url(#wh-water)" />
 
           {/* drifting surface shimmer (two bands) */}
           <motion.path
-            d="M-300,8 q150,-22 300,0 t300,0 t300,0 t300,0 t300,0 t300,0"
+            d="M-300,6 q150,-20 300,0 t300,0 t300,0 t300,0 t300,0 t300,0"
             stroke="#EAFCFE"
             strokeOpacity="0.5"
             strokeWidth="5"
@@ -75,7 +80,7 @@ export function WaterHeadline({ className }: { className?: string }) {
             transition={{ duration: 7, repeat: Infinity, ease: "linear" }}
           />
           <motion.path
-            d="M-300,210 q150,-20 300,0 t300,0 t300,0 t300,0 t300,0 t300,0"
+            d="M-300,172 q150,-18 300,0 t300,0 t300,0 t300,0 t300,0 t300,0"
             stroke="#EAFCFE"
             strokeOpacity="0.32"
             strokeWidth="4"
@@ -93,8 +98,8 @@ export function WaterHeadline({ className }: { className?: string }) {
                   r={b.r}
                   fill="#DAF7FA"
                   fillOpacity="0.28"
-                  initial={{ cy: 430, opacity: 0 }}
-                  animate={{ cy: [430, 90], opacity: [0, 0.5, 0] }}
+                  initial={{ cy: 340, opacity: 0 }}
+                  animate={{ cy: [340, 70], opacity: [0, 0.5, 0] }}
                   transition={{
                     duration: 6 + i,
                     delay: b.delay,
@@ -109,8 +114,8 @@ export function WaterHeadline({ className }: { className?: string }) {
 
       {/* crisp outline against the dark abyss */}
       <g fill="none" stroke="#CFF3F7" strokeOpacity="0.42" strokeWidth="1.6" {...TYPE}>
-        <text x="600" y="186" fontSize="190">{L1}</text>
-        <text x="600" y="378" fontSize="190">{L2}</text>
+        <text x="600" y={Y1} fontSize={S1}>{L1}</text>
+        <text x="600" y={Y2} fontSize={S2}>{L2}</text>
       </g>
     </svg>
   );

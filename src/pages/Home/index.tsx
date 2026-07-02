@@ -12,8 +12,8 @@ export default function Home() {
   return (
     <>
       <Seo
-        title="Maquila y embotellado de agua mineral en Tehuacán"
-        description="MOG México: maquila, embotellado y marca privada de agua mineral y purificada en Tehuacán, Puebla. Producimos tu marca de agua de principio a fin."
+        title="Maquila y embotellado de agua y bebidas en Tehuacán"
+        description="MOG México: maquila embotelladora en Tehuacán, Puebla. Agua mineral, purificada y otras bebidas con tu marca, de principio a fin."
         path="/"
         jsonLd={organizationJsonLd}
       />
@@ -23,7 +23,7 @@ export default function Home() {
       <ProcessPreview />
       <CapabilitiesBlock />
       <TrustStrip />
-      <WaveDivider nextColor="#0E2A47" className="bg-foam" />
+      <WaveDivider nextColor="#07232C" className="bg-foam" />
       <CtaBand />
     </>
   );

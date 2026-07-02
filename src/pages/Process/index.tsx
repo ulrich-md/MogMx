@@ -24,7 +24,7 @@ export default function Process() {
         </div>
       </section>
 
-      <WaveDivider nextColor="#0E2A47" className="bg-white" />
+      <WaveDivider nextColor="#07232C" className="bg-white" />
       <CtaBand
         title="¿Empezamos tu proyecto?"
         lead="El primer paso es una cotización. Cuéntanos tu idea y la aterrizamos contigo."

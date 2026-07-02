@@ -82,7 +82,7 @@ export default function About() {
         </div>
       </section>
 
-      <WaveDivider nextColor="#0E2A47" className="bg-foam" />
+      <WaveDivider nextColor="#07232C" className="bg-foam" />
       <CtaBand
         title="Produce tu marca con nosotros"
         lead="Llevamos tu idea del concepto al producto terminado, listo para tu canal de venta."

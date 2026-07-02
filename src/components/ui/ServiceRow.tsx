@@ -33,7 +33,7 @@ export function ServiceRow({
           <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-mist text-blue transition-colors duration-300 group-hover:bg-blue group-hover:text-white">
             <Icon name={service.icon} size={20} />
           </span>
-          <h3 className="font-display text-xl font-bold tracking-tight text-navy md:text-[1.6rem] md:leading-[1.05]">
+          <h3 className="font-display text-xl font-bold tracking-tight text-navy transition-transform duration-300 ease-water group-hover:translate-x-1 md:text-[1.6rem] md:leading-[1.05]">
             {service.title}
           </h3>
         </div>

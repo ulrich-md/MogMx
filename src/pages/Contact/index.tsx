@@ -154,7 +154,7 @@ export default function Contact() {
         </div>
       </section>
 
-      <WaveDivider nextColor="#0E2A47" className="bg-white" />
+      <WaveDivider nextColor="#07232C" className="bg-white" />
     </>
   );
 }

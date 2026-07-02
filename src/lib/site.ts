@@ -14,7 +14,7 @@ export const site = {
   url: "https://mogmx.com",
   // Honest, affirmable description (no metrics claimed).
   description:
-    "Maquila, embotellado y marca privada de agua mineral y purificada en Tehuacán, Puebla. Producimos tu marca de agua de principio a fin.",
+    "Maquila embotelladora en Tehuacán, Puebla: agua mineral, purificada y otras bebidas, con marca privada. Producimos tu marca de principio a fin.",
   location: {
     city: "Tehuacán",
     state: "Puebla",
@@ -76,11 +76,11 @@ export const services: Service[] = [
   {
     slug: "maquila-agua-mineral",
     icon: "Drop",
-    title: "Maquila de agua mineral",
+    title: "Maquila de bebidas",
     summary:
-      "Manufactura por contrato de agua mineral, lista para salir con tu marca.",
+      "Manufactura por contrato de agua y bebidas, listas para salir con tu marca.",
     detail:
-      "Operamos tu producción de agua mineral bajo contrato, desde el manejo de la fuente hasta el producto terminado, cuidando perfil y consistencia en cada lote.",
+      "Operamos tu producción bajo contrato, del agua mineral de Tehuacán a otras bebidas, cuidando perfil y consistencia en cada lote.",
     points: [
       "Producción por contrato de principio a fin",
       "Control de perfil mineral por lote",
@@ -90,13 +90,13 @@ export const services: Service[] = [
   {
     slug: "embotellado",
     icon: "Flask",
-    title: "Embotellado de agua purificada y mineral",
+    title: "Embotellado y envasado",
     summary:
-      "Llenado y sellado de agua purificada y mineral en distintos formatos.",
+      "Llenado y sellado de agua y bebidas en distintos formatos.",
     detail:
-      "Líneas de llenado, tapado y sellado para agua purificada y mineral, con cambios de formato y presentación según el proyecto.",
+      "Líneas de llenado, tapado y sellado para agua y otras bebidas, con cambios de formato y presentación según el proyecto.",
     points: [
-      "Agua purificada y mineral",
+      "Agua, bebidas y más",
       "Formatos y presentaciones flexibles",
       "Sellado e inspección en línea",
     ],
@@ -108,7 +108,7 @@ export const services: Service[] = [
     summary:
       "Tu marca, embotellada por nosotros. Tú creces, nosotros producimos.",
     detail:
-      "Producimos agua con tu marca: tú defines identidad, formato y presentación; nosotros nos encargamos de fabricarla con calidad constante.",
+      "Producimos tu bebida con tu marca: tú defines identidad, formato y presentación; nosotros la fabricamos con calidad constante.",
     points: [
       "Producto terminado con tu marca",
       "Acompañamiento en formato y presentación",
@@ -120,7 +120,7 @@ export const services: Service[] = [
     icon: "TestTube",
     title: "Desarrollo de producto y formulación",
     summary:
-      "Definimos contigo el perfil del agua y la presentación del producto.",
+      "Definimos contigo el perfil de tu bebida y la presentación del producto.",
     detail:
       "Te acompañamos en el desarrollo del producto: definición de perfil, pruebas y ajustes hasta llegar a una fórmula y presentación listas para producción.",
     points: [
@@ -171,13 +171,13 @@ export const processSteps: ProcessStep[] = [
     n: "01",
     title: "Cotización",
     description:
-      "Nos cuentas tu proyecto (tipo de agua, formato y volumen estimado) y preparamos una propuesta clara.",
+      "Nos cuentas tu proyecto (tipo de bebida, formato y volumen estimado) y preparamos una propuesta clara.",
   },
   {
     n: "02",
     title: "Formulación",
     description:
-      "Definimos el perfil del agua y la presentación, con pruebas y ajustes hasta dejar el producto listo.",
+      "Definimos el perfil de la bebida y la presentación, con pruebas y ajustes hasta dejar el producto listo.",
   },
   {
     n: "03",
@@ -218,6 +218,11 @@ export const waterTypes = [
     title: "Agua purificada",
     description:
       "Agua sometida a procesos de purificación para un perfil limpio y neutro.",
+  },
+  {
+    // EDITABLE: indicar las categorías reales de bebidas en "[categorías]".
+    title: "Otras bebidas",
+    description: "Embotellado de otras bebidas según tu proyecto: [categorías].",
   },
 ];
 
@@ -337,7 +342,7 @@ export const values = [
     icon: "Drop",
     title: "Pureza",
     description:
-      "El agua es el producto. Cuidamos su perfil y limpieza en cada etapa.",
+      "El producto es lo primero. Cuidamos su perfil y limpieza en cada etapa.",
   },
   {
     icon: "ShieldCheck",
@@ -349,7 +354,7 @@ export const values = [
     icon: "MapPin",
     title: "Trazabilidad",
     description:
-      "Seguimiento por lote, del agua de origen al producto terminado.",
+      "Seguimiento por lote, del origen al producto terminado.",
   },
   {
     icon: "Factory",
@@ -363,6 +368,7 @@ export const values = [
 export const projectTypes = [
   "Maquila de agua mineral",
   "Embotellado de agua purificada",
+  "Maquila de otra bebida",
   "Marca privada / private label",
   "Desarrollo de producto",
   "Otro",

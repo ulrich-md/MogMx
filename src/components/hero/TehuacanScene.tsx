@@ -24,7 +24,7 @@ const EASE = [0.16, 1, 0.3, 1] as const;
 
 function Cactus() {
   return (
-    <g fill="#0A1830">
+    <g fill="#062026">
       <path d="M-15,0 L-15,-78 Q-15,-95 0,-95 Q15,-95 15,-78 L15,0 Z" />
       <path d="M15,-44 L33,-44 Q44,-44 44,-58 L44,-74 Q44,-86 55,-86 Q66,-86 66,-74 L66,-30 L48,-30 Q15,-30 15,-44 Z" />
       <path d="M-15,-54 L-30,-54 Q-40,-54 -40,-66 L-40,-80 Q-40,-90 -49,-90 Q-58,-90 -58,-80 L-58,-40 L-42,-40 Q-15,-40 -15,-54 Z" />
@@ -72,7 +72,7 @@ export function TehuacanScene() {
         className="absolute inset-0"
         style={{
           background:
-            "linear-gradient(180deg, #0B1A3A 0%, #22407A 40%, #4E7AB8 64%, #CBD9EE 80%)",
+            "linear-gradient(180deg, #0A2B33 0%, #14606E 40%, #4FA3B5 64%, #D2ECEF 80%)",
         }}
         initial={reduce ? false : { opacity: 0 }}
         whileInView={{ opacity: 1 }}
@@ -85,14 +85,14 @@ export function TehuacanScene() {
         <motion.svg viewBox={VB} preserveAspectRatio={SLICE} className={LAYER} style={par(ySun, sunX)}>
           <defs>
             <radialGradient id="sunGlow" cx="0.5" cy="0.5" r="0.5">
-              <stop offset="0" stopColor="#9FB0D8" stopOpacity="0.55" />
-              <stop offset="0.45" stopColor="#7E8FC2" stopOpacity="0.22" />
-              <stop offset="1" stopColor="#7E8FC2" stopOpacity="0" />
+              <stop offset="0" stopColor="#9FCBD4" stopOpacity="0.55" />
+              <stop offset="0.45" stopColor="#7EAFBB" stopOpacity="0.22" />
+              <stop offset="1" stopColor="#7EAFBB" stopOpacity="0" />
             </radialGradient>
           </defs>
           <circle cx="1015" cy="450" r="300" fill="url(#sunGlow)" />
           <circle cx="1015" cy="450" r="58" fill="#E7DBB0" />
-          <g stroke="#0A1830" strokeWidth="4" fill="none" strokeLinecap="round" opacity="0.5">
+          <g stroke="#062026" strokeWidth="4" fill="none" strokeLinecap="round" opacity="0.5">
             <path d="M1030,360 q16,-13 32,0 q16,-13 32,0" />
             <path d="M1108,393 q12,-10 24,0 q12,-10 24,0" />
             <path d="M988,399 q13,-11 26,0 q13,-11 26,0" />
@@ -104,7 +104,7 @@ export function TehuacanScene() {
       <motion.div className="absolute inset-0" {...enter(0.22, 70)}>
         <motion.svg viewBox={VB} preserveAspectRatio={SLICE} className={LAYER} style={par(yFar, farX)}>
           <defs>
-            <linearGradient id="far" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#A9BEDE" /><stop offset="1" stopColor="#8AA4CF" /></linearGradient>
+            <linearGradient id="far" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#A5CDD6" /><stop offset="1" stopColor="#86B2BD" /></linearGradient>
             <linearGradient id="haze" x1="0" y1="0" x2="0" y2="1">
               <stop offset="0" stopColor="#EAF5FB" stopOpacity="0" /><stop offset="0.5" stopColor="#EAF5FB" stopOpacity="0.55" /><stop offset="1" stopColor="#EAF5FB" stopOpacity="0" />
             </linearGradient>
@@ -118,7 +118,7 @@ export function TehuacanScene() {
       <motion.div className="absolute inset-0" {...enter(0.34, 90)}>
         <motion.svg viewBox={VB} preserveAspectRatio={SLICE} className={LAYER} style={par(yMid)}>
           <defs>
-            <linearGradient id="mid" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#3F5D96" /><stop offset="1" stopColor="#2C3F70" /></linearGradient>
+            <linearGradient id="mid" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#3E7484" /><stop offset="1" stopColor="#2A525E" /></linearGradient>
             <linearGradient id="haze2" x1="0" y1="0" x2="0" y2="1">
               <stop offset="0" stopColor="#EAF5FB" stopOpacity="0" /><stop offset="0.5" stopColor="#EAF5FB" stopOpacity="0.55" /><stop offset="1" stopColor="#EAF5FB" stopOpacity="0" />
             </linearGradient>
@@ -133,7 +133,7 @@ export function TehuacanScene() {
         <motion.svg viewBox={VB} preserveAspectRatio={SLICE} className={LAYER} style={par(yWater)}>
           <defs>
             <linearGradient id="waterFade" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0" stopColor="#CBD9EE" /><stop offset="0.34" stopColor="#5F7FC0" /><stop offset="0.66" stopColor="#A6B8E0" /><stop offset="1" stopColor="#FFFFFF" />
+              <stop offset="0" stopColor="#D2ECEF" /><stop offset="0.34" stopColor="#5FA9BD" /><stop offset="0.66" stopColor="#A8D8DF" /><stop offset="1" stopColor="#FFFFFF" />
             </linearGradient>
             <linearGradient id="sunRefl" x1="0" y1="0" x2="0" y2="1">
               <stop offset="0" stopColor="#E7DBB0" stopOpacity="0.55" /><stop offset="1" stopColor="#E7DBB0" stopOpacity="0" />
@@ -142,16 +142,16 @@ export function TehuacanScene() {
           <rect x="0" y="628" width="1440" height="272" fill="url(#waterFade)" />
           <path d="M985,630 L1045,630 L1020,762 L1010,762 Z" fill="url(#sunRefl)" opacity="0.55" />
           {/* plant reflection */}
-          <g transform="matrix(1,0,0,-1,0,1256)" opacity="0.16" fill="#0A1830">
+          <g transform="matrix(1,0,0,-1,0,1256)" opacity="0.16" fill="#062026">
             <rect x="686" y="584" width="34" height="44" /><rect x="722" y="574" width="88" height="54" /><rect x="808" y="545" width="52" height="83" /><rect x="846" y="510" width="9" height="40" />
           </g>
           {/* bottling plant */}
           <g>
-            <rect x="686" y="584" width="34" height="44" fill="#0A1830" /><ellipse cx="703" cy="584" rx="17" ry="6" fill="#25406E" />
-            <rect x="722" y="574" width="88" height="54" fill="#0A1830" />
-            <rect x="808" y="545" width="52" height="83" fill="#0E2240" />
-            <rect x="846" y="510" width="9" height="40" fill="#0A1830" />
-            <rect x="722" y="574" width="88" height="5" fill="#25406E" />
+            <rect x="686" y="584" width="34" height="44" fill="#062026" /><ellipse cx="703" cy="584" rx="17" ry="6" fill="#1E4A55" />
+            <rect x="722" y="574" width="88" height="54" fill="#062026" />
+            <rect x="808" y="545" width="52" height="83" fill="#0A2B33" />
+            <rect x="846" y="510" width="9" height="40" fill="#062026" />
+            <rect x="722" y="574" width="88" height="5" fill="#1E4A55" />
             <g fill="#E7DBB0">
               <rect x="731" y="590" width="9" height="9" /><rect x="747" y="590" width="9" height="9" /><rect x="763" y="590" width="9" height="9" /><rect x="779" y="590" width="9" height="9" />
               <rect x="731" y="607" width="9" height="9" /><rect x="747" y="607" width="9" height="9" /><rect x="763" y="607" width="9" height="9" /><rect x="779" y="607" width="9" height="9" />

@@ -67,7 +67,7 @@ export function Footer() {
                 <li key={item.to}>
                   <Link
                     to={item.to}
-                    className="text-mist/85 transition-colors hover:text-white"
+                    className="inline-block text-mist/85 transition-all duration-300 ease-water hover:translate-x-1 hover:text-white"
                   >
                     {item.label}
                   </Link>
@@ -86,7 +86,7 @@ export function Footer() {
               <li key={s.slug}>
                 <Link
                   to="/servicios"
-                  className="text-mist/85 transition-colors hover:text-white"
+                  className="inline-block text-mist/85 transition-all duration-300 ease-water hover:translate-x-1 hover:text-white"
                 >
                   {s.title}
                 </Link>

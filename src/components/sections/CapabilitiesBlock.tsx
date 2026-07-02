@@ -16,10 +16,10 @@ export function CapabilitiesBlock() {
             lead="Líneas de embotellado, control de calidad y trazabilidad por lote para mantener tu producto siempre consistente."
           />
           <ul className="mt-8 space-y-5">
-            {waterTypes.map((t) => (
-              <li key={t.title} className="flex gap-4">
-                <span className="mt-0.5 grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-mist text-blue">
-                  <Icon name="Drop" size={20} />
+            {waterTypes.map((t, i) => (
+              <li key={t.title} className="group flex gap-4">
+                <span className="mt-0.5 grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-mist text-blue transition-all duration-300 ease-water group-hover:bg-blue group-hover:text-white">
+                  <Icon name={["Drop", "Flask", "Package"][i] ?? "Drop"} size={20} />
                 </span>
                 <div>
                   <h3 className="font-display text-base font-semibold text-navy">
@@ -50,8 +50,12 @@ export function CapabilitiesBlock() {
                 tone="navy"
               />
             </div>
-            <div className="rounded-card bg-mist p-6 ring-1 ring-line">
-              <Icon name="ShieldCheck" size={26} className="text-blue" />
+            <div className="group rounded-card bg-mist p-6 ring-1 ring-line transition-all duration-300 ease-water hover:-translate-y-1 hover:shadow-lift">
+              <Icon
+                name="ShieldCheck"
+                size={26}
+                className="text-blue transition-transform duration-300 ease-water group-hover:scale-110"
+              />
               <h3 className="mt-4 font-display text-lg font-semibold text-navy">
                 Control de calidad
               </h3>
@@ -60,14 +64,17 @@ export function CapabilitiesBlock() {
                 entre lotes.
               </p>
             </div>
-            <div className="rounded-card bg-navy p-6">
-              <Icon name="MapPin" size={26} className="text-aqua" />
+            <div className="group rounded-card bg-navy p-6 transition-all duration-300 ease-water hover:-translate-y-1 hover:shadow-lift">
+              <Icon
+                name="MapPin"
+                size={26}
+                className="text-aqua transition-transform duration-300 ease-water group-hover:scale-110"
+              />
               <h3 className="mt-4 font-display text-lg font-semibold text-white">
                 Trazabilidad por lote
               </h3>
               <p className="mt-2 text-[14px] leading-relaxed text-mist">
-                Cada lote queda identificado, del agua de origen al producto
-                terminado.
+                Cada lote queda identificado, del origen al producto terminado.
               </p>
             </div>
           </Reveal>
