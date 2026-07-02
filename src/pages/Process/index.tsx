@@ -9,10 +9,11 @@ export default function Process() {
     <>
       <Seo
         title="Proceso"
-        description="De la cotización a la entrega: cotización, formulación, producción, envasado, etiquetado y entrega de tu marca de agua."
+        description="De la cotización a la entrega: cotización, formulación, producción, envasado, etiquetado y entrega de tu marca."
         path="/proceso"
       />
       <PageHero
+        product="bottle"
         eyebrow="Cómo trabajamos"
         title="Un proceso claro, de la cotización a la entrega"
         lead="Cada proyecto sigue seis etapas trazables. Sabes en qué punto está tu producción en todo momento."

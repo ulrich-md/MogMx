@@ -2,10 +2,11 @@ import { WhatsappLogo } from "@phosphor-icons/react";
 import { Button } from "../ui/Button";
 import { GlassEffect } from "../ui/liquid-glass";
 import { Reveal } from "../ui/Reveal";
+import { BottleSvg, CanSvg, Floater } from "../hero/Products";
 import { primaryCta, whatsappHref } from "@/lib/site";
 
 export function CtaBand({
-  title = "¿Listo para producir tu marca de agua?",
+  title = "¿Listo para embotellar tu marca?",
   lead = "Cuéntanos tu proyecto y te enviamos una propuesta clara, sin compromiso.",
 }: {
   title?: string;
@@ -38,9 +39,29 @@ export function CtaBand({
         ))}
       </svg>
 
+      {/* Product echoes from the hero, floating at the edges */}
+      <Floater
+        delay={0.2}
+        depth={0.4}
+        floatY={9}
+        duration={7}
+        className="pointer-events-none absolute -left-6 top-1/2 hidden h-56 -translate-y-1/2 opacity-80 lg:block"
+      >
+        <BottleSvg className="h-full w-auto -rotate-[10deg] drop-shadow-[0_26px_40px_rgba(3,16,22,0.5)]" />
+      </Floater>
+      <Floater
+        delay={0.35}
+        depth={0.55}
+        floatY={11}
+        duration={6.2}
+        className="pointer-events-none absolute -right-4 top-1/2 hidden h-44 -translate-y-1/2 opacity-80 lg:block"
+      >
+        <CanSvg className="h-full w-auto rotate-[12deg] drop-shadow-[0_26px_40px_rgba(3,16,22,0.5)]" />
+      </Floater>
+
       <div className="container-px section relative">
         <Reveal className="mx-auto max-w-2xl text-center">
-          <h2 className="font-display text-[1.9rem] font-bold leading-[1.1] tracking-tight text-white sm:text-4xl md:text-[2.5rem]">
+          <h2 className="font-display text-[2rem] font-extrabold uppercase leading-[1.02] tracking-tight text-white sm:text-4xl md:text-[2.7rem]">
             {title}
           </h2>
           <p className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-mist">

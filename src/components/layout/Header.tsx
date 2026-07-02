@@ -60,8 +60,9 @@ export function Header() {
 
   useMotionValueEvent(scrollY, "change", (v) => setScrolled(v > 12));
 
-  // The home hero is dark, so at the very top its chrome must be light.
-  const overHero = pathname === "/" && !scrolled && !open;
+  // Every page now opens on the dark deep-water hero, so at the very top the
+  // chrome is light everywhere; it flips to glass-on-white once scrolled.
+  const overHero = !scrolled && !open;
 
   // Close menu on route change
   useEffect(() => {

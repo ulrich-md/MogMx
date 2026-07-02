@@ -38,6 +38,7 @@ export default function Contact() {
         path="/contacto"
       />
       <PageHero
+        product="bottle"
         eyebrow="Contacto"
         title="Hablemos de tu marca"
         lead="Escríbenos o llámanos directo. Te respondemos con una propuesta clara para tu proyecto de embotellado, sin compromiso."

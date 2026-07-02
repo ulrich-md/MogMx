@@ -27,6 +27,7 @@ export default function Capabilities() {
         path="/capacidades"
       />
       <PageHero
+        product="jug"
         eyebrow="Capacidades"
         title="Infraestructura y calidad para tu producción"
         lead="Líneas de embotellado, formatos flexibles y control de calidad con trazabilidad por lote, pensados para producir a escala sin perder consistencia."
@@ -167,7 +168,7 @@ export default function Capabilities() {
           <SectionHeading
             eyebrow="Calidad"
             title="Calidad y trazabilidad en cada lote"
-            lead="Controles a lo largo del proceso y seguimiento por lote, del agua de origen al producto terminado."
+            lead="Controles a lo largo del proceso y seguimiento por lote, del origen al producto terminado."
           />
           <div className="mt-10 grid gap-6 md:grid-cols-3">
             {qualityPoints.map((q, i) => (

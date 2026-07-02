@@ -17,6 +17,7 @@ export default function Resources() {
         path="/recursos"
       />
       <PageHero
+        product="can"
         eyebrow="Recursos"
         title="Videos y documentos"
         lead="Conoce la planta, el proceso y la documentación de producto. Descarga lo que necesites para evaluar tu proyecto."

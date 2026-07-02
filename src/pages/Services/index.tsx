@@ -16,8 +16,9 @@ export default function Services() {
       />
       <PageHero
         eyebrow="Servicios"
+        product="can"
         title="Maquila y embotellado, de principio a fin"
-        lead="Seis servicios para producir tu marca de agua con calidad constante. Elige el punto donde nos necesitas; nos encargamos del resto."
+        lead="Seis servicios para producir tu marca con calidad constante. Elige el punto donde nos necesitas; nos encargamos del resto."
       />
 
       <section className="bg-white">
