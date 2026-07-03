@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Button } from "../ui/Button";
 import { Eyebrow } from "../ui/Eyebrow";
 import { WaveDivider } from "../ui/WaveDivider";
-import { BottleSvg, CanSvg, Floater, JugSvg } from "./Products";
+import { BottleSvg, CanSvg, Floater, GlassSvg, JugSvg, MiniSvg } from "./Products";
 import { primaryCta } from "@/lib/site";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
@@ -90,6 +90,26 @@ export function Hero() {
           className="absolute -right-16 top-[40%] z-0 h-[31vh] opacity-90"
         >
           <JugSvg className="h-full w-auto -rotate-[8deg] drop-shadow-[0_30px_44px_rgba(3,16,22,0.5)]" />
+        </Floater>
+        {/* Behind the type: glass juice bottle bleeding off the left edge */}
+        <Floater
+          delay={1}
+          depth={0.3}
+          floatY={9}
+          duration={8.2}
+          className="absolute -left-6 top-[32%] z-0 h-[38vh] opacity-85"
+        >
+          <GlassSvg className="h-full w-auto rotate-[10deg] drop-shadow-[0_28px_42px_rgba(3,16,22,0.5)]" />
+        </Floater>
+        {/* Far depth: mini personal bottle drifting top-right */}
+        <Floater
+          delay={1.1}
+          depth={0.22}
+          floatY={7}
+          duration={5.8}
+          className="absolute right-[22%] top-[7%] z-0 h-[16vh] opacity-80"
+        >
+          <MiniSvg className="h-full w-auto -rotate-[14deg] drop-shadow-[0_22px_34px_rgba(3,16,22,0.5)]" />
         </Floater>
         {/* In front: bottle kissing the left edge of the type */}
         <Floater

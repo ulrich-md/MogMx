@@ -145,6 +145,68 @@ export function CanSvg({ className }: { className?: string }) {
   );
 }
 
+export function GlassSvg({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 112 410" className={className} role="img" aria-label="Botella de vidrio MOG">
+      <defs>
+        <linearGradient id="p-lime" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="#D9F4E4" />
+          <stop offset="0.45" stopColor="#7FD6AC" />
+          <stop offset="1" stopColor="#2E8F6B" />
+        </linearGradient>
+        <linearGradient id="p-gloss4" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stopColor="#FFFFFF" stopOpacity="0.6" />
+          <stop offset="1" stopColor="#FFFFFF" stopOpacity="0" />
+        </linearGradient>
+      </defs>
+      <g transform="translate(56,6)">
+        <rect x="-22" y="0" width="44" height="14" rx="4" fill="#0A2B33" />
+        <path d="M-22,12 h44 l3,6 h-50 Z" fill="#123B44" />
+        <rect x="-15" y="18" width="30" height="52" rx="6" fill="#BFE9D6" opacity="0.9" />
+        <path d="M-15,70 Q-52,96 -52,150 L-52,356 Q-52,392 -16,392 L16,392 Q52,392 52,356 L52,150 Q52,96 15,70 Z" fill="url(#p-lime)" />
+        <rect x="-38" y="120" width="18" height="240" rx="9" fill="url(#p-gloss4)" opacity="0.65" />
+        <rect x="26" y="120" width="12" height="240" rx="6" fill="#14523C" opacity="0.35" />
+        <rect x="-40" y="196" width="80" height="88" rx="8" fill="#FFFFFF" fillOpacity="0.22" />
+        <path d="M-20,232 q10,-12 20,0 q10,12 20,0" stroke="#EAFCF3" strokeWidth="2.6" fill="none" strokeLinecap="round" />
+        <text x="0" y="268" fill="#F2FDF8" fontFamily="'JetBrains Mono', monospace" fontSize="13" letterSpacing="3" textAnchor="middle">
+          MOG
+        </text>
+      </g>
+    </svg>
+  );
+}
+
+export function MiniSvg({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 80 240" className={className} role="img" aria-label="Botella personal MOG">
+      <defs>
+        <linearGradient id="p-aqua2" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="#DCF6F8" />
+          <stop offset="0.3" stopColor="#8FDDE6" />
+          <stop offset="0.65" stopColor="#3FB3C4" />
+          <stop offset="1" stopColor="#12707F" />
+        </linearGradient>
+        <linearGradient id="p-gloss5" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stopColor="#FFFFFF" stopOpacity="0.6" />
+          <stop offset="1" stopColor="#FFFFFF" stopOpacity="0" />
+        </linearGradient>
+      </defs>
+      <g transform="translate(40,6)">
+        <rect x="-18" y="0" width="36" height="12" rx="3" fill="#0A2B33" />
+        <rect x="-18" y="11" width="36" height="10" rx="3" fill="#12444F" />
+        <path d="M-11,21 L11,21 L18,46 L-18,46 Z" fill="#7FCBD6" />
+        <rect x="-36" y="44" width="72" height="180" rx="26" fill="url(#p-aqua2)" />
+        <rect x="-27" y="58" width="14" height="152" rx="7" fill="url(#p-gloss5)" opacity="0.75" />
+        <rect x="19" y="58" width="10" height="152" rx="5" fill="#0C4A56" opacity="0.35" />
+        <rect x="-30" y="112" width="60" height="58" rx="6" fill="#FFFFFF" fillOpacity="0.2" />
+        <text x="0" y="148" fill="#F2FBFD" fontFamily="'JetBrains Mono', monospace" fontSize="11" letterSpacing="2.5" textAnchor="middle">
+          MOG
+        </text>
+      </g>
+    </svg>
+  );
+}
+
 export function JugSvg({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 200 340" className={className} role="img" aria-label="Garrafón de agua MOG">
