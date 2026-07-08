@@ -81,7 +81,7 @@ export function PageHero({
               {eyebrow}
             </Eyebrow>
           ) : null}
-          <h1 className="font-display text-[clamp(2.6rem,5.6vw,4.7rem)] font-extrabold uppercase leading-[0.96] tracking-[-0.02em] text-white">
+          <h1 className="font-display text-[clamp(2.2rem,4.6vw,3.9rem)] font-extrabold uppercase leading-[1.02] tracking-[-0.015em] text-white">
             {title}
           </h1>
           {lead ? (

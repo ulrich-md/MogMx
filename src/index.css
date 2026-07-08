@@ -35,7 +35,6 @@
 
   body {
     @apply bg-white font-sans text-navy antialiased;
-    font-feature-settings: "cv11", "ss01";
   }
 
   h1,
@@ -86,7 +85,7 @@
 
   /* Small uppercase label above a heading. Used sparingly. */
   .eyebrow {
-    @apply inline-flex items-center gap-2 font-sans text-[11px] font-semibold uppercase tracking-eyebrow text-blue-deep;
+    @apply inline-flex items-center gap-2 font-mono text-[11px] font-medium uppercase tracking-eyebrow text-blue-deep;
   }
 }
 

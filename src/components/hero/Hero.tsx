@@ -8,7 +8,7 @@ import { primaryCta } from "@/lib/site";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 const HEADLINE =
-  "block font-display font-extrabold uppercase leading-[0.98] tracking-[-0.035em] text-white";
+  "block font-display font-extrabold uppercase leading-none tracking-[-0.025em] text-white";
 
 export function Hero() {
   const reduce = useReducedMotion();
@@ -141,11 +141,20 @@ export function Hero() {
           <Eyebrow tone="dark">MAQUILA · EMBOTELLADO · MARCA PRIVADA</Eyebrow>
         </motion.div>
 
+        {/* Syne runs wide: sizes calibrated in the render pipeline (112/86 at
+            1440) so both lines kiss the floating products without losing
+            glyphs. The lg inter-line air lets the products breathe. */}
         <h1 className="mt-6">
-          <motion.span {...clip(0.35)} className={`${HEADLINE} text-[min(13vw,11.4rem)]`}>
+          <motion.span
+            {...clip(0.35)}
+            className={`${HEADLINE} text-[min(11vw,4.6rem)] lg:text-[min(7.8vw,7rem)]`}
+          >
             Tu marca,
           </motion.span>
-          <motion.span {...clip(0.5)} className={`${HEADLINE} text-[min(10.2vw,8.9rem)]`}>
+          <motion.span
+            {...clip(0.5)}
+            className={`${HEADLINE} mt-[0.3em] text-[min(8.4vw,3.5rem)] lg:mt-[1.1em] lg:text-[min(6vw,5.4rem)]`}
+          >
             embotellada.
           </motion.span>
         </h1>

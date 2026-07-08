@@ -11,10 +11,10 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@fontsource/bricolage-grotesque": "^5.2.10",
-    "@fontsource/inter": "^5.1.0",
+    "@fontsource/instrument-sans": "^5.2.8",
     "@fontsource/jetbrains-mono": "^5.2.8",
     "@fontsource/plus-jakarta-sans": "^5.2.8",
+    "@fontsource/syne": "^5.2.7",
     "@phosphor-icons/react": "^2.1.7",
     "@splinetool/react-spline": "^4.1.0",
     "@splinetool/runtime": "^1.12.98",
