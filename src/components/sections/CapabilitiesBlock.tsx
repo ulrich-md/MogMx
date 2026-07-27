@@ -12,8 +12,8 @@ export function CapabilitiesBlock() {
       <div className="container-px section grid gap-12 lg:grid-cols-12 lg:items-center">
         <div className="lg:col-span-5">
           <SectionHeading
-            title="Infraestructura para producir a escala"
-            lead="Líneas de embotellado, control de calidad y trazabilidad por lote para mantener tu producto siempre consistente."
+            title="Versatilidad que se nota en el anaquel"
+            lead="Múltiples envases, tapas y presentaciones, con control de calidad y trazabilidad por lote para que tu producto sea siempre el mismo."
           />
           <ul className="mt-8 space-y-5">
             {waterTypes.map((t, i) => (

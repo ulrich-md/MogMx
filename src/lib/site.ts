@@ -14,7 +14,7 @@ export const site = {
   url: "https://mogmx.com",
   // Honest, affirmable description (no metrics claimed).
   description:
-    "Maquila embotelladora en Tehuacán, Puebla: agua mineral, purificada y otras bebidas, con marca privada. Producimos tu marca de principio a fin.",
+    "Agua mineral de Tehuacán, Puebla, embotellada con tu marca. Marca propia, mejora de formulación y diversidad de envases y tapas, también para otras bebidas.",
   location: {
     city: "Tehuacán",
     state: "Puebla",
@@ -74,91 +74,91 @@ export type Service = {
 
 export const services: Service[] = [
   {
-    slug: "maquila-agua-mineral",
+    slug: "agua-mineral-tehuacan",
     icon: "Drop",
-    title: "Maquila de bebidas",
+    title: "Agua mineral de Tehuacán",
     summary:
-      "Manufactura por contrato de agua y bebidas, listas para salir con tu marca.",
+      "El agua que solo da este valle, embotellada con tu nombre.",
     detail:
-      "Operamos tu producción bajo contrato, del agua mineral de Tehuacán a otras bebidas, cuidando perfil y consistencia en cada lote.",
+      "Tehuacán es la cuna del agua mineral en México. Cuidamos su perfil característico lote a lote, para que quien pruebe tu marca reconozca siempre lo mismo.",
     points: [
-      "Producción por contrato de principio a fin",
-      "Control de perfil mineral por lote",
-      "Volúmenes adaptables a tu demanda",
+      "Origen mineral de Tehuacán",
+      "Perfil cuidado en cada lote",
+      "Carácter propio, imposible de imitar fuera del valle",
     ],
   },
   {
-    slug: "embotellado",
-    icon: "Flask",
-    title: "Embotellado y envasado",
-    summary:
-      "Llenado y sellado de agua y bebidas en distintos formatos.",
-    detail:
-      "Líneas de llenado, tapado y sellado para agua y otras bebidas, con cambios de formato y presentación según el proyecto.",
-    points: [
-      "Agua, bebidas y más",
-      "Formatos y presentaciones flexibles",
-      "Sellado e inspección en línea",
-    ],
-  },
-  {
-    slug: "marca-privada",
+    slug: "marca-propia",
     icon: "Tag",
-    title: "Marca privada / private label",
-    summary:
-      "Tu marca, embotellada por nosotros. Tú creces, nosotros producimos.",
+    title: "Marca propia",
+    summary: "Tu nombre en el envase, tuyo de principio a fin.",
     detail:
-      "Producimos tu bebida con tu marca: tú defines identidad, formato y presentación; nosotros la fabricamos con calidad constante.",
+      "El producto sale con tu marca, tu identidad y tu presentación. Tú decides cómo se ve y a quién le habla; nosotros lo hacemos realidad contigo.",
     points: [
       "Producto terminado con tu marca",
-      "Acompañamiento en formato y presentación",
-      "Calidad constante entre corridas",
+      "Acompañamiento en presentación e identidad",
+      "La misma calidad entre una corrida y la siguiente",
     ],
   },
   {
-    slug: "desarrollo-formulacion",
+    slug: "formulacion",
     icon: "TestTube",
-    title: "Desarrollo de producto y formulación",
+    title: "Mejora de formulación",
     summary:
-      "Definimos contigo el perfil de tu bebida y la presentación del producto.",
+      "Experiencia para llevar tu idea, o tu fórmula actual, a su mejor versión.",
     detail:
-      "Te acompañamos en el desarrollo del producto: definición de perfil, pruebas y ajustes hasta llegar a una fórmula y presentación listas para producción.",
+      "Partimos de lo que ya tienes, sea una idea en la cabeza o una fórmula que quieres mejorar, y la trabajamos con pruebas y ajustes hasta dejarla como la imaginaste.",
     points: [
-      "Definición de perfil y concepto",
-      "Pruebas y ajustes de formulación",
-      "Preparación para escalar a producción",
+      "Del concepto a una fórmula lista",
+      "Pruebas y ajustes con acompañamiento",
+      "Mejora de fórmulas que ya existen",
     ],
   },
   {
-    slug: "lineas-envasado",
-    icon: "Factory",
-    title: "Líneas de producción y envasado",
-    summary: "Capacidad instalada de envasado para distintos volúmenes.",
-    detail:
-      "Líneas de producción y envasado preparadas para distintas presentaciones, con cambios de formato y trazabilidad por lote.",
-    points: [
-      "Distintas presentaciones y formatos",
-      "Trazabilidad por lote",
-      "Capacidad escalable [capacidad] // EDITABLE",
-    ],
-  },
-  {
-    slug: "etiquetado-empaque",
+    slug: "envases-y-tapas",
     icon: "Package",
-    title: "Etiquetado y empaque",
-    summary: "Etiquetado, codificado y empaque listo para distribución.",
+    title: "Envases y tapas",
+    summary:
+      "Diversidad de envases, tapas y presentaciones para tu proyecto.",
     detail:
-      "Aplicación de etiqueta, codificado y empaque final para que el producto salga listo para almacén y distribución.",
+      "Manejamos múltiples tipos de envase y tapa. Esa flexibilidad es lo que te deja elegir la presentación correcta para tu mercado, y cambiarla cuando tu marca lo pida.",
+    points: [
+      "Múltiples envases y presentaciones",
+      "Diversidad y manejo de tapas",
+      "Cambio de formato según tu mercado",
+    ],
+  },
+  {
+    slug: "otras-bebidas",
+    icon: "Flask",
+    title: "Otras bebidas",
+    summary: "Más allá del agua: lo que tu marca necesite envasar.",
+    detail:
+      "El agua mineral y purificada es nuestro origen, no nuestro límite. Envasamos otras bebidas según el proyecto: [categorías].",
+    points: [
+      "Agua mineral y purificada",
+      // EDITABLE: sustituir por las categorías reales de bebidas.
+      "Otras categorías: [categorías]",
+      "Presentaciones adaptadas a cada bebida",
+    ],
+  },
+  {
+    slug: "producto-final",
+    icon: "Sparkle",
+    title: "Producto final",
+    summary: "Etiquetado, codificado y listo para su primer anaquel.",
+    detail:
+      "Cerramos con el detalle que se ve: etiqueta, codificado y empaque, para que tu producto salga de aquí listo para venderse.",
     points: [
       "Etiquetado y codificado",
-      "Empaque para distribución",
+      "Empaque listo para distribución",
       "Presentación lista para anaquel",
     ],
   },
 ];
 
 /* ----------------------------------------------------------------- */
-/*  Process (Cotización -> Entrega)                                   */
+/*  Process (De la posibilidad a la realidad)                         */
 /* ----------------------------------------------------------------- */
 export type ProcessStep = {
   n: string;
@@ -169,39 +169,39 @@ export type ProcessStep = {
 export const processSteps: ProcessStep[] = [
   {
     n: "01",
-    title: "Cotización",
+    title: "Tu idea",
     description:
-      "Nos cuentas tu proyecto (tipo de bebida, formato y volumen estimado) y preparamos una propuesta clara.",
+      "Nos cuentas qué quieres lograr y a quién le quieres vender. De ahí sale una propuesta clara, sin compromiso.",
   },
   {
     n: "02",
     title: "Formulación",
     description:
-      "Definimos el perfil de la bebida y la presentación, con pruebas y ajustes hasta dejar el producto listo.",
+      "Definimos el perfil de tu bebida con pruebas y ajustes, hasta que sea la que tenías en la cabeza.",
   },
   {
     n: "03",
-    title: "Producción",
+    title: "Envase y tapa",
     description:
-      "Programamos la corrida y producimos bajo control de calidad, cuidando consistencia en cada lote.",
+      "Eliges entre múltiples envases, tapas y presentaciones la combinación correcta para tu mercado.",
   },
   {
     n: "04",
-    title: "Envasado",
+    title: "Producción",
     description:
-      "Llenado, tapado y sellado en el formato definido, con inspección en línea.",
+      "Preparamos tu corrida y la cuidamos con control de calidad, lote por lote.",
   },
   {
     n: "05",
-    title: "Etiquetado",
+    title: "Tu marca",
     description:
-      "Aplicamos etiqueta, codificado y los datos de lote para trazabilidad.",
+      "Etiqueta, codificado y datos de lote. El envase deja de ser nuestro y pasa a ser tuyo.",
   },
   {
     n: "06",
-    title: "Entrega",
+    title: "Producto final",
     description:
-      "Empaque final y entrega de tu producto terminado, listo para almacén y distribución.",
+      "Empaque y entrega. Tu marca existe y está lista para su primer anaquel.",
   },
 ];
 
@@ -210,9 +210,9 @@ export const processSteps: ProcessStep[] = [
 /* ----------------------------------------------------------------- */
 export const waterTypes = [
   {
-    title: "Agua mineral",
+    title: "Agua mineral de Tehuacán",
     description:
-      "Agua de origen mineral, embotellada cuidando su perfil característico.",
+      "El agua del valle que le dio nombre al agua mineral en México, con su perfil característico intacto.",
   },
   {
     title: "Agua purificada",
@@ -222,7 +222,7 @@ export const waterTypes = [
   {
     // EDITABLE: indicar las categorías reales de bebidas en "[categorías]".
     title: "Otras bebidas",
-    description: "Embotellado de otras bebidas según tu proyecto: [categorías].",
+    description: "Envasado de otras bebidas según tu proyecto: [categorías].",
   },
 ];
 
@@ -236,9 +236,10 @@ export const formats = [
 
 export const capabilityStats = [
   // EDITABLE: cifras de ejemplo. Cada una es editable y NO es un dato afirmado.
-  { value: "[capacidad]", unit: "L / día", label: "Capacidad de envasado" },
-  { value: "[N]", unit: "líneas", label: "Líneas de producción" },
-  { value: "[N]", unit: "formatos", label: "Formatos disponibles" },
+  // Hablan de variedad (versatilidad), nunca de volumen mínimo.
+  { value: "[N]", unit: "tipos de envase", label: "Envases disponibles" },
+  { value: "[N]", unit: "tipos de tapa", label: "Tapas y sellado" },
+  { value: "[N]", unit: "presentaciones", label: "Presentaciones" },
 ];
 
 /**
@@ -286,20 +287,20 @@ export type VideoResource = {
 
 export const videos: VideoResource[] = [
   {
-    title: "Recorrido por la planta",
-    description: "Conoce nuestras instalaciones y líneas de embotellado.",
+    title: "Dónde nace tu producto",
+    description: "Un recorrido por el lugar donde se embotella tu marca.",
     provider: "youtube",
     videoId: "", // EDITABLE: ID de YouTube, ej. "dQw4w9WgXcQ"
   },
   {
-    title: "Nuestro proceso de producción",
-    description: "Del agua de origen al producto terminado con tu marca.",
+    title: "Del manantial al envase",
+    description: "Cómo cuidamos el agua de Tehuacán hasta el producto final.",
     provider: "youtube",
     videoId: "", // EDITABLE: ID de YouTube
   },
   {
-    title: "Marca privada en acción",
-    description: "Cómo acompañamos a las marcas que producen con nosotros.",
+    title: "Marcas que empezaron aquí",
+    description: "Cómo acompañamos a quien está creando su propia marca.",
     provider: "vimeo",
     videoId: "", // EDITABLE: ID de Vimeo
   },
@@ -340,36 +341,36 @@ export const downloads: DownloadResource[] = [
 export const values = [
   {
     icon: "Drop",
-    title: "Pureza",
+    title: "Origen",
     description:
-      "El producto es lo primero. Cuidamos su perfil y limpieza en cada etapa.",
+      "El agua de Tehuacán no se replica en otro lado. Ese carácter es el punto de partida de tu marca.",
   },
   {
     icon: "ShieldCheck",
     title: "Consistencia",
     description:
-      "Calidad constante entre lotes para que tu marca sea siempre la misma.",
+      "Calidad constante entre lotes, para que tu marca sepa siempre igual.",
   },
   {
-    icon: "MapPin",
-    title: "Trazabilidad",
+    icon: "Package",
+    title: "Versatilidad",
     description:
-      "Seguimiento por lote, del origen al producto terminado.",
+      "Múltiples envases, tapas y presentaciones. Tu producto se adapta a tu mercado, no al revés.",
   },
   {
-    icon: "Factory",
-    title: "Capacidad industrial",
+    icon: "Sparkle",
+    title: "Oficio",
     description:
-      "Infraestructura de embotellado pensada para producir a escala.",
+      "Trabajamos contigo el detalle, de la fórmula al anaquel, como se trabaja un producto propio.",
   },
 ];
 
 /* Quote form: project types */
 export const projectTypes = [
-  "Maquila de agua mineral",
-  "Embotellado de agua purificada",
-  "Maquila de otra bebida",
-  "Marca privada / private label",
-  "Desarrollo de producto",
+  "Agua mineral de Tehuacán con mi marca",
+  "Agua purificada con mi marca",
+  "Otra bebida con mi marca",
+  "Mejora de una fórmula que ya tengo",
+  "Aún lo estoy definiendo",
   "Otro",
 ];

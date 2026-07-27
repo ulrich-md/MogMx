@@ -34,14 +34,14 @@ export default function Contact() {
     <>
       <Seo
         title="Contacto"
-        description="Contáctanos por WhatsApp, correo o teléfono. MOG México, embotellado y marca privada de agua en Tehuacán, Puebla."
+        description="Contáctanos por WhatsApp, correo o teléfono. MOG México, agua mineral de Tehuacán, Puebla, embotellada con tu marca."
         path="/contacto"
       />
       <PageHero
         product="bottle"
         eyebrow="Contacto"
         title="Hablemos de tu marca"
-        lead="Escríbenos o llámanos directo. Te respondemos con una propuesta clara para tu proyecto de embotellado, sin compromiso."
+        lead="Escríbenos o llámanos directo. Te respondemos con una propuesta clara para tu marca, sin compromiso."
       />
 
       <section className="bg-white">

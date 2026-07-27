@@ -141,12 +141,12 @@ export function Hero() {
         className="relative z-10 flex w-full max-w-[1180px] flex-col items-center"
       >
         <motion.div {...rise(0.2)}>
-          <Eyebrow tone="dark">MAQUILA · EMBOTELLADO · MARCA PRIVADA</Eyebrow>
+          <Eyebrow tone="dark">AGUA MINERAL DE TEHUACÁN · MARCA PROPIA</Eyebrow>
         </motion.div>
 
         <h1 className="mt-6">
           <motion.span {...clip(0.35)} className={`${HEADLINE} text-[min(13vw,11.4rem)]`}>
-            Tu marca,
+            Tu marca
           </motion.span>
           <motion.span {...clip(0.5)} className={`${HEADLINE} text-[min(10.2vw,8.9rem)]`}>
             embotellada.
@@ -170,8 +170,8 @@ export function Hero() {
           {...rise(0.62)}
           className="mx-auto mt-8 max-w-xl text-[1.0625rem] leading-[1.6] text-[#B7DDE3]"
         >
-          Maquila y embotellado de agua y bebidas en Tehuacán, la cuna del
-          agua mineral. Tu línea, de principio a fin.
+          Nace en Tehuacán, la cuna del agua mineral en México. Sale con tu
+          nombre, en el envase y la bebida que tu marca necesite.
         </motion.p>
 
         <motion.div

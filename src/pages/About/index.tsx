@@ -18,8 +18,8 @@ export default function About() {
       />
       <PageHero
         eyebrow="Nosotros"
-        title="Agua, oficio y la cuna del agua mineral"
-        lead="Producimos desde Tehuacán, Puebla, una región históricamente ligada al agua mineral en México."
+        title="Somos de donde nace el agua mineral"
+        lead="Trabajamos desde Tehuacán, Puebla, la región que en México lleva generaciones ligada a los manantiales y al agua mineral."
       />
 
       {/* Tehuacán context (city context is affirmable; no company metrics) */}
@@ -34,14 +34,14 @@ export default function About() {
                 sus manantiales y a la cultura del agua mineral.
               </p>
               <p>
-                Desde aquí operamos como maquiladora y embotelladora: producimos
-                agua mineral y purificada para empresas, distribuidores y marcas
-                que quieren su propia línea embotellada, cuidando el perfil del
-                agua y la consistencia en cada lote.
+                Desde aquí embotellamos agua mineral y purificada con la marca
+                de cada cliente, y también otras bebidas cuando el proyecto lo
+                pide. Cuidamos el perfil del agua y la consistencia lote a lote.
               </p>
               <p>
-                Nuestro enfoque es simple: tú haces crecer tu marca, nosotros nos
-                encargamos de producirla bien.
+                Trabajamos igual con quien está lanzando su primera marca y con
+                quien ya tiene un mercado que atender: mismo cuidado, mismos
+                controles, la misma atención al detalle.
               </p>
             </div>
           </div>

@@ -9,14 +9,14 @@ export default function Process() {
     <>
       <Seo
         title="Proceso"
-        description="De la cotización a la entrega: cotización, formulación, producción, envasado, etiquetado y entrega de tu marca."
+        description="De la posibilidad a la realidad: tu idea, formulación, envase y tapa, producción, tu marca y el producto final."
         path="/proceso"
       />
       <PageHero
         product="bottle"
         eyebrow="Cómo trabajamos"
-        title="Un proceso claro, de la cotización a la entrega"
-        lead="Cada proyecto sigue seis etapas trazables. Sabes en qué punto está tu producción en todo momento."
+        title="De la posibilidad a la realidad"
+        lead="Seis pasos entre la idea que traes hoy y el producto que vas a vender. Sabes en qué punto está el tuyo en todo momento."
       />
 
       <section className="bg-white">
@@ -28,7 +28,7 @@ export default function Process() {
       <WaveDivider nextColor="#07232C" className="bg-white" />
       <CtaBand
         title="¿Empezamos tu proyecto?"
-        lead="El primer paso es una cotización. Cuéntanos tu idea y la aterrizamos contigo."
+        lead="El primer paso es contarnos qué quieres lograr. De ahí lo aterrizamos contigo."
       />
     </>
   );

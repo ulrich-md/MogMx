@@ -11,14 +11,14 @@ export default function Services() {
     <>
       <Seo
         title="Servicios"
-        description="Maquila de agua mineral, embotellado, marca privada, desarrollo de producto, líneas de envasado y etiquetado en Tehuacán, Puebla."
+        description="Agua mineral de Tehuacán con tu marca: marca propia, mejora de formulación, diversidad de envases y tapas, otras bebidas y producto final."
         path="/servicios"
       />
       <PageHero
         eyebrow="Servicios"
         product="can"
-        title="Maquila y embotellado, de principio a fin"
-        lead="Seis servicios para producir tu marca con calidad constante. Elige el punto donde nos necesitas; nos encargamos del resto."
+        title="Una solución para toda tu marca"
+        lead="Seis formas de trabajar juntos, del agua de origen al producto en anaquel. Entra donde nos necesites; el resto lo cuidamos nosotros."
       />
 
       <section className="bg-white">

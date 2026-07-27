@@ -10,8 +10,8 @@ export function ServicesStrip() {
       <div className="container-px section">
         <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <SectionHeading
-            title="Una planta, toda tu línea"
-            lead="Maquila y embotellado de principio a fin: del origen al producto terminado, con tu identidad."
+            title="Una solución para toda tu marca"
+            lead="Del agua de Tehuacán al producto en la mano de tu cliente: fórmula, envase, tapa y etiqueta, trabajados contigo."
             className="md:max-w-2xl"
           />
           <div className="shrink-0">

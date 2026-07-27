@@ -4,14 +4,12 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
 import { Icon } from "@/components/ui/Icon";
 import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
-import { CountUp } from "@/components/ui/CountUp";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { WaveDivider } from "@/components/ui/WaveDivider";
 import {
   waterTypes,
   formats,
   capabilityStats,
-  exampleMetrics,
   qualityPoints,
 } from "@/lib/site";
 import { media } from "@/lib/media";
@@ -29,8 +27,8 @@ export default function Capabilities() {
       <PageHero
         product="jug"
         eyebrow="Capacidades"
-        title="Infraestructura y calidad para tu producción"
-        lead="Líneas de embotellado, formatos flexibles y control de calidad con trazabilidad por lote, pensados para producir a escala sin perder consistencia."
+        title="Todo lo que tu producto puede ser"
+        lead="Tipos de agua, envases, tapas y presentaciones, con control de calidad y seguimiento por lote. La versatilidad para que tu marca encuentre su forma exacta."
       />
 
       {/* Tipos de agua + planta */}
@@ -66,7 +64,7 @@ export default function Capabilities() {
             <Reveal>
               <MediaPlaceholder
                 src={media.fillingLine}
-                label="Interior de planta y línea de embotellado"
+                label="Interior de nuestras instalaciones"
                 alt="Detalle de llenado y tapado en la línea de MOG México"
                 aspect="4/3"
                 tone="navy"
@@ -105,8 +103,8 @@ export default function Capabilities() {
       <section className="bg-white">
         <div className="container-px section">
           <SectionHeading
-            title="Capacidad instalada"
-            lead="Estas cifras son editables: reemplázalas con tus datos verificados."
+            title="Versatilidad de envase y presentación"
+            lead="La variedad con la que puedes trabajar tu marca. Reemplaza cada dato con tus cifras verificadas."
           />
 
           <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
@@ -132,32 +130,6 @@ export default function Capabilities() {
                 Certificaciones vigentes
               </p>
             </div>
-          </div>
-
-          {/* Illustrative count-up strip (clearly tagged, not claimed facts) */}
-          <div className="mt-14 rounded-card border border-dashed border-line bg-foam/70 p-8">
-            <div className="flex flex-wrap items-center justify-between gap-3">
-              <h3 className="font-display text-lg font-semibold text-navy">
-                Cifras ilustrativas
-              </h3>
-              <span className="rounded-full bg-white px-3 py-1 text-[11px] font-semibold uppercase tracking-eyebrow text-blue-deep ring-1 ring-line">
-                ejemplo · editable
-              </span>
-            </div>
-            <div className="mt-7 grid gap-8 sm:grid-cols-3">
-              {exampleMetrics.map((m) => (
-                <div key={m.label}>
-                  <p className="font-display text-4xl font-bold tracking-tight text-blue">
-                    <CountUp to={m.to} />
-                  </p>
-                  <p className="mt-2 text-[14px] text-slate">{m.label}</p>
-                </div>
-              ))}
-            </div>
-            <p className="mt-7 text-[13px] text-slate">
-              Cifras de ejemplo para ilustrar el formato. Reemplázalas con datos
-              reales verificados antes de publicar.
-            </p>
           </div>
         </div>
       </section>

@@ -13,14 +13,14 @@ export default function Resources() {
     <>
       <Seo
         title="Recursos"
-        description="Videos de planta y proceso, ficha técnica, catálogo de presentaciones y certificaciones de MOG México."
+        description="Videos del proceso, ficha técnica, catálogo de presentaciones y certificaciones de MOG México."
         path="/recursos"
       />
       <PageHero
         product="can"
         eyebrow="Recursos"
         title="Videos y documentos"
-        lead="Conoce la planta, el proceso y la documentación de producto. Descarga lo que necesites para evaluar tu proyecto."
+        lead="Conoce cómo trabajamos, el proceso y la documentación de producto. Descarga lo que necesites para evaluar tu proyecto."
       />
 
       <section className="bg-white">

@@ -12,8 +12,8 @@ export default function Home() {
   return (
     <>
       <Seo
-        title="Maquila y embotellado de agua y bebidas en Tehuacán"
-        description="MOG México: maquila embotelladora en Tehuacán, Puebla. Agua mineral, purificada y otras bebidas con tu marca, de principio a fin."
+        title="Agua mineral de Tehuacán con tu propia marca"
+        description="MOG México embotella agua mineral de Tehuacán, Puebla, con tu marca. Marca propia, mejora de formulación y diversidad de envases y tapas, también para otras bebidas."
         path="/"
         jsonLd={organizationJsonLd}
       />

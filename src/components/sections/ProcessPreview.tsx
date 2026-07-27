@@ -9,8 +9,8 @@ export function ProcessPreview() {
     <section className="bg-foam">
       <div className="container-px section">
         <SectionHeading
-          title="De la cotización a la entrega"
-          lead="Un proceso claro y trazable. Tú defines tu marca; nosotros la producimos paso a paso."
+          title="De la posibilidad a la realidad"
+          lead="Seis pasos entre la idea que traes hoy y el producto que vas a vender. Con acompañamiento en cada uno."
         />
 
         <div className="mt-12 grid gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">

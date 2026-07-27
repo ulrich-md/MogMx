@@ -8,12 +8,12 @@ import { Reveal } from "../ui/Reveal";
  * replacing the old placeholder logo wall.
  */
 const words = [
-  "Agua mineral",
+  "Agua de Tehuacán",
+  "Marca propia",
   "Agua purificada",
-  "Marca privada",
-  "Maquila de bebidas",
-  "Etiquetado",
-  "Envasado",
+  "Envases y tapas",
+  "Formulación",
+  "Otras bebidas",
 ];
 
 function Band({ ariaHidden = false }: { ariaHidden?: boolean }) {
@@ -40,8 +40,8 @@ export function TrustStrip() {
       <div className="container-px pt-14">
         <Reveal>
           <p className="text-center text-[15px] text-slate">
-            Producimos para marcas y distribuidores que quieren su propia
-            bebida embotellada.
+            Trabajamos con quien está lanzando su primera marca y con quien ya
+            tiene un mercado que atender.
           </p>
         </Reveal>
       </div>

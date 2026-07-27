@@ -43,15 +43,15 @@ export function StatementBand() {
           transition={{ duration: 0.7, ease: EASE }}
           className="max-w-3xl"
         >
-          <Eyebrow tone="dark">Pureza + capacidad</Eyebrow>
+          <Eyebrow tone="dark">Origen + oficio</Eyebrow>
           <h2 className="mt-5 font-display text-[2.4rem] font-bold uppercase leading-[0.95] tracking-tight text-white sm:text-5xl lg:text-[3.6rem]">
-            Del origen
+            Del manantial
             <br />
             <span className="text-mint">a tu marca.</span>
           </h2>
           <p className="mt-6 max-w-xl text-[1.075rem] leading-[1.7] text-mist">
-            Maquila y embotellado con control de calidad y trazabilidad por lote.
-            Cuidamos el detalle para que tu producto sea siempre el mismo.
+            No hace falta ser una marca mundial para tener la tuya. Hace falta
+            empezar con el agua correcta y con quien sepa trabajarla.
           </p>
           <div className="mt-9">
             <Button to="/contacto" size="lg" withArrow>
