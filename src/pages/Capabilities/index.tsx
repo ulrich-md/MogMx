@@ -6,12 +6,7 @@ import { Icon } from "@/components/ui/Icon";
 import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { WaveDivider } from "@/components/ui/WaveDivider";
-import {
-  waterTypes,
-  formats,
-  capabilityStats,
-  qualityPoints,
-} from "@/lib/site";
+import { waterTypes, qualityPoints } from "@/lib/site";
 import { media } from "@/lib/media";
 
 const strip = (s: string) => s.replace(/\s*\/\/ EDITABLE.*$/, "");
@@ -21,7 +16,7 @@ export default function Capabilities() {
     <>
       <Seo
         title="Capacidades"
-        description="Tipos de agua, formatos y presentaciones, capacidad instalada, calidad y trazabilidad por lote en Tehuacán, Puebla."
+        description="Agua mineral y purificada, versatilidad de envase y presentación, con control de calidad y trazabilidad por lote en Tehuacán, Puebla."
         path="/capacidades"
       />
       <PageHero
@@ -70,66 +65,6 @@ export default function Capabilities() {
                 tone="navy"
               />
             </Reveal>
-          </div>
-        </div>
-      </section>
-
-      {/* Formatos y presentaciones */}
-      <section className="bg-foam">
-        <div className="container-px section">
-          <SectionHeading
-            title="Formatos y presentaciones"
-            lead="Distintas presentaciones para acompañar tu canal de venta. Confirma medidas exactas con nuestro equipo."
-          />
-          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {formats.map((f, i) => (
-              <Reveal key={f.label} delay={i * 0.05}>
-                <div className="h-full rounded-card bg-white p-6 shadow-soft ring-1 ring-line">
-                  <Icon name="Drop" size={26} className="text-blue" />
-                  <h3 className="mt-4 font-display text-base font-semibold text-navy">
-                    {f.label}
-                  </h3>
-                  <p className="mt-1 font-display text-lg font-bold text-blue">
-                    {strip(f.note)}
-                  </p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Capacidad instalada (bracket placeholders) + illustrative count-up */}
-      <section className="bg-white">
-        <div className="container-px section">
-          <SectionHeading
-            title="Versatilidad de envase y presentación"
-            lead="La variedad con la que puedes trabajar tu marca. Reemplaza cada dato con tus cifras verificadas."
-          />
-
-          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {capabilityStats.map((stat) => (
-              <div
-                key={stat.label}
-                className="rounded-card bg-navy p-7 text-center"
-              >
-                <p className="font-display text-3xl font-bold tracking-tight text-white">
-                  {stat.value}
-                </p>
-                <p className="mt-1 text-[13px] font-medium text-aqua">
-                  {stat.unit}
-                </p>
-                <p className="mt-3 text-[13.5px] text-mist">{stat.label}</p>
-              </div>
-            ))}
-            <div className="rounded-card bg-mist p-7 text-center ring-1 ring-line">
-              <p className="font-display text-3xl font-bold tracking-tight text-navy">
-                [certificación]
-              </p>
-              <p className="mt-3 text-[13.5px] text-navy/70">
-                Certificaciones vigentes
-              </p>
-            </div>
           </div>
         </div>
       </section>

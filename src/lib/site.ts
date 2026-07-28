@@ -52,7 +52,6 @@ export const nav: NavItem[] = [
   { label: "Servicios", to: "/servicios" },
   { label: "Proceso", to: "/proceso" },
   { label: "Capacidades", to: "/capacidades" },
-  { label: "Recursos", to: "/recursos" },
   { label: "Nosotros", to: "/nosotros" },
   { label: "Contacto", to: "/contacto" },
 ];
@@ -226,33 +225,6 @@ export const waterTypes = [
   },
 ];
 
-// Formats / presentations are placeholders to confirm with real catalog.
-export const formats = [
-  { label: "Presentación individual", note: "[formato] ml // EDITABLE" },
-  { label: "Presentación personal", note: "[formato] L // EDITABLE" },
-  { label: "Presentación familiar", note: "[formato] L // EDITABLE" },
-  { label: "Presentación para distribución", note: "[formato] L // EDITABLE" },
-];
-
-export const capabilityStats = [
-  // EDITABLE: cifras de ejemplo. Cada una es editable y NO es un dato afirmado.
-  // Hablan de variedad (versatilidad), nunca de volumen mínimo.
-  { value: "[N]", unit: "tipos de envase", label: "Envases disponibles" },
-  { value: "[N]", unit: "tipos de tapa", label: "Tapas y sellado" },
-  { value: "[N]", unit: "presentaciones", label: "Presentaciones" },
-];
-
-/**
- * Illustrative example metrics for the animated count-up.
- * These are NOT verified facts: each is tagged "ejemplo · editable" in the UI.
- * EDITABLE: reemplazar por cifras reales verificadas (o quitar la sección).
- */
-export const exampleMetrics = [
-  { to: 8, label: "Formatos de envasado" },
-  { to: 12, label: "Controles por lote" },
-  { to: 4, label: "Tipos de presentación" },
-];
-
 export const qualityPoints = [
   {
     icon: "ShieldCheck",
@@ -271,67 +243,6 @@ export const qualityPoints = [
     title: "Certificaciones",
     description:
       "Operamos bajo [certificación] // EDITABLE: indicar certificaciones reales y vigentes.",
-  },
-];
-
-/* ----------------------------------------------------------------- */
-/*  Resources: videos (lightbox-ready) + downloads                    */
-/* ----------------------------------------------------------------- */
-export type VideoResource = {
-  title: string;
-  description: string;
-  provider: "youtube" | "vimeo";
-  // EDITABLE: reemplazar por el ID real del video
-  videoId: string;
-};
-
-export const videos: VideoResource[] = [
-  {
-    title: "Dónde nace tu producto",
-    description: "Un recorrido por el lugar donde se embotella tu marca.",
-    provider: "youtube",
-    videoId: "", // EDITABLE: ID de YouTube, ej. "dQw4w9WgXcQ"
-  },
-  {
-    title: "Del manantial al envase",
-    description: "Cómo cuidamos el agua de Tehuacán hasta el producto final.",
-    provider: "youtube",
-    videoId: "", // EDITABLE: ID de YouTube
-  },
-  {
-    title: "Marcas que empezaron aquí",
-    description: "Cómo acompañamos a quien está creando su propia marca.",
-    provider: "vimeo",
-    videoId: "", // EDITABLE: ID de Vimeo
-  },
-];
-
-export type DownloadResource = {
-  title: string;
-  description: string;
-  kind: string;
-  // EDITABLE: reemplazar por la ruta real del archivo (PDF, etc.)
-  href: string;
-};
-
-export const downloads: DownloadResource[] = [
-  {
-    title: "Ficha técnica",
-    description: "Especificaciones de producto y presentaciones.",
-    kind: "PDF",
-    href: "#", // EDITABLE: /docs/ficha-tecnica.pdf
-  },
-  {
-    title: "Catálogo de presentaciones",
-    description: "Formatos y opciones de envasado disponibles.",
-    kind: "PDF",
-    href: "#", // EDITABLE: /docs/catalogo.pdf
-  },
-  {
-    title: "Certificaciones",
-    description: "Documentación de calidad y cumplimiento.",
-    kind: "PDF",
-    href: "#", // EDITABLE: /docs/certificaciones.pdf
   },
 ];
 

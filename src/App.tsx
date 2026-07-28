@@ -6,7 +6,6 @@ const Home = lazy(() => import("./pages/Home"));
 const Services = lazy(() => import("./pages/Services"));
 const Process = lazy(() => import("./pages/Process"));
 const Capabilities = lazy(() => import("./pages/Capabilities"));
-const Resources = lazy(() => import("./pages/Resources"));
 const About = lazy(() => import("./pages/About"));
 const Contact = lazy(() => import("./pages/Contact"));
 const NotFound = lazy(() => import("./pages/NotFound"));
@@ -56,14 +55,6 @@ export default function App() {
           element={
             <Suspense fallback={<PageLoader />}>
               <Capabilities />
-            </Suspense>
-          }
-        />
-        <Route
-          path="/recursos"
-          element={
-            <Suspense fallback={<PageLoader />}>
-              <Resources />
             </Suspense>
           }
         />
