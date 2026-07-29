@@ -2,11 +2,10 @@ import { useRef } from "react";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { Button } from "../ui/Button";
 import { Eyebrow } from "../ui/Eyebrow";
-import { media } from "@/lib/media";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
-/** Cinematic navy editorial band. Amber accent is valid on dark. */
+/** Cinematic deep-water editorial band (photography-free). */
 export function StatementBand() {
   const reduce = useReducedMotion();
   const ref = useRef<HTMLElement>(null);
@@ -14,27 +13,34 @@ export function StatementBand() {
     target: ref,
     offset: ["start end", "end start"],
   });
-  const imgY = useTransform(scrollYProgress, [0, 1], [-55, 55]);
+  const causticY = useTransform(scrollYProgress, [0, 1], [-40, 40]);
 
   return (
-    <section ref={ref} className="relative isolate overflow-hidden bg-navy">
-      <motion.img
-        src={media.waterPour}
-        alt=""
+    <section
+      ref={ref}
+      className="relative isolate overflow-hidden"
+      style={{
+        background:
+          "radial-gradient(120% 130% at 82% 8%, #0F4C58 0%, #07232C 46%, #03141A 100%)",
+      }}
+    >
+      {/* Designed water surface: drifting caustic light, no photo */}
+      <motion.svg
         aria-hidden="true"
-        loading="lazy"
-        decoding="async"
-        style={reduce ? undefined : { y: imgY, scale: 1.18 }}
-        className="absolute inset-0 -z-10 h-full w-full object-cover opacity-45"
-      />
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 -z-10"
-        style={{
-          background:
-            "linear-gradient(90deg, #07232C 0%, rgba(7,35,44,0.88) 46%, rgba(7,35,44,0.55) 100%)",
-        }}
-      />
+        viewBox="0 0 1440 500"
+        preserveAspectRatio="xMidYMid slice"
+        style={reduce ? undefined : { y: causticY }}
+        className="absolute inset-0 -z-10 h-full w-full opacity-[0.6]"
+      >
+        <g stroke="#BFF0FB" strokeOpacity="0.10" strokeWidth="2" fill="none">
+          <path d="M0,90 q180,-34 360,0 t360,0 t360,0 t360,0" />
+          <path d="M0,150 q200,30 400,0 t400,0 t400,0" />
+          <path d="M0,230 q160,-28 320,0 t320,0 t320,0 t320,0" />
+          <path d="M0,320 q220,32 440,0 t440,0 t440,0" />
+        </g>
+        <ellipse cx="1180" cy="40" rx="520" ry="240" fill="#6FD3DC" fillOpacity="0.10" />
+      </motion.svg>
+
       <div className="container-px section relative">
         <motion.div
           initial={reduce ? false : { opacity: 0, y: 24 }}

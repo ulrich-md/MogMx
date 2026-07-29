@@ -133,11 +133,10 @@ export const services: Service[] = [
     title: "Otras bebidas",
     summary: "Más allá del agua: lo que tu marca necesite envasar.",
     detail:
-      "El agua mineral y purificada es nuestro origen, no nuestro límite. Envasamos otras bebidas según el proyecto: [categorías].",
+      "El agua mineral y purificada es nuestro origen, no nuestro límite. Envasamos otras bebidas según el proyecto y su perfil.",
     points: [
       "Agua mineral y purificada",
-      // EDITABLE: sustituir por las categorías reales de bebidas.
-      "Otras categorías: [categorías]",
+      "Otras bebidas según tu proyecto",
       "Presentaciones adaptadas a cada bebida",
     ],
   },
@@ -219,9 +218,9 @@ export const waterTypes = [
       "Agua sometida a procesos de purificación para un perfil limpio y neutro.",
   },
   {
-    // EDITABLE: indicar las categorías reales de bebidas en "[categorías]".
     title: "Otras bebidas",
-    description: "Envasado de otras bebidas según tu proyecto: [categorías].",
+    description:
+      "Más allá del agua: envasamos otras bebidas según tu proyecto y su perfil.",
   },
 ];
 
@@ -240,9 +239,9 @@ export const qualityPoints = [
   },
   {
     icon: "Medal",
-    title: "Certificaciones",
+    title: "Normativa y estándares",
     description:
-      "Operamos bajo [certificación] // EDITABLE: indicar certificaciones reales y vigentes.",
+      "Producimos bajo la normativa vigente para agua y bebidas, con controles propios de alto estándar en cada lote.",
   },
 ];
 

@@ -3,11 +3,10 @@ import { PageHero } from "@/components/sections/PageHero";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
 import { Icon } from "@/components/ui/Icon";
-import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
+import { ProductScene } from "@/components/ui/ProductScene";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { WaveDivider } from "@/components/ui/WaveDivider";
 import { waterTypes, qualityPoints } from "@/lib/site";
-import { media } from "@/lib/media";
 
 const strip = (s: string) => s.replace(/\s*\/\/ EDITABLE.*$/, "");
 
@@ -57,13 +56,9 @@ export default function Capabilities() {
           </div>
           <div className="lg:col-span-7">
             <Reveal>
-              <MediaPlaceholder
-                src={media.fillingLine}
-                label="Interior de nuestras instalaciones"
-                alt="Detalle de llenado y tapado en la línea de MOG México"
-                aspect="4/3"
-                tone="navy"
-              />
+              <div className="aspect-[4/3] overflow-hidden rounded-card ring-1 ring-white/10">
+                <ProductScene variant="single" className="h-full w-full" />
+              </div>
             </Reveal>
           </div>
         </div>

@@ -2,9 +2,8 @@ import { Icon } from "../ui/Icon";
 import { SectionHeading } from "../ui/SectionHeading";
 import { Reveal } from "../ui/Reveal";
 import { Button } from "../ui/Button";
-import { MediaPlaceholder } from "../ui/MediaPlaceholder";
+import { ProductScene } from "../ui/ProductScene";
 import { waterTypes } from "@/lib/site";
-import { media } from "@/lib/media";
 
 export function CapabilitiesBlock() {
   return (
@@ -41,14 +40,8 @@ export function CapabilitiesBlock() {
 
         <div className="lg:col-span-7">
           <Reveal className="grid grid-cols-2 gap-4">
-            <div className="col-span-2">
-              <MediaPlaceholder
-                src={media.bottlingLine}
-                label="Línea de embotellado en operación"
-                alt="Línea de embotellado de MOG México en operación"
-                aspect="16/9"
-                tone="navy"
-              />
+            <div className="col-span-2 aspect-[16/9] overflow-hidden rounded-card ring-1 ring-white/10">
+              <ProductScene variant="line" className="h-full w-full" />
             </div>
             <div className="group rounded-card bg-mist p-6 ring-1 ring-line transition-all duration-300 ease-water hover:-translate-y-1 hover:shadow-lift">
               <Icon
