@@ -1,0 +1,201 @@
+<meta charset="utf-8">
+<title>LV — motion study</title>
+<style>
+  html,body{margin:0;padding:0;background:#000;overflow:hidden}
+  #stage{position:relative;width:1080px;height:1920px;overflow:hidden}
+  .lbl{position:absolute;left:0;right:0;bottom:36px;text-align:center;
+       font:600 19px/1 ui-monospace,monospace;letter-spacing:.2em;
+       color:rgba(245,239,226,.30);text-transform:uppercase}
+</style>
+<div id="stage">
+  <svg id="svg" width="1080" height="1920" viewBox="0 0 1080 1920">
+    <defs>
+      <radialGradient id="plate" cx="46%" cy="34%" r="88%">
+        <stop offset="0"   stop-color="#174934"/>
+        <stop offset=".44" stop-color="#0A2417"/>
+        <stop offset="1"   stop-color="#030A07"/>
+      </radialGradient>
+
+      <!-- travelling shaft of gold light across the plate -->
+      <linearGradient id="shaft" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="380" y2="520">
+        <stop offset="0"   stop-color="#F2C86E" stop-opacity="0"/>
+        <stop offset=".46" stop-color="#F2C86E" stop-opacity=".17"/>
+        <stop offset="1"   stop-color="#F2C86E" stop-opacity="0"/>
+      </linearGradient>
+
+      <filter id="grain" x="0" y="0" width="100%" height="100%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" seed="11"/>
+        <feColorMatrix type="saturate" values="0"/>
+        <feComponentTransfer><feFuncA type="linear" slope="0.13"/></feComponentTransfer>
+      </filter>
+
+      <radialGradient id="vig" cx="50%" cy="48%" r="70%">
+        <stop offset=".42" stop-color="#000" stop-opacity="0"/>
+        <stop offset="1"   stop-color="#000" stop-opacity=".82"/>
+      </radialGradient>
+
+      <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+        <feGaussianBlur stdDeviation="14" result="b"/>
+        <feMerge><feMergeNode in="b"/><feMergeNode in="b"/></feMerge>
+      </filter>
+
+      <linearGradient id="wipegrad" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#fff"/>
+        <stop offset="1" stop-color="#000"/>
+      </linearGradient>
+      <mask id="lvwipe" maskUnits="userSpaceOnUse" x="0" y="0" width="1080" height="1920">
+        <rect x="0" y="0" width="1080" height="1920" fill="url(#wipegrad)"/>
+      </mask>
+
+      <linearGradient id="sweepgrad" gradientUnits="objectBoundingBox" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0"   stop-color="#FFF6E0" stop-opacity="0"/>
+        <stop offset=".44" stop-color="#FFFFFF" stop-opacity="1"/>
+        <stop offset=".56" stop-color="#FFFFFF" stop-opacity="1"/>
+        <stop offset="1"   stop-color="#FFF6E0" stop-opacity="0"/>
+      </linearGradient>
+      <mask id="markmask" maskUnits="userSpaceOnUse" x="0" y="0" width="1080" height="1920">
+        <g id="mm"></g>
+      </mask>
+    </defs>
+
+    <rect width="1080" height="1920" fill="url(#plate)"/>
+    <g id="shaftwrap"><rect id="shaftrect" x="-500" y="-400" width="900" height="2800"
+       fill="url(#shaft)" transform="rotate(-24 540 960)" style="mix-blend-mode:screen"/></g>
+    <g id="dust"></g>
+    <rect width="1080" height="1920" filter="url(#grain)" opacity=".9"
+          style="mix-blend-mode:overlay"/>
+
+    <g id="mark">
+      <!-- soft glow layer under the strokes, lifted on the snap -->
+      <g id="glowwrap" filter="url(#glow)" opacity="0">
+        <path id="glow_g" fill="none" stroke="#4FA97A" stroke-width="15" stroke-linecap="round" pathLength="1"/>
+        <path id="glow_a" fill="none" stroke="#E8B65A" stroke-width="13" stroke-linecap="round" pathLength="1"/>
+      </g>
+      <g id="gwrap">
+        <path id="oval_g" fill="none" stroke="#57B583" stroke-width="18"
+              stroke-linecap="round" pathLength="1"/>
+      </g>
+      <g id="awrap">
+        <path id="oval_a" fill="none" stroke="#EDBE63" stroke-width="16"
+              stroke-linecap="round" pathLength="1"/>
+      </g>
+      <g id="lvwrap" mask="url(#lvwipe)">
+        <text id="lv" x="540" y="1072" text-anchor="middle"
+              font-family="Georgia, 'Times New Roman', serif"
+              font-style="italic" font-size="300" fill="#F7F1E4">LV</text>
+      </g>
+      <g mask="url(#markmask)">
+        <rect id="sweep" x="-700" y="380" width="300" height="1200"
+              fill="url(#sweepgrad)" opacity="0" style="mix-blend-mode:screen"/>
+      </g>
+    </g>
+
+    <rect width="1080" height="1920" fill="url(#vig)"/>
+  </svg>
+  <div class="lbl">motion study · placeholder geometry</div>
+</div>
+
+<script>
+const FPS = 30, DUR = 3.5, TOTAL = Math.round(FPS * DUR);
+
+const p3out   = t => 1 - Math.pow(1 - t, 3);
+const p4out   = t => 1 - Math.pow(1 - t, 4);
+const expoOut = t => t >= 1 ? 1 : 1 - Math.pow(2, -10 * t);
+const backOut = (t, s = 2.4) => 1 + (s + 1) * Math.pow(t - 1, 3) + s * Math.pow(t - 1, 2);
+const clamp01 = t => t < 0 ? 0 : t > 1 ? 1 : t;
+const beat    = (t, a, b) => clamp01((t - a) / (b - a));
+
+function arc(cx, cy, rx, ry, a0, a1) {
+  const p = a => [cx + rx * Math.cos(a), cy + ry * Math.sin(a)];
+  const [x0, y0] = p(a0), [x1, y1] = p(a1);
+  const large = Math.abs(a1 - a0) > Math.PI ? 1 : 0;
+  return `M ${x0.toFixed(2)} ${y0.toFixed(2)} A ${rx} ${ry} 0 ${large} 1 ${x1.toFixed(2)} ${y1.toFixed(2)}`;
+}
+
+const CX = 540, CY = 960;
+const D_G = arc(CX, CY, 288, 398, -0.30 * Math.PI, 1.52 * Math.PI);
+const D_A = arc(CX + 6, CY - 16, 246, 360, 0.62 * Math.PI, 2.02 * Math.PI);
+for (const id of ['oval_g', 'glow_g']) document.getElementById(id).setAttribute('d', D_G);
+for (const id of ['oval_a', 'glow_a']) document.getElementById(id).setAttribute('d', D_A);
+
+document.getElementById('mm').innerHTML =
+  `<path d="${D_G}" fill="none" stroke="#fff" stroke-width="22" stroke-linecap="round"/>
+   <path d="${D_A}" fill="none" stroke="#fff" stroke-width="20" stroke-linecap="round"/>
+   <text x="540" y="1072" text-anchor="middle" font-family="Georgia,'Times New Roman',serif"
+         font-style="italic" font-size="300" fill="#fff">LV</text>`;
+
+// deterministic dust: pure function of frame, seeded once
+const rnd = (s => () => (s = (s * 16807) % 2147483647) / 2147483647)(20260730);
+const DUST = Array.from({length: 130}, () => ({
+  x: rnd() * 1080, y: rnd() * 1920, r: 0.7 + rnd() * 1.9,
+  sp: 18 + rnd() * 62, ph: rnd() * 6.283, dr: 8 + rnd() * 26, o: .10 + rnd() * .30
+}));
+document.getElementById('dust').innerHTML = DUST.map((d, i) =>
+  `<circle id="d${i}" r="${d.r.toFixed(2)}" fill="#F2D89A"/>`).join('');
+const dnodes = DUST.map((_, i) => document.getElementById('d' + i));
+
+const G  = document.getElementById('oval_g'),  A  = document.getElementById('oval_a');
+const GG = document.getElementById('glow_g'),  GA = document.getElementById('glow_a');
+const gw = document.getElementById('gwrap'),   aw = document.getElementById('awrap');
+const glw = document.getElementById('glowwrap');
+const lvw = document.getElementById('lvwrap'), wg = document.getElementById('wipegrad');
+const sweep = document.getElementById('sweep'), mark = document.getElementById('mark');
+const shaft = document.getElementById('shaftrect');
+
+const LV_L = 300, LV_R = 780, EDGE = 210;
+
+function render(t) {
+  // ---- plate: shaft of light travels, dust drifts up ----
+  shaft.setAttribute('x', (-980 + 300 * t).toFixed(1));
+  dnodes.forEach((n, i) => {
+    const d = DUST[i];
+    const y = ((d.y - d.sp * t) % 1920 + 1920) % 1920;
+    const x = d.x + Math.sin(t * 1.5 + d.ph) * d.dr;
+    n.setAttribute('cx', x.toFixed(1)); n.setAttribute('cy', y.toFixed(1));
+    // brighter inside the raking light band, near-invisible outside it
+    const band = Math.exp(-Math.pow(((x + y * 0.42) - (520 + 300 * t)) / 460, 2));
+    n.setAttribute('opacity',
+      (d.o * (0.30 + 0.70 * band) * (0.6 + 0.4 * Math.sin(t * 2.2 + d.ph))).toFixed(3));
+  });
+
+  // ---- beat 1: green draws with visible travel (0.05 - 0.80) ----
+  const b1 = p3out(beat(t, 0.05, 0.80));
+  G.style.strokeDasharray = '1'; G.style.strokeDashoffset = (1 - b1).toFixed(4);
+  GG.style.strokeDasharray = '1'; GG.style.strokeDashoffset = (1 - b1).toFixed(4);
+  gw.setAttribute('transform', `rotate(${(-17 * (1 - b1)).toFixed(3)} ${CX} ${CY})`);
+
+  // ---- beat 2: gold draws, offset, counter-rotating (0.28 - 1.02) ----
+  const b2 = p3out(beat(t, 0.28, 1.02));
+  A.style.strokeDasharray = '1'; A.style.strokeDashoffset = (1 - b2).toFixed(4);
+  GA.style.strokeDasharray = '1'; GA.style.strokeDashoffset = (1 - b2).toFixed(4);
+  aw.setAttribute('transform', `rotate(${(19 * (1 - b2)).toFixed(3)} ${CX} ${CY})`);
+
+  // ---- beat 3: LV is written left to right, then overshoots home (0.85 - 1.60) ----
+  const b3r = beat(t, 0.85, 1.60), b3 = p4out(b3r);
+  const x1 = LV_L - EDGE + (LV_R - LV_L + EDGE * 2) * b3;
+  wg.setAttribute('x1', x1.toFixed(1)); wg.setAttribute('x2', (x1 + EDGE).toFixed(1));
+  const os = b3r <= 0 ? 0.93 : 0.93 + 0.07 * backOut(clamp01(b3r * 1.15));
+  lvw.setAttribute('transform',
+    `translate(${CX} 1020) scale(${os.toFixed(4)}) translate(${-CX} -1020)`);
+
+  // ---- beat 4: the snap — light rakes the mark and the strokes bloom (1.52 - 2.05) ----
+  const b4 = beat(t, 1.52, 2.05);
+  const env = b4 > 0 && b4 < 1 ? Math.sin(b4 * Math.PI) : 0;
+  sweep.setAttribute('opacity', env.toFixed(3));
+  sweep.setAttribute('x', (-700 + 2100 * b4).toFixed(1));
+  glw.setAttribute('opacity', (env * 0.55).toFixed(3));
+
+  // ---- beat 5: settle and hold (2.05 - 3.50) ----
+  const b5 = beat(t, 2.05, 3.50);
+  const s = 1.014 - 0.014 * expoOut(clamp01(b5 * 2.6)) + 0.0025 * Math.sin(b5 * Math.PI);
+  mark.setAttribute('transform',
+    `translate(${CX} ${CY}) scale(${s.toFixed(5)}) translate(${-CX} ${-CY})`);
+}
+
+const f = new URLSearchParams(location.search).get('f');
+if (f !== null) { render(Number(f) / FPS); }
+else {
+  const t0 = performance.now();
+  (function loop(){ render(((performance.now() - t0) / 1000) % DUR); requestAnimationFrame(loop); })();
+}
+</script>
