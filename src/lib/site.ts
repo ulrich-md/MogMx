@@ -79,10 +79,10 @@ export const services: Service[] = [
     summary:
       "El agua que solo da este valle, embotellada con tu nombre.",
     detail:
-      "Tehuacán es la cuna del agua mineral en México. Cuidamos su perfil característico lote a lote, para que quien pruebe tu marca reconozca siempre lo mismo.",
+      "Nace del deshielo del Pico de Orizaba y aflora en Tehuacán, la cuna del agua mineral en México. Cuidamos su perfil característico lote a lote, para que quien pruebe tu marca reconozca siempre lo mismo.",
     points: [
-      "Origen mineral de Tehuacán",
-      "Perfil cuidado en cada lote",
+      "Del deshielo del Pico de Orizaba al valle de Tehuacán",
+      "Perfil mineral cuidado en cada lote",
       "Carácter propio, imposible de imitar fuera del valle",
     ],
   },
@@ -210,7 +210,7 @@ export const waterTypes = [
   {
     title: "Agua mineral de Tehuacán",
     description:
-      "El agua del valle que le dio nombre al agua mineral en México, con su perfil característico intacto.",
+      "Del deshielo del Pico de Orizaba al valle que le dio nombre al agua mineral en México, con su perfil característico intacto.",
   },
   {
     title: "Agua purificada",
@@ -229,7 +229,7 @@ export const qualityPoints = [
     icon: "ShieldCheck",
     title: "Control de calidad",
     description:
-      "Controles a lo largo del proceso para mantener la consistencia entre lotes.",
+      "Análisis microbiológicos y físico-químicos, control de residuos y pruebas a lo largo del proceso, para mantener la consistencia entre lotes.",
   },
   {
     icon: "MapPin",
@@ -239,9 +239,9 @@ export const qualityPoints = [
   },
   {
     icon: "Medal",
-    title: "Normativa y estándares",
+    title: "Normatividad mexicana",
     description:
-      "Producimos bajo la normativa vigente para agua y bebidas, con controles propios de alto estándar en cada lote.",
+      "Producimos bajo la normatividad mexicana vigente (NOM) para agua y bebidas, con controles propios de alto estándar en cada lote.",
   },
 ];
 
@@ -272,6 +272,36 @@ export const values = [
     title: "Oficio",
     description:
       "Trabajamos contigo el detalle, de la fórmula al anaquel, como se trabaja un producto propio.",
+  },
+];
+
+/* ----------------------------------------------------------------- */
+/*  Tehuacán: contexto cultural e histórico del valle                 */
+/* ----------------------------------------------------------------- */
+export const biosphereLink =
+  // EDITABLE: cambia el destino si prefieres otra fuente.
+  "https://www.gob.mx/conanp/articulos/valle-de-tehuacan-cuicatlan-bien-mixto-de-patrimonio-mundial";
+
+export const tehuacanFacts = [
+  {
+    term: "El maíz",
+    description:
+      "En este valle se hallaron algunos de los vestigios de maíz domesticado más antiguos de México.",
+  },
+  {
+    term: "El sedentarismo",
+    description:
+      "Aquí quedó registrado el paso de la vida nómada a la agricultura, uno de los orígenes de Mesoamérica.",
+  },
+  {
+    term: "El agua",
+    description:
+      "Se levantaron algunas de las obras hidráulicas más antiguas de América para manejar el agua del valle.",
+  },
+  {
+    term: "Patrimonio Mundial",
+    description:
+      "Reserva de la biosfera y Patrimonio Mundial de la UNESCO: la zona árida con mayor biodiversidad de América.",
   },
 ];
 
