@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { BottleAssembly } from "../hero/BottleAssembly";
+import { processImages } from "@/lib/assets";
 import { processSteps } from "@/lib/site";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
@@ -52,6 +53,20 @@ export function ProcessTimeline() {
             <div className="sm:pt-3">
               <h3 className="poster text-[2.6rem] text-ink sm:text-[3.4rem]">{step.title}</h3>
               <p className="mt-5 max-w-lg text-[1.05rem] leading-[1.7] text-slate">{step.description}</p>
+              {processImages[step.n] ? (
+                <figure className="relative mt-8 overflow-hidden rounded-card bg-bone">
+                  <img
+                    src={processImages[step.n].src}
+                    alt={processImages[step.n].alt}
+                    loading="lazy"
+                    decoding="async"
+                    width={1536}
+                    height={1024}
+                    className="aspect-[16/9] w-full object-cover transition-transform duration-700 ease-smooth group-hover:scale-[1.03]"
+                  />
+                  <span aria-hidden="true" className="absolute left-0 top-0 h-[3px] w-16 bg-accent" />
+                </figure>
+              ) : null}
             </div>
           </motion.li>
         ))}

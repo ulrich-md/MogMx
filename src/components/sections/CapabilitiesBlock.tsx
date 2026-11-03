@@ -2,26 +2,17 @@ import { SectionHeading } from "../ui/SectionHeading";
 import { Reveal } from "../ui/Reveal";
 import { Button } from "../ui/Button";
 import { Icon } from "../ui/Icon";
-import { products } from "@/lib/assets";
+import { ShelfExplorer } from "./ShelfExplorer";
 import { waterTypes } from "@/lib/site";
 
 export function CapabilitiesBlock() {
   return (
     <section className="overflow-hidden bg-paper">
       <div className="container-px section grid gap-14 lg:grid-cols-12 lg:items-center lg:gap-10">
-        {/* Product family on a signal block, bleeding off the left edge */}
+        {/* Interactive tiendita shelf: hotspots per presentation */}
         <Reveal className="relative lg:col-span-7">
-          <div aria-hidden="true" className="absolute -left-[30%] bottom-[10%] top-[16%] w-[78%] bg-[linear-gradient(180deg,#E6F6F9_0%,#CDEDF2_100%)]" />
-          <div aria-hidden="true" className="absolute bottom-[10%] left-0 right-[4%] h-px bg-ink/15" />
-          <img
-            src={products.flavors}
-            alt="Bebidas MOG de limón, jamaica, pepino y mango en botella PET"
-            loading="lazy"
-            decoding="async"
-            width={1536}
-            height={1024}
-            className="relative w-full"
-          />
+          <ShelfExplorer />
+          <p className="readout mt-3 text-slate">Pasa el cursor sobre los puntos</p>
         </Reveal>
 
         <div className="lg:col-span-5">

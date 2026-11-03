@@ -15,19 +15,19 @@ export function StatementBand() {
   const imgScale = useTransform(scrollYProgress, [0, 0.5, 1], [1.18, 1.08, 1.18]);
 
   return (
-    <section ref={ref} className="relative isolate overflow-hidden bg-water">
+    <section ref={ref} className="relative isolate overflow-hidden bg-abyss">
       <motion.img
-        src={photos.water}
+        src={photos.table}
         alt=""
         aria-hidden="true"
         loading="lazy"
         decoding="async"
         style={reduce ? undefined : { y: imgY, scale: imgScale }}
-        className="absolute inset-0 -z-20 h-full w-full object-cover"
+        className="absolute inset-y-0 right-0 -z-20 h-full w-full object-cover object-[60%_50%] lg:w-[60%]"
       />
       <div
         aria-hidden="true"
-        className="absolute inset-0 -z-10 bg-[linear-gradient(100deg,rgba(3,20,26,0.94)_0%,rgba(7,35,44,0.72)_45%,rgba(15,76,88,0.25)_100%)]"
+        className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(3,20,26,0.92)_0%,rgba(3,20,26,0.75)_100%)] lg:bg-[linear-gradient(90deg,#03141A_0%,#03141A_40%,rgba(3,20,26,0.55)_52%,rgba(3,20,26,0)_70%)]"
       />
 
       <div className="container-px relative py-28 md:py-40">

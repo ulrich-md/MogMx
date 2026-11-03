@@ -20,6 +20,11 @@ export const photos = {
   orizaba: "/assets/photos/pico-de-orizaba.webp",
   bubbles: "/assets/photos/burbujas.webp",
   street: "/assets/photos/botella-calle.webp",
+  idea: "/assets/photos/idea.webp",
+  preforms: "/assets/photos/preformas.webp",
+  labels: "/assets/photos/etiquetas.webp",
+  fridge: "/assets/photos/anaquel.webp",
+  table: "/assets/photos/mesa.webp",
 } as const;
 
 export const products = {
@@ -66,4 +71,14 @@ export const serviceImages: Record<string, ServiceImage> = {
     alt: "Tarima con paquetes termoencogidos de botellas MOG listas para distribución",
     fit: "contain",
   },
+};
+
+/** One photo per process step (keyed by step number in src/lib/site.ts). */
+export const processImages: Record<string, { src: string; alt: string }> = {
+  "01": { src: photos.idea, alt: "Bocetos de etiqueta, lápices y paleta de color junto a una botella sin etiquetar" },
+  "02": { src: products.flavors, alt: "Bebidas MOG de limón, jamaica, pepino y mango" },
+  "03": { src: photos.preforms, alt: "Preformas de PET de distintos tamaños junto a una botella terminada" },
+  "04": { src: photos.bubbles, alt: "Agua mineral con gas en primer plano" },
+  "05": { src: photos.labels, alt: "Rollo de etiquetas impresas listas para aplicarse" },
+  "06": { src: products.pallet, alt: "Tarima con paquetes de botellas listas para distribución" },
 };
