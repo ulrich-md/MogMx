@@ -52,12 +52,12 @@ export default function Capabilities() {
             <div aria-hidden="true" className="absolute -right-[30%] bottom-[12%] top-[14%] w-[72%] bg-[linear-gradient(180deg,#E6F6F9_0%,#CDEDF2_100%)]" />
             <img
               src={products.family}
-              alt="Envases MOG: botella PET de 600 ml, lata de 355 ml, botella de vidrio y garrafón de 20 L"
+              alt="Envases MOG: botella PET de 600 ml, lata de 355 ml y botella de vidrio"
               loading="lazy"
               decoding="async"
-              width={1536}
-              height={1024}
-              className="relative w-full"
+              width={880}
+              height={945}
+              className="relative mx-auto max-h-[600px] w-auto"
             />
           </Reveal>
         </div>

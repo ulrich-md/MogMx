@@ -14,8 +14,8 @@ export function CapabilitiesBlock() {
           <div aria-hidden="true" className="absolute -left-[30%] bottom-[10%] top-[16%] w-[78%] bg-[linear-gradient(180deg,#E6F6F9_0%,#CDEDF2_100%)]" />
           <div aria-hidden="true" className="absolute bottom-[10%] left-0 right-[4%] h-px bg-ink/15" />
           <img
-            src={products.family}
-            alt="Envases MOG: botella PET de 600 ml, lata de 355 ml, botella de vidrio y garrafón de 20 L"
+            src={products.flavors}
+            alt="Bebidas MOG de limón, jamaica, pepino y mango en botella PET"
             loading="lazy"
             decoding="async"
             width={1536}

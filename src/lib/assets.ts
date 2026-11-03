@@ -24,6 +24,7 @@ export const photos = {
 
 export const products = {
   family: "/assets/products/familia.webp",
+  flavors: "/assets/products/sabores.webp",
   privateLabels: "/assets/products/marcas-propias.webp",
   pallet: "/assets/products/tarima.webp",
 } as const;
@@ -52,13 +53,12 @@ export const serviceImages: Record<string, ServiceImage> = {
   },
   "envases-y-tapas": {
     src: products.family,
-    alt: "Envases MOG: botella PET, lata, botella de vidrio y garrafón",
+    alt: "Envases MOG: botella PET, lata y botella de vidrio",
     fit: "contain",
   },
-  // REEMPLAZAR: imagen de bebidas de sabores (limón, jamaica, pepino, mango)
   "otras-bebidas": {
-    src: products.family,
-    alt: "Presentaciones MOG para agua y otras bebidas",
+    src: products.flavors,
+    alt: "Bebidas naturales MOG de limón, jamaica, pepino y mango",
     fit: "contain",
   },
   "producto-final": {

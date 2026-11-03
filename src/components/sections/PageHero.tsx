@@ -6,7 +6,7 @@ import { products } from "@/lib/assets";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
-type Visual = "bottle" | "family" | "none";
+type Visual = "bottle" | "brands" | "none";
 
 /**
  * Interior page hero, same editorial world as the home hero: paper, poster
@@ -93,10 +93,10 @@ export function PageHero({
               <>
                 <div className="absolute bottom-[18%] left-[8%] right-0 top-[24%] bg-[linear-gradient(180deg,#E6F6F9_0%,#CDEDF2_100%)]" />
                 <img
-                  src={products.family}
+                  src={products.privateLabels}
                   alt=""
                   decoding="async"
-                  className="absolute inset-x-0 bottom-[12%] w-full"
+                  className="absolute inset-0 m-auto h-full w-auto object-contain"
                 />
               </>
             )}

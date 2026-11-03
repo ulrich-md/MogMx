@@ -15,7 +15,7 @@ export default function Services() {
       />
       <PageHero
         eyebrow="Servicios"
-        visual="family"
+        visual="brands"
         title="Una solución para toda tu marca"
         lead="Seis formas de trabajar juntos, del agua de origen al producto en anaquel. Entra donde nos necesites; el resto lo cuidamos nosotros."
       />

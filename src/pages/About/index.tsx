@@ -79,7 +79,7 @@ export default function About() {
                 <span aria-hidden="true" className="absolute left-0 top-0 h-[3px] w-24 bg-accent" />
               </figure>
             </Reveal>
-            <Reveal delay={0.08} className="flex flex-col justify-end md:col-span-6 md:col-start-7">
+            <Reveal delay={0.08} className="flex flex-col md:col-span-6 md:col-start-7">
               <p className="text-[1.1rem] leading-[1.8] text-graphite">
                 Tehuacán es históricamente conocida como una de las cunas del
                 agua mineral en México, una región asociada por generaciones a
@@ -97,6 +97,18 @@ export default function About() {
                 quien ya tiene un mercado que atender: mismo cuidado, mismos
                 controles, la misma atención al detalle.
               </p>
+              <figure className="relative mt-10 overflow-hidden rounded-card bg-ink md:mt-auto">
+                <img
+                  src={photos.orizaba}
+                  alt="El Pico de Orizaba nevado entre las nubes, de donde baja el agua que aflora en Tehuacán"
+                  loading="lazy"
+                  decoding="async"
+                  className="aspect-[16/9] w-full object-cover"
+                />
+                <figcaption className="label absolute bottom-0 left-0 right-0 bg-gradient-to-t from-ink/75 to-transparent px-5 pb-4 pt-10 text-white">
+                  Pico de Orizaba
+                </figcaption>
+              </figure>
             </Reveal>
           </div>
 
