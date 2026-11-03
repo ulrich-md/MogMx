@@ -1,106 +1,60 @@
-import { useEffect, useRef } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useReducedMotion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { BottleAssembly } from "../hero/BottleAssembly";
 import { processSteps } from "@/lib/site";
 
-gsap.registerPlugin(ScrollTrigger);
+const EASE = [0.16, 1, 0.3, 1] as const;
 
 /**
- * Numbered process timeline. A connector line fills with aqua as the user
- * scrolls the section (scrubbed, transform-only). Steps reveal on enter.
- * This does NOT pin or hijack the scroll. Static under reduced motion.
+ * Process ledger with a sticky bottle that builds itself as you read:
+ * scrolling the six steps scrubs the same photographic assembly used in the
+ * home hero (envase -> llenado -> tapa -> etiqueta). Native scroll only,
+ * nothing is pinned or hijacked. Static (finished) under reduced motion.
  */
 export function ProcessTimeline() {
   const root = useRef<HTMLDivElement>(null);
-  const fill = useRef<HTMLDivElement>(null);
   const reduce = useReducedMotion();
-
-  useEffect(() => {
-    if (reduce || !root.current || !fill.current) return;
-
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        fill.current,
-        { scaleY: 0 },
-        {
-          scaleY: 1,
-          ease: "none",
-          scrollTrigger: {
-            trigger: root.current,
-            start: "top 60%",
-            end: "bottom 80%",
-            scrub: true,
-          },
-        },
-      );
-
-      gsap.utils.toArray<HTMLElement>(".timeline-step").forEach((el) => {
-        gsap.from(el, {
-          opacity: 0,
-          y: 28,
-          duration: 0.6,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: el,
-            start: "top 82%",
-            toggleActions: "play none none none",
-          },
-        });
-      });
-
-      ScrollTrigger.refresh();
-    }, root);
-
-    return () => ctx.revert();
-  }, [reduce]);
+  const { scrollYProgress } = useScroll({ target: root, offset: ["start 0.7", "end 0.85"] });
+  const progress = useTransform(scrollYProgress, [0, 1], reduce ? [1, 1] : [0.04, 1]);
+  const meter = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
   return (
-    <div ref={root} className="relative mx-auto max-w-4xl">
-      {/* Track + animated fill */}
-      <div
-        aria-hidden="true"
-        className="absolute bottom-3 left-[28px] top-3 w-[2px] bg-line md:left-1/2 md:-translate-x-1/2"
-      >
-        <div
-          ref={fill}
-          className="absolute inset-0 origin-top rounded-full bg-gradient-to-b from-aqua to-blue"
-          style={{ transform: reduce ? "scaleY(1)" : "scaleY(0)" }}
-        />
+    <div ref={root} className="relative grid gap-10 lg:grid-cols-12 lg:gap-8">
+      {/* Sticky build stage (desktop) */}
+      <div className="hidden lg:col-span-5 lg:block">
+        <div className="sticky top-[96px] flex h-[calc(100vh-120px)] max-h-[820px] flex-col">
+          <div className="relative flex flex-1 justify-center">
+            <motion.div
+              aria-hidden="true"
+              style={{ scaleY: useTransform(scrollYProgress, [0, 0.12], [0.2, 1]), originY: 1 }}
+              className="absolute bottom-[8%] left-[18%] right-[18%] top-[26%] bg-accent"
+            />
+            <BottleAssembly progress={progress} className="h-full" />
+          </div>
+          <div className="mt-4 h-[3px] w-full overflow-hidden bg-line">
+            <motion.div style={{ scaleX: meter, originX: 0 }} className="h-full bg-gradient-to-r from-aqua to-blue" />
+          </div>
+        </div>
       </div>
 
-      <ol className="relative">
-        {processSteps.map((step, i) => {
-          const isLeft = i % 2 === 0;
-          return (
-            <li
-              key={step.n}
-              className="timeline-step relative py-5 md:grid md:grid-cols-2 md:gap-x-14 md:py-7"
-            >
-              {/* Node on the line */}
-              <span className="absolute left-[10px] top-[26px] z-10 grid h-[38px] w-[38px] place-items-center rounded-full border-2 border-aqua bg-white font-display text-[13px] font-bold text-blue shadow-soft md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2">
-                {step.n}
-              </span>
-
-              <div
-                className={
-                  isLeft
-                    ? "pl-[68px] md:col-start-1 md:pl-0 md:pr-8 md:text-right"
-                    : "pl-[68px] md:col-start-2 md:pl-8"
-                }
-              >
-                <div className="rounded-card bg-white p-6 shadow-soft ring-1 ring-line transition-shadow duration-300 hover:shadow-lift">
-                  <h3 className="font-display text-lg font-semibold tracking-tight text-navy">
-                    {step.title}
-                  </h3>
-                  <p className="mt-2 text-[14.5px] leading-relaxed text-slate">
-                    {step.description}
-                  </p>
-                </div>
-              </div>
-            </li>
-          );
-        })}
+      {/* Steps */}
+      <ol className="border-t border-ink/15 lg:col-span-7">
+        {processSteps.map((step) => (
+          <motion.li
+            key={step.n}
+            initial={reduce ? false : { opacity: 0.25 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ amount: 0.6, margin: "-10% 0px -10% 0px" }}
+            transition={{ duration: 0.5, ease: EASE }}
+            className="group grid gap-x-8 gap-y-4 border-b border-ink/15 py-12 sm:grid-cols-[7.5rem_1fr] lg:min-h-[46vh] lg:py-16"
+          >
+            <span className="poster text-[5.5rem] text-accent sm:text-[6.5rem]">{step.n}</span>
+            <div className="sm:pt-3">
+              <h3 className="poster text-[2.6rem] text-ink sm:text-[3.4rem]">{step.title}</h3>
+              <p className="mt-5 max-w-lg text-[1.05rem] leading-[1.7] text-slate">{step.description}</p>
+            </div>
+          </motion.li>
+        ))}
       </ol>
     </div>
   );

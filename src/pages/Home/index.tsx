@@ -6,7 +6,6 @@ import { ProcessPreview } from "@/components/sections/ProcessPreview";
 import { CapabilitiesBlock } from "@/components/sections/CapabilitiesBlock";
 import { TrustStrip } from "@/components/sections/TrustStrip";
 import { CtaBand } from "@/components/sections/CtaBand";
-import { WaveDivider } from "@/components/ui/WaveDivider";
 
 export default function Home() {
   return (
@@ -23,7 +22,6 @@ export default function Home() {
       <ProcessPreview />
       <CapabilitiesBlock />
       <TrustStrip />
-      <WaveDivider nextColor="#07232C" className="bg-foam" />
       <CtaBand />
     </>
   );

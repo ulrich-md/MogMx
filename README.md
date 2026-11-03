@@ -14,7 +14,7 @@ Estética: agua premium (pureza, limpieza, lujo sereno) con credibilidad industr
 - **Framer Motion** (reveals, micro-interacciones) + **GSAP ScrollTrigger** (línea de proceso) + **Lenis** (smooth scroll)
 - **React Router** (ruteo real multipágina)
 - **react-helmet-async** (SEO por página)
-- Fuentes self-hosted: **Space Grotesk** (titulares) + **Inter** (cuerpo)
+- Fuentes self-hosted: **Anton** (titulares tipo póster) + **Instrument Sans** (cuerpo) + **JetBrains Mono** (datos)
 
 ## Requisitos
 
@@ -43,7 +43,7 @@ src/
     seo.tsx             componente SEO por página
   components/
     layout/             Header, Footer, Layout, SmoothScroll, ScrollToTop, Logo
-    hero/               Hero + fondo de agua animado
+    hero/               Hero + BottleAssembly (botella que se arma por capas)
     sections/           bloques reutilizables (servicios, proceso, capacidades, CTA…)
     process/            ProcessTimeline (línea que se llena al hacer scroll)
     resources/          galería de video con lightbox + tarjetas de descarga
@@ -61,19 +61,38 @@ tailwind.config.js      tokens de color / tipografía / sombras / animaciones
 ## Tokens de color (centralizados)
 
 Definidos en `tailwind.config.js` y replicados como variables CSS en `src/index.css`.
+Paleta original de la marca (azul noche + teal del agua + coral) sobre un layout editorial.
 
 | Token | Hex | Uso |
 |------|------|-----|
-| `navy` | `#0E2A47` | texto principal y secciones oscuras |
-| `blue` | `#1E7FB8` | acento agua (íconos, rellenos) |
-| `blue-deep` | `#176FA3` | texto pequeño/enlaces (contraste AA) |
-| `aqua` | `#2BA6D9` | acento agua claro |
-| `mist` | `#CFE8F2` | fondos suaves |
-| `foam` | `#F2F9FC` | fondos muy suaves |
-| `slate` | `#5B6B78` | texto secundario |
-| `amber` | `#C9892F` | **acento cálido, SOLO para botones/CTA** |
+| `ink` / `navy` | `#0B2B33` | texto principal y secciones oscuras |
+| `abyss` | `#03141A` | superficies más profundas (degradados) |
+| `paper` | `#FFFFFF` | fondo principal |
+| `bone` / `foam` | `#EFF9FA` | fondos alternos |
+| `blue` | `#1893A6` | acento agua |
+| `blue-deep` | `#10707F` | texto pequeño / etiquetas (AA) |
+| `aqua` / `mint` | `#2FC1CF` / `#5FE0E6` | realces sobre fondos oscuros |
+| `slate` | `#56707A` | texto secundario |
+| `accent` | `#FB6F57` | coral: CTA, bloques de señal y numerales grandes |
 
-> El ámbar se usa exclusivamente en los CTA. El azul/aqua se usan con mesura.
+---
+
+## Assets (imágenes)
+
+Todo el arte es fotográfico (no hay ilustraciones SVG). Están en `public/assets/` y se
+referencian desde `src/lib/assets.ts`.
+
+- `hero/` — capas de la botella sobre un mismo lienzo de 1024×1536, alineadas al píxel:
+  `bottle-empty` (envase vacío), `bottle-filled` (con agua), `bottle-cap` (tapa recortada),
+  `bottle-label` (etiqueta recortada), `bottle-final` (botella terminada) y `splash`.
+  `src/components/hero/BottleAssembly.tsx` las anima en orden: envase → llenado → tapa →
+  etiqueta → producto final. La misma pieza se reproduce sola en el inicio y se arma con
+  el scroll en la página de Proceso.
+- `photos/` — valle de Tehuacán y textura de agua.
+- `products/` — familia de envases (PET, lata, vidrio y garrafón).
+
+Para reemplazar la botella por la de un cliente, genera las cinco capas con el mismo
+encuadre y tamaño y sustituye los archivos con el mismo nombre.
 
 ---
 
@@ -87,8 +106,7 @@ El sitio se entrega con **placeholders visibles y editables**. Busca los comenta
 2. **Cifras de la empresa** — están como placeholders en corchetes (`[N]`, `[capacidad]`,
    `[certificación]`). **No se afirma ningún número** hasta que lo reemplaces con datos reales.
    - Ver `capabilityStats`, `formats`, y la sección "Cifras ilustrativas" (Capacidades).
-3. **Imágenes** — los slots `MediaPlaceholder` indican qué foto va en cada lugar.
-   Pasa la prop `src` con la ruta real de la foto (botella, planta, línea de producción).
+3. **Imágenes** — ver la sección *Assets*; reemplaza los archivos de `public/assets/`.
 4. **Videos** — `src/lib/site.ts` → `videos[].videoId` (ID de YouTube/Vimeo).
 5. **Descargas** — `src/lib/site.ts` → `downloads[].href` (rutas a tus PDF en `/public`).
 6. **Certificaciones / aviso de privacidad** — reemplaza los placeholders correspondientes.

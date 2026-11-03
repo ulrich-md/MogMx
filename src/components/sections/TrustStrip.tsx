@@ -1,11 +1,9 @@
-import { Drop } from "@phosphor-icons/react";
 import { Reveal } from "../ui/Reveal";
 
 /**
- * Kinetic capability strip (the page's single marquee). Giant ghost words
- * drift horizontally; each word inks in on hover, and hovering pauses the
- * band. Content is limited to affirmed services/types (no invented clients),
- * replacing the old placeholder logo wall.
+ * Kinetic capability strip (the page's single marquee). Outlined poster
+ * words drift horizontally; each word inks in on hover, hovering pauses
+ * the band. Content is limited to affirmed services/types.
  */
 const words = [
   "Agua de Tehuacán",
@@ -18,16 +16,13 @@ const words = [
 
 function Band({ ariaHidden = false }: { ariaHidden?: boolean }) {
   return (
-    <ul
-      aria-hidden={ariaHidden || undefined}
-      className="flex w-max shrink-0 items-center"
-    >
+    <ul aria-hidden={ariaHidden || undefined} className="flex w-max shrink-0 items-center">
       {words.map((word) => (
         <li key={word} className="flex items-center">
-          <span className="whitespace-nowrap px-6 font-display text-[2.6rem] font-extrabold uppercase leading-none tracking-tight text-navy/[0.14] transition-colors duration-300 hover:text-blue-deep sm:px-8 sm:text-6xl">
+          <span className="poster text-outline whitespace-nowrap px-7 text-[3.4rem] transition-colors duration-300 sm:px-10 sm:text-[5.5rem]">
             {word}
           </span>
-          <Drop size={18} weight="fill" aria-hidden="true" className="text-aqua/40" />
+          <span aria-hidden="true" className="h-3 w-3 shrink-0 bg-accent" />
         </li>
       ))}
     </ul>
@@ -36,10 +31,10 @@ function Band({ ariaHidden = false }: { ariaHidden?: boolean }) {
 
 export function TrustStrip() {
   return (
-    <section className="overflow-hidden border-y border-line bg-foam">
-      <div className="container-px pt-14">
+    <section className="overflow-hidden border-y border-line bg-paper">
+      <div className="container-px pt-16">
         <Reveal>
-          <p className="text-center text-[15px] text-slate">
+          <p className="label mx-auto max-w-xl text-center leading-relaxed text-graphite">
             Trabajamos con quien está lanzando su primera marca y con quien ya
             tiene un mercado que atender.
           </p>

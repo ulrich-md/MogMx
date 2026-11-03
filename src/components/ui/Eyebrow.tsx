@@ -1,8 +1,7 @@
 import type { ReactNode } from "react";
 
 /**
- * Small uppercase label above a heading. Used sparingly
- * (max ~1 per 3 sections, per the anti-slop discipline).
+ * Small tracked uppercase label above a heading, led by a short signal bar.
  */
 export function Eyebrow({
   children,
@@ -15,9 +14,8 @@ export function Eyebrow({
 }) {
   const color = tone === "dark" ? "text-aqua" : "text-blue-deep";
   return (
-    <span
-      className={`inline-flex items-center font-mono text-[11px] font-medium uppercase tracking-eyebrow ${color} ${className}`}
-    >
+    <span className={`label inline-flex items-center gap-3 ${color} ${className}`}>
+      <span aria-hidden="true" className="h-[2px] w-6 bg-accent" />
       {children}
     </span>
   );

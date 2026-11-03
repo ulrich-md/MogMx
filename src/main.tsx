@@ -4,8 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 
 // Self-hosted Google Fonts (font-display: swap by default, no external request)
-import "@fontsource/syne/700.css";
-import "@fontsource/syne/800.css";
+import "@fontsource/anton/400.css";
 import "@fontsource/instrument-sans/400.css";
 import "@fontsource/instrument-sans/500.css";
 import "@fontsource/instrument-sans/600.css";

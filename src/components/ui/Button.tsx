@@ -1,15 +1,15 @@
 import { Link } from "react-router-dom";
-import { ArrowRight } from "@phosphor-icons/react";
+import { ArrowUpRight } from "@phosphor-icons/react";
 import type { ReactNode } from "react";
 
-type Variant = "primary" | "secondary" | "ghostDark" | "outlineDark";
+type Variant = "primary" | "accent" | "secondary" | "ghostDark" | "outlineDark";
 type Size = "md" | "lg";
 
 type CommonProps = {
   children: ReactNode;
   variant?: Variant;
   size?: Size;
-  /** Show the nested circular arrow (button-in-button) */
+  /** Show the trailing arrow */
   withArrow?: boolean;
   className?: string;
 };
@@ -33,55 +33,50 @@ type AsButton = CommonProps & {
 type ButtonProps = AsLink | AsAnchor | AsButton;
 
 const base =
-  "group inline-flex items-center justify-center gap-2.5 rounded-full font-sans font-semibold tracking-tight transition-all duration-300 ease-water active:translate-y-px active:scale-[0.985] focus-visible:outline-none disabled:opacity-50 disabled:pointer-events-none";
+  "group relative inline-flex items-center justify-center gap-3 overflow-hidden rounded-full font-sans font-semibold uppercase tracking-[0.12em] transition-[transform,background-color,color,box-shadow,border-color] duration-300 ease-water active:scale-[0.98] focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50";
 
 const sizes: Record<Size, string> = {
-  md: "px-5 py-3 text-[14px]",
-  lg: "px-7 py-4 text-[15px]",
+  md: "h-11 px-5 text-[11.5px]",
+  lg: "h-14 px-7 text-[12.5px]",
 };
 
 const variants: Record<Variant, string> = {
-  // Emerald primary (single accent). Navy text on emerald = ~5.5:1 (AA).
-  primary: "bg-accent text-navy shadow-accent hover:-translate-y-0.5 hover:shadow-lift",
-  // Light surface pill, for light sections.
-  secondary: "bg-white text-navy ring-1 ring-line hover:ring-navy/25 hover:bg-foam",
-  // Solid white pill, for dark backgrounds (hero, dark bands).
-  ghostDark: "bg-white text-navy shadow-soft hover:-translate-y-0.5 hover:bg-mist",
-  // Outline pill on dark surfaces (product hero) - no accent color.
-  outlineDark:
-    "border border-white/40 text-white hover:border-white/70 hover:bg-white/10",
+  // Coral pill: the single primary action (navy on coral = AA).
+  primary: "bg-accent text-ink shadow-accent hover:bg-ink hover:text-white",
+  // Alias of primary, kept for call-site intent.
+  accent: "bg-accent text-ink shadow-accent hover:bg-ink hover:text-white",
+  // Hairline pill for secondary actions on paper.
+  secondary: "border border-ink/20 text-ink hover:border-ink hover:bg-ink hover:text-white",
+  // Solid paper pill for dark surfaces.
+  ghostDark: "bg-white text-ink hover:bg-mist",
+  // Hairline pill for dark surfaces.
+  outlineDark: "border border-white/30 text-white hover:border-white hover:bg-white hover:text-ink",
 };
 
-function Inner({
-  children,
-  withArrow,
-}: {
-  children: ReactNode;
-  withArrow?: boolean;
-}) {
+function Inner({ children, withArrow }: { children: ReactNode; withArrow?: boolean }) {
   return (
     <>
-      <span>{children}</span>
+      <span className="relative">{children}</span>
       {withArrow ? (
-        <ArrowRight
-          size={17}
-          weight="bold"
-          aria-hidden="true"
-          className="transition-transform duration-300 ease-water group-hover:translate-x-1"
-        />
+        <span aria-hidden="true" className="relative -mr-1 grid h-5 w-5 place-items-center overflow-hidden">
+          <ArrowUpRight
+            size={15}
+            weight="bold"
+            className="transition-transform duration-500 ease-water group-hover:-translate-y-5 group-hover:translate-x-5"
+          />
+          <ArrowUpRight
+            size={15}
+            weight="bold"
+            className="absolute -translate-x-5 translate-y-5 transition-transform duration-500 ease-water group-hover:translate-x-0 group-hover:translate-y-0"
+          />
+        </span>
       ) : null}
     </>
   );
 }
 
 export function Button(props: ButtonProps) {
-  const {
-    children,
-    variant = "primary",
-    size = "md",
-    withArrow = false,
-    className = "",
-  } = props;
+  const { children, variant = "primary", size = "md", withArrow = false, className = "" } = props;
   const cls = `${base} ${sizes[size]} ${variants[variant]} ${className}`;
   const inner = <Inner withArrow={withArrow}>{children}</Inner>;
 

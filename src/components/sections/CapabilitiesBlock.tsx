@@ -1,76 +1,74 @@
-import { Icon } from "../ui/Icon";
 import { SectionHeading } from "../ui/SectionHeading";
 import { Reveal } from "../ui/Reveal";
 import { Button } from "../ui/Button";
-import { ProductScene } from "../ui/ProductScene";
+import { Icon } from "../ui/Icon";
+import { products } from "@/lib/assets";
 import { waterTypes } from "@/lib/site";
 
 export function CapabilitiesBlock() {
   return (
-    <section className="bg-white">
-      <div className="container-px section grid gap-12 lg:grid-cols-12 lg:items-center">
+    <section className="overflow-hidden bg-paper">
+      <div className="container-px section grid gap-14 lg:grid-cols-12 lg:items-center lg:gap-10">
+        {/* Product family on a signal block, bleeding off the left edge */}
+        <Reveal className="relative lg:col-span-7">
+          <div aria-hidden="true" className="absolute -left-[30%] bottom-[10%] top-[16%] w-[78%] bg-accent" />
+          <div aria-hidden="true" className="absolute bottom-[10%] left-0 right-[4%] h-px bg-ink/15" />
+          <img
+            src={products.family}
+            alt="Envases MOG: botella PET de 600 ml, lata de 355 ml, botella de vidrio y garrafón de 20 L"
+            loading="lazy"
+            decoding="async"
+            width={1536}
+            height={1024}
+            className="relative w-full"
+          />
+        </Reveal>
+
         <div className="lg:col-span-5">
           <SectionHeading
+            index="04"
+            eyebrow="Capacidades"
+            size="md"
             title="Versatilidad que se nota en el anaquel"
             lead="Múltiples envases, tapas y presentaciones, con control de calidad y trazabilidad por lote para que tu producto sea siempre el mismo."
           />
-          <ul className="mt-8 space-y-5">
+          <ul className="mt-10 border-t border-line">
             {waterTypes.map((t, i) => (
-              <li key={t.title} className="group flex gap-4">
-                <span className="mt-0.5 grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-mist text-blue transition-all duration-300 ease-water group-hover:bg-blue group-hover:text-white">
-                  <Icon name={["Drop", "Flask", "Package"][i] ?? "Drop"} size={20} />
+              <li key={t.title} className="group grid grid-cols-[auto_1fr] gap-x-5 border-b border-line py-5">
+                <span className="readout pt-1 text-slate transition-colors group-hover:text-accent-deep">
+                  {String(i + 1).padStart(2, "0")}
                 </span>
                 <div>
-                  <h3 className="font-display text-base font-semibold text-navy">
-                    {t.title}
-                  </h3>
-                  <p className="mt-1 text-[14.5px] leading-relaxed text-slate">
-                    {t.description}
-                  </p>
+                  <h3 className="label text-[12.5px] text-ink">{t.title}</h3>
+                  <p className="mt-2 text-[14.5px] leading-relaxed text-slate">{t.description}</p>
                 </div>
               </li>
             ))}
           </ul>
-          <div className="mt-8">
-            <Button to="/capacidades" variant="secondary">
-              Ver capacidades
-            </Button>
-          </div>
-        </div>
 
-        <div className="lg:col-span-7">
-          <Reveal className="grid grid-cols-2 gap-4">
-            <div className="col-span-2 aspect-[16/9] overflow-hidden rounded-card ring-1 ring-white/10">
-              <ProductScene variant="line" className="h-full w-full" />
-            </div>
-            <div className="group rounded-card bg-mist p-6 ring-1 ring-line transition-all duration-300 ease-water hover:-translate-y-1 hover:shadow-lift">
-              <Icon
-                name="ShieldCheck"
-                size={26}
-                className="text-blue transition-transform duration-300 ease-water group-hover:scale-110"
-              />
-              <h3 className="mt-4 font-display text-lg font-semibold text-navy">
-                Control de calidad
-              </h3>
-              <p className="mt-2 text-[14px] leading-relaxed text-navy/70">
+          <div className="mt-8 grid grid-cols-2 gap-3">
+            <div className="group rounded-card bg-ink p-5 text-white transition-transform duration-500 ease-water hover:-translate-y-1">
+              <Icon name="ShieldCheck" size={22} weight="bold" className="text-accent" />
+              <h3 className="label mt-5 text-[12px]">Control de calidad</h3>
+              <p className="mt-2 text-[13.5px] leading-relaxed text-white/65">
                 Controles a lo largo del proceso para mantener la consistencia
                 entre lotes.
               </p>
             </div>
-            <div className="group rounded-card bg-navy p-6 transition-all duration-300 ease-water hover:-translate-y-1 hover:shadow-lift">
-              <Icon
-                name="MapPin"
-                size={26}
-                className="text-aqua transition-transform duration-300 ease-water group-hover:scale-110"
-              />
-              <h3 className="mt-4 font-display text-lg font-semibold text-white">
-                Trazabilidad por lote
-              </h3>
-              <p className="mt-2 text-[14px] leading-relaxed text-mist">
+            <div className="group rounded-card bg-accent p-5 text-ink transition-transform duration-500 ease-water hover:-translate-y-1">
+              <Icon name="MapPin" size={22} weight="bold" />
+              <h3 className="label mt-5 text-[12px]">Trazabilidad por lote</h3>
+              <p className="mt-2 text-[13.5px] leading-relaxed text-ink/75">
                 Cada lote queda identificado, del origen al producto terminado.
               </p>
             </div>
-          </Reveal>
+          </div>
+
+          <div className="mt-8">
+            <Button to="/capacidades" variant="secondary" withArrow>
+              Ver capacidades
+            </Button>
+          </div>
         </div>
       </div>
     </section>

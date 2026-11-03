@@ -4,22 +4,24 @@
 
 /* ------------------------------------------------------------------ */
 /*  MOG Mexico - design tokens (single source of truth, mirrored in    */
-/*  tailwind.config.js). Emerald accent is reserved for CTAs only.     */
+/*  tailwind.config.js). Azul noche + teal del agua + coral.    */
 /* ------------------------------------------------------------------ */
 :root {
-  --navy: #0b2b33;
-  --navy-deep: #07232c;
-  --ink: #03141a;
+  --paper: #ffffff;
+  --bone: #eff9fa;
+  --ink: #0b2b33;
+  --ink-soft: #07232c;
+  --abyss: #03141a;
+  --slate: #56707a;
+  --line: #ddedf0;
+  --accent: #fb6f57; /* EDITABLE: acento coral, CTAs y bloques de señal */
+  --accent-deep: #d2482f;
   --blue: #1893a6;
   --blue-deep: #10707f;
   --aqua: #2fc1cf;
+  --mint: #5fe0e6;
   --mist: #cdedf2;
   --foam: #eff9fa;
-  --slate: #56707a;
-  --accent: #fb6f57; /* EDITABLE: acento coral, solo para CTAs */
-  --accent-deep: #e2553c;
-  --mint: #5fe0e6; /* realce tipográfico sobre fondos oscuros (aqua) */
-  --line: #ddedf0;
   --white: #ffffff;
 }
 
@@ -31,22 +33,26 @@
   html {
     -webkit-text-size-adjust: 100%;
     text-rendering: optimizeLegibility;
+    background: var(--paper);
   }
 
   body {
-    @apply bg-white font-sans text-navy antialiased;
+    @apply bg-paper font-sans text-ink antialiased;
   }
 
   h1,
   h2,
   h3,
   h4 {
-    @apply font-display;
     text-wrap: balance;
   }
 
   p {
     text-wrap: pretty;
+  }
+
+  img {
+    -webkit-user-drag: none;
   }
 
   ::selection {
@@ -56,9 +62,9 @@
 
   /* Accessible focus ring (keyboard only) */
   :focus-visible {
-    outline: 2px solid var(--aqua);
+    outline: 2px solid var(--accent);
     outline-offset: 3px;
-    border-radius: 4px;
+    border-radius: 2px;
   }
 
   /* Lenis smooth-scroll plumbing */
@@ -75,17 +81,26 @@
 }
 
 @layer components {
-  /* Section wrapper: generous, airy vertical rhythm (VISUAL_DENSITY 3) */
   .section {
-    @apply py-20 md:py-28;
+    @apply py-20 md:py-32;
   }
   .container-px {
-    @apply mx-auto w-full max-w-[1240px] px-5 sm:px-8;
+    @apply mx-auto w-full max-w-shell px-5 sm:px-8 lg:px-12;
   }
 
-  /* Small uppercase label above a heading. Used sparingly. */
-  .eyebrow {
-    @apply inline-flex items-center gap-2 font-mono text-[11px] font-medium uppercase tracking-eyebrow text-blue-deep;
+  /* Poster display type: condensed, uppercase, tight. */
+  .poster {
+    @apply font-display font-normal uppercase leading-poster tracking-poster;
+  }
+
+  /* Small tracked uppercase label (UI chrome, data labels). */
+  .label {
+    @apply font-sans text-[11px] font-semibold uppercase tracking-eyebrow;
+  }
+
+  /* Mono data readout. */
+  .readout {
+    @apply font-mono text-[11px] font-medium uppercase tracking-[0.14em];
   }
 }
 
@@ -93,45 +108,28 @@
   .text-balance {
     text-wrap: balance;
   }
-  /* Thin sheen used on the loader / glass surfaces */
-  .mask-fade-b {
-    -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
-    mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+  /* Outlined poster type (marquee) */
+  .text-outline {
+    color: transparent;
+    -webkit-text-stroke: 1.5px rgba(11, 43, 51, 0.4);
   }
-
-  /* Let inner layers inherit the parent's radius (liquid-glass primitives). */
-  .rounded-inherit {
-    border-radius: inherit;
+  .text-outline:hover {
+    color: var(--ink);
+    -webkit-text-stroke-color: var(--ink);
   }
-
-  /* Spinner for lazy 3D / Spline fallbacks (emerald accent on dark). */
-  .loader {
-    width: 38px;
-    height: 38px;
-    border-radius: 9999px;
-    border: 3px solid rgba(255, 255, 255, 0.18);
-    border-top-color: var(--accent);
-    animation: loader-spin 0.8s linear infinite;
+  /* Subtle paper grain so flat surfaces feel printed, not digital. */
+  .grain {
+    position: relative;
   }
-  @keyframes loader-spin {
-    to {
-      transform: rotate(360deg);
-    }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .loader {
-      animation-duration: 1.6s;
-    }
-  }
-}
-
-/* Slow vertical pan for liquid-glass demo backgrounds. */
-@keyframes moveBackground {
-  from {
-    background-position: 0% 0%;
-  }
-  to {
-    background-position: 0% -1000%;
+  .grain::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.035;
+    mix-blend-mode: multiply;
+    background-image: radial-gradient(rgba(11, 43, 51, 0.9) 0.5px, transparent 0.6px);
+    background-size: 3px 3px;
   }
 }
 
@@ -146,5 +144,26 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
+  }
+}
+
+/* Carbonation inside the hero bottle */
+@keyframes bubble-rise {
+  0% {
+    transform: translate3d(0, 0, 0);
+    opacity: 0;
+  }
+  12% {
+    opacity: 1;
+  }
+  50% {
+    transform: translate3d(3px, -28vh, 0);
+  }
+  88% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(-2px, -56vh, 0);
+    opacity: 0;
   }
 }

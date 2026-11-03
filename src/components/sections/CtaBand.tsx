@@ -1,10 +1,12 @@
+import { useRef } from "react";
+import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { WhatsappLogo } from "@phosphor-icons/react";
 import { Button } from "../ui/Button";
-import { GlassEffect } from "../ui/liquid-glass";
 import { Reveal } from "../ui/Reveal";
-import { BottleSvg, CanSvg, Floater } from "../hero/Products";
+import { bottle } from "@/lib/assets";
 import { primaryCta, whatsappHref } from "@/lib/site";
 
+/** Closing band: ink surface, poster title, the finished bottle on a signal block. */
 export function CtaBand({
   title = "¿Listo para embotellar tu marca?",
   lead = "Cuéntanos tu proyecto y te enviamos una propuesta clara, sin compromiso.",
@@ -12,78 +14,51 @@ export function CtaBand({
   title?: string;
   lead?: string;
 }) {
+  const reduce = useReducedMotion();
+  const ref = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
+  const bottleY = useTransform(scrollYProgress, [0, 1], ["14%", "-10%"]);
+  const bottleRotate = useTransform(scrollYProgress, [0, 1], [-4, 6]);
+
   return (
     <section
-      className="relative overflow-hidden bg-navy"
-      style={{
-        background:
-          "linear-gradient(135deg, #03141A 0%, #07232C 42%, #0F4C58 100%)",
-      }}
+      ref={ref}
+      className="relative isolate overflow-hidden bg-ink text-white"
+      style={{ background: "linear-gradient(135deg, #03141A 0%, #07232C 42%, #0F4C58 100%)" }}
     >
-      {/* Decorative water ripples */}
-      <svg
-        aria-hidden="true"
-        className="pointer-events-none absolute -right-20 -top-24 h-[28rem] w-[28rem] opacity-[0.12]"
-        viewBox="0 0 400 400"
-      >
-        {[60, 110, 160, 200].map((r) => (
-          <circle
-            key={r}
-            cx="200"
-            cy="200"
-            r={r}
-            fill="none"
-            stroke="#2FC1CF"
-            strokeWidth="1.5"
-          />
-        ))}
-      </svg>
-
-      {/* Product echoes from the hero, floating at the edges */}
-      <Floater
-        delay={0.2}
-        depth={0.4}
-        floatY={9}
-        duration={7}
-        className="pointer-events-none absolute -left-6 top-1/2 hidden h-56 -translate-y-1/2 opacity-80 lg:block"
-      >
-        <BottleSvg className="h-full w-auto -rotate-[10deg] drop-shadow-[0_26px_40px_rgba(3,16,22,0.5)]" />
-      </Floater>
-      <Floater
-        delay={0.35}
-        depth={0.55}
-        floatY={11}
-        duration={6.2}
-        className="pointer-events-none absolute -right-4 top-1/2 hidden h-44 -translate-y-1/2 opacity-80 lg:block"
-      >
-        <CanSvg className="h-full w-auto rotate-[12deg] drop-shadow-[0_26px_40px_rgba(3,16,22,0.5)]" />
-      </Floater>
-
-      <div className="container-px section relative">
-        <Reveal className="mx-auto max-w-2xl text-center">
-          <h2 className="font-display text-[2rem] font-extrabold uppercase leading-[1.02] tracking-tight text-white sm:text-4xl md:text-[2.7rem]">
-            {title}
-          </h2>
-          <p className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-mist">
-            {lead}
-          </p>
-          <div className="mt-9 flex flex-wrap justify-center gap-3">
-            <Button to={primaryCta.to} withArrow size="lg">
+      <div className="container-px relative grid items-center gap-10 py-24 md:py-32 lg:grid-cols-12">
+        <Reveal className="relative z-10 lg:col-span-7">
+          <h2 className="poster text-[clamp(3.2rem,7.4vw,7.4rem)]">{title}</h2>
+          <p className="mt-7 max-w-xl text-lg leading-relaxed text-mist">{lead}</p>
+          <div className="mt-10 flex flex-wrap gap-3">
+            <Button to={primaryCta.to} variant="accent" withArrow size="lg">
               {primaryCta.label}
             </Button>
-            <GlassEffect
-              href={whatsappHref(
-                "Hola, me interesa cotizar un proyecto de embotellado.",
-              )}
-              className="rounded-full px-7 py-4"
+            <Button
+              href={whatsappHref("Hola, me interesa cotizar un proyecto de embotellado.")}
+              target="_blank"
+              variant="outlineDark"
+              size="lg"
             >
-              <span className="inline-flex items-center gap-2 text-[15px] font-semibold text-white">
-                <WhatsappLogo size={18} weight="fill" />
+              <span className="inline-flex items-center gap-2">
+                <WhatsappLogo size={17} weight="fill" />
                 WhatsApp
               </span>
-            </GlassEffect>
+            </Button>
           </div>
         </Reveal>
+
+        <div aria-hidden="true" className="relative mx-auto h-[420px] w-full max-w-[420px] lg:col-span-5 lg:h-[560px]">
+          <div className="absolute bottom-[8%] left-[18%] right-[18%] top-[18%] bg-accent" />
+          <motion.img
+            src={bottle.final}
+            alt=""
+            loading="lazy"
+            decoding="async"
+            style={reduce ? undefined : { y: bottleY, rotate: bottleRotate }}
+            className="absolute inset-0 m-auto h-full w-auto drop-shadow-[0_40px_50px_rgba(0,0,0,0.45)]"
+          />
+        </div>
       </div>
     </section>
   );

@@ -3,9 +3,8 @@ import { PageHero } from "@/components/sections/PageHero";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
 import { Icon } from "@/components/ui/Icon";
-import { ProductScene } from "@/components/ui/ProductScene";
 import { CtaBand } from "@/components/sections/CtaBand";
-import { WaveDivider } from "@/components/ui/WaveDivider";
+import { photos, products } from "@/lib/assets";
 import { waterTypes, qualityPoints } from "@/lib/site";
 
 const strip = (s: string) => s.replace(/\s*\/\/ EDITABLE.*$/, "");
@@ -19,80 +18,92 @@ export default function Capabilities() {
         path="/capacidades"
       />
       <PageHero
-        product="jug"
+        visual="bottle"
         eyebrow="Capacidades"
         title="Todo lo que tu producto puede ser"
         lead="Tipos de agua, envases, tapas y presentaciones, con control de calidad y seguimiento por lote. La versatilidad para que tu marca encuentre su forma exacta."
       />
 
-      {/* Tipos de agua + planta */}
-      <section className="bg-white">
-        <div className="container-px section grid gap-12 lg:grid-cols-12 lg:items-center">
+      {/* Tipos de agua + familia de envases */}
+      <section className="overflow-hidden bg-paper">
+        <div className="container-px section grid gap-14 lg:grid-cols-12 lg:items-center lg:gap-10">
           <div className="lg:col-span-5">
             <SectionHeading
+              index="01"
+              size="md"
               title="Agua mineral y purificada"
               lead="Producimos dos perfiles de agua, cada uno cuidado para mantener su carácter en cada lote."
             />
-            <div className="mt-8 space-y-4">
-              {waterTypes.map((t) => (
-                <div
-                  key={t.title}
-                  className="flex gap-4 rounded-card bg-mist/60 p-5 ring-1 ring-line"
-                >
-                  <span className="mt-0.5 grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-white text-blue shadow-soft">
-                    <Icon name="Drop" size={20} />
+            <ul className="mt-10 border-t border-line">
+              {waterTypes.map((t, i) => (
+                <li key={t.title} className="group grid grid-cols-[auto_1fr] gap-x-5 border-b border-line py-6">
+                  <span className="poster text-[2.6rem] text-ink/15 transition-colors duration-300 group-hover:text-accent">
+                    {String(i + 1).padStart(2, "0")}
                   </span>
-                  <div>
-                    <h3 className="font-display text-base font-semibold text-navy">
-                      {t.title}
-                    </h3>
-                    <p className="mt-1 text-[14.5px] leading-relaxed text-slate">
-                      {t.description}
-                    </p>
+                  <div className="pt-1">
+                    <h3 className="label text-[12.5px] text-ink">{t.title}</h3>
+                    <p className="mt-2 text-[14.5px] leading-relaxed text-slate">{t.description}</p>
                   </div>
-                </div>
+                </li>
               ))}
-            </div>
+            </ul>
           </div>
-          <div className="lg:col-span-7">
-            <Reveal>
-              <div className="aspect-[4/3] overflow-hidden rounded-card ring-1 ring-white/10">
-                <ProductScene variant="single" className="h-full w-full" />
-              </div>
-            </Reveal>
-          </div>
+          <Reveal className="relative lg:col-span-7">
+            <div aria-hidden="true" className="absolute -right-[30%] bottom-[12%] top-[14%] w-[72%] bg-accent" />
+            <img
+              src={products.family}
+              alt="Envases MOG: botella PET de 600 ml, lata de 355 ml, botella de vidrio y garrafón de 20 L"
+              loading="lazy"
+              decoding="async"
+              width={1536}
+              height={1024}
+              className="relative w-full"
+            />
+          </Reveal>
         </div>
       </section>
 
-      {/* Calidad y trazabilidad */}
-      <section className="bg-foam">
+      {/* Calidad y trazabilidad: water photography band behind */}
+      <section className="relative isolate overflow-hidden bg-water text-white">
+        <img
+          src={photos.water}
+          alt=""
+          aria-hidden="true"
+          loading="lazy"
+          decoding="async"
+          className="absolute inset-0 -z-20 h-full w-full object-cover opacity-60"
+        />
+        <div aria-hidden="true" className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(3,20,26,0.88),rgba(7,35,44,0.82))]" />
         <div className="container-px section">
           <SectionHeading
+            index="02"
+            tone="dark"
+            size="md"
             eyebrow="Calidad"
             title="Calidad y trazabilidad en cada lote"
             lead="Controles a lo largo del proceso y seguimiento por lote, del origen al producto terminado."
           />
-          <div className="mt-10 grid gap-6 md:grid-cols-3">
+          <div className="mt-14 grid border-t border-white/15 md:grid-cols-3">
             {qualityPoints.map((q, i) => (
-              <Reveal key={q.title} delay={i * 0.06}>
-                <div className="h-full rounded-card bg-white p-7 shadow-soft ring-1 ring-line">
-                  <span className="grid h-12 w-12 place-items-center rounded-xl bg-mist text-blue">
-                    <Icon name={q.icon} size={24} />
+              <Reveal
+                key={q.title}
+                delay={i * 0.06}
+                className="group border-b border-white/15 py-10 md:border-b-0 md:border-r md:px-8 md:first:pl-0 md:last:border-r-0"
+              >
+                <div className="flex items-center justify-between">
+                  <span className="grid h-12 w-12 place-items-center rounded-full border border-white/20 text-aqua transition-colors duration-300 group-hover:border-accent group-hover:bg-accent group-hover:text-ink">
+                    <Icon name={q.icon} size={22} weight="bold" />
                   </span>
-                  <h3 className="mt-5 font-display text-lg font-semibold text-navy">
-                    {q.title}
-                  </h3>
-                  <p className="mt-2 text-[14.5px] leading-relaxed text-slate">
-                    {strip(q.description)}
-                  </p>
+                  <span className="readout text-white/40">{String(i + 1).padStart(2, "0")}</span>
                 </div>
+                <h3 className="poster mt-8 text-[2.2rem]">{q.title}</h3>
+                <p className="mt-3 text-[14.5px] leading-relaxed text-mist/85">{strip(q.description)}</p>
               </Reveal>
             ))}
           </div>
         </div>
       </section>
 
-      <WaveDivider nextColor="#07232C" className="bg-foam" />
       <CtaBand />
     </>
   );
