@@ -84,14 +84,12 @@ export function PageHero({
           >
             {visual === "bottle" ? (
               <>
-                <div className="absolute bottom-0 left-[22%] right-[22%] top-0 bg-[linear-gradient(180deg,#E6F6F9_0%,#CDEDF2_100%)]" />
                 <div className="absolute inset-0 flex justify-center">
                   <FinishedBottle className="h-full" />
                 </div>
               </>
             ) : (
               <>
-                <div className="absolute bottom-[18%] left-[8%] right-0 top-[24%] bg-[linear-gradient(180deg,#E6F6F9_0%,#CDEDF2_100%)]" />
                 <img
                   src={products.privateLabels}
                   alt=""

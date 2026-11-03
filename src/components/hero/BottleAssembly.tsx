@@ -63,6 +63,8 @@ export function BottleAssembly({
   scale,
   brand,
   labelOpacity = 1,
+  halo = true,
+  reflection = true,
 }: {
   progress: MotionValue<number>;
   /** Optional size factor (1 = canvas size), scaled from the base of the bottle. */
@@ -71,6 +73,10 @@ export function BottleAssembly({
   brand?: string;
   /** < 1 lets whatever sits behind the bottle read through the paper label. */
   labelOpacity?: number;
+  /** Soft aqua glow behind the body (no hard edges). */
+  halo?: boolean;
+  /** Faint mirrored reflection on the floor. */
+  reflection?: boolean;
   className?: string;
   showSplash?: boolean;
   bubbles?: boolean;
@@ -121,11 +127,39 @@ export function BottleAssembly({
 
   return (
     <div className={`relative aspect-[2/3] ${className}`} role="img" aria-label="Botella de agua mineral MOG armándose: envase, llenado, tapa y etiqueta">
-      {/* Contact shadow (behind everything) */}
+      {/* Halo: diffuse aqua light behind the body (multiply, so type stays crisp) */}
+      {halo ? (
+        <motion.div
+          aria-hidden="true"
+          style={{ opacity: enterOpacity, scale: size, originY: 1 }}
+          className="pointer-events-none absolute inset-x-[8%] bottom-[2%] top-[18%] mix-blend-multiply"
+        >
+          <div className="absolute inset-0 rounded-[50%] bg-[radial-gradient(closest-side,rgba(47,193,207,0.34),rgba(95,224,230,0.14)_55%,rgba(95,224,230,0)_100%)] blur-2xl" />
+        </motion.div>
+      ) : null}
+
+      {/* Floor reflection: the clear bottle mirrored, fading out fast */}
+      {reflection ? (
+        <motion.div
+          aria-hidden="true"
+          style={{
+            opacity: enterOpacity,
+            scale: size,
+            originY: 0,
+            WebkitMaskImage: "linear-gradient(to bottom, rgba(0,0,0,0.5), transparent 16%)",
+            maskImage: "linear-gradient(to bottom, rgba(0,0,0,0.5), transparent 16%)",
+          }}
+          className="pointer-events-none absolute inset-x-0 top-[98.6%] h-full mix-blend-multiply"
+        >
+          <img src={bottle.empty} alt="" loading="lazy" decoding="async" className="h-full w-full -scale-y-100 select-none object-contain opacity-60" />
+        </motion.div>
+      ) : null}
+
+      {/* Contact shadow */}
       <motion.div
         aria-hidden="true"
         style={{ opacity: enterOpacity, scaleX: size, x: "-50%" }}
-        className="absolute bottom-[-1.5%] left-1/2 h-[4%] w-[52%] rounded-[50%] bg-[radial-gradient(closest-side,rgba(18,21,21,0.32),rgba(18,21,21,0))]"
+        className="absolute bottom-[-1%] left-1/2 h-[3%] w-[46%] rounded-[50%] bg-[radial-gradient(closest-side,rgba(11,43,51,0.38),rgba(11,43,51,0))] blur-[2px]"
       />
 
       {/* Splash crown behind the base */}

@@ -25,11 +25,6 @@ export function ProcessTimeline() {
       <div className="hidden lg:col-span-5 lg:block">
         <div className="sticky top-[96px] flex h-[calc(100vh-120px)] max-h-[820px] flex-col">
           <div className="relative flex flex-1 justify-center">
-            <motion.div
-              aria-hidden="true"
-              style={{ scaleY: useTransform(scrollYProgress, [0, 0.12], [0.2, 1]), originY: 1 }}
-              className="absolute bottom-0 left-[24%] right-[24%] top-0 bg-[linear-gradient(180deg,#E6F6F9_0%,#CDEDF2_100%)]"
-            />
             <BottleAssembly progress={progress} className="h-full" />
           </div>
           <div className="mt-4 h-[3px] w-full overflow-hidden bg-line">

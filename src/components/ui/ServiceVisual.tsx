@@ -17,7 +17,7 @@ export function ServiceVisual({
   return (
     <div
       className={`relative overflow-hidden rounded-card ${
-        cover ? "bg-ink" : "bg-[linear-gradient(180deg,#EFF9FA_0%,#CDEDF2_100%)]"
+        cover ? "bg-ink" : "bg-white ring-1 ring-inset ring-line"
       } ${className}`}
     >
       <img

@@ -81,7 +81,6 @@ export function Hero() {
   const fill = useTransform(progress, [...ASSEMBLY.fill], [0, 1]);
   const mlText = useTransform(fill, (f) => String(Math.round(f * HERO_ML)).padStart(3, "0"));
   const meter = useTransform(progress, [0, 1], [0, 1]);
-  const panelScale = useTransform(progress, [0, 0.14], [0, 1]);
 
   const rise = (delay: number) =>
     reduce
@@ -100,8 +99,6 @@ export function Hero() {
           animate: { y: "0%" },
           transition: { duration: 1, delay, ease: EASE },
         };
-
-  const PANEL = "bg-[linear-gradient(180deg,#E6F6F9_0%,#CDEDF2_100%)]";
 
   const replay = !reduce ? (
     <button
@@ -163,13 +160,6 @@ export function Hero() {
 
   return (
     <section className="grain relative isolate overflow-hidden bg-paper pt-[72px]">
-      {/* Water display panel behind the bottle. Painted BEFORE the type so the
-          headline reads over it, and the clear plastic shows both through it. */}
-      <motion.div
-        aria-hidden="true"
-        style={{ scaleY: panelScale, originY: 1 }}
-        className={`absolute left-[calc(50%-min(3vw,43px))] top-[19vh] hidden h-[56vh] w-[min(19vw,274px)] lg:block ${PANEL}`}
-      />
 
       <div className="container-px relative grid min-h-[calc(100dvh-72px)] grid-cols-1 lg:grid-cols-12 lg:gap-x-8">
         {/* Left: headline + CTA card */}
@@ -193,11 +183,6 @@ export function Hero() {
 
           {/* Mobile / tablet stage (in flow, below the headline) */}
           <div className="relative mx-auto mt-4 h-[min(66vh,620px)] w-full lg:hidden">
-            <motion.div
-              aria-hidden="true"
-              style={{ scaleY: panelScale, originY: 1, x: "-50%" }}
-              className={`absolute bottom-[22%] left-1/2 top-[8%] w-[min(62%,300px)] ${PANEL}`}
-            />
             <div className="absolute inset-0 flex justify-center">
               <BottleAssembly progress={progress} brand={brand} priority className="h-full" />
             </div>

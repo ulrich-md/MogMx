@@ -49,7 +49,7 @@ export function CtaBand({
         </Reveal>
 
         <div aria-hidden="true" className="relative mx-auto h-[420px] w-full max-w-[420px] lg:col-span-5 lg:h-[560px]">
-          <div className="absolute bottom-0 left-[26%] right-[26%] top-0 bg-[linear-gradient(180deg,rgba(47,193,207,0.22),rgba(24,147,166,0.08))] ring-1 ring-inset ring-white/10" />
+          <div className="absolute inset-x-[12%] bottom-[4%] top-[20%] rounded-[50%] bg-[radial-gradient(closest-side,rgba(47,193,207,0.35),rgba(47,193,207,0))] blur-2xl" />
           <motion.img
             src={bottle.final}
             alt=""
