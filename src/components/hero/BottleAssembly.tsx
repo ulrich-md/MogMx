@@ -60,8 +60,11 @@ export function BottleAssembly({
   showSplash = true,
   bubbles = true,
   priority = false,
+  scale,
 }: {
   progress: MotionValue<number>;
+  /** Optional size factor (1 = canvas size), scaled from the base of the bottle. */
+  scale?: MotionValue<number>;
   className?: string;
   showSplash?: boolean;
   bubbles?: boolean;
@@ -104,6 +107,9 @@ export function BottleAssembly({
   const splashOpacity = useTransform(progress, [ASSEMBLY.finish[0], ASSEMBLY.finish[0] + 0.05], [0, 1]);
   const bubbleOpacity = useTransform(progress, [ASSEMBLY.fill[1] - 0.1, ASSEMBLY.fill[1]], [0, 1]);
 
+  const one = useMotionValue(1);
+  const size = scale ?? one;
+
   const loading = priority ? "eager" : "lazy";
   const img = "pointer-events-none absolute inset-0 h-full w-full select-none object-contain";
 
@@ -112,12 +118,13 @@ export function BottleAssembly({
       {/* Contact shadow (behind everything) */}
       <motion.div
         aria-hidden="true"
-        style={{ opacity: enterOpacity }}
-        className="absolute bottom-[-1.5%] left-1/2 h-[4%] w-[52%] -translate-x-1/2 rounded-[50%] bg-[radial-gradient(closest-side,rgba(18,21,21,0.32),rgba(18,21,21,0))]"
+        style={{ opacity: enterOpacity, scaleX: size, x: "-50%" }}
+        className="absolute bottom-[-1.5%] left-1/2 h-[4%] w-[52%] rounded-[50%] bg-[radial-gradient(closest-side,rgba(18,21,21,0.32),rgba(18,21,21,0))]"
       />
 
       {/* Splash crown behind the base */}
       {showSplash ? (
+        <motion.div aria-hidden="true" style={{ scale: size, originY: 1 }} className="pointer-events-none absolute inset-0">
         <motion.img
           src={bottle.splash}
           alt=""
@@ -127,12 +134,13 @@ export function BottleAssembly({
           style={{ scale: splashScale, opacity: splashOpacity, x: "-50%", originY: 1 }}
           className="pointer-events-none absolute bottom-[-3%] left-1/2 w-[76%] max-w-none select-none mix-blend-multiply"
         />
+        </motion.div>
       ) : null}
 
       {/* Clear plastic + water + cap (multiply: the backdrop reads through) */}
       <motion.div
         aria-hidden="true"
-        style={{ opacity: enterOpacity, y: enterY }}
+        style={{ opacity: enterOpacity, y: enterY, scale: size, originY: 1 }}
         className="absolute inset-0 mix-blend-multiply"
       >
         <img src={bottle.empty} alt="" loading={loading} decoding="async" className={img} />
@@ -172,17 +180,18 @@ export function BottleAssembly({
       </motion.div>
 
       {/* Meniscus highlight (normal blend) */}
-      <motion.div
-        aria-hidden="true"
-        style={{ top: meniscusTop, opacity: meniscusOpacity, y: enterY }}
-        className="pointer-events-none absolute left-[29.5%] right-[29.5%] -mt-[0.35%] h-[0.7%] rounded-[50%] bg-[radial-gradient(closest-side,rgba(255,255,255,0.95),rgba(255,255,255,0))]"
-      />
+      <motion.div aria-hidden="true" style={{ scale: size, originY: 1 }} className="pointer-events-none absolute inset-0">
+        <motion.div
+          style={{ top: meniscusTop, opacity: meniscusOpacity, y: enterY }}
+          className="absolute left-[29.5%] right-[29.5%] -mt-[0.35%] h-[0.7%] rounded-[50%] bg-[radial-gradient(closest-side,rgba(255,255,255,0.95),rgba(255,255,255,0))]"
+        />
+      </motion.div>
 
       {/* Live carbonation (normal blend, under the label) */}
       {bubbles ? (
         <motion.div
           aria-hidden="true"
-          style={{ opacity: bubbleOpacity, y: enterY }}
+          style={{ opacity: bubbleOpacity, y: enterY, scale: size, originY: 1 }}
           className="pointer-events-none absolute inset-0 overflow-hidden motion-reduce:hidden"
         >
           <div className="absolute inset-x-[31%] bottom-[3%] top-[20%] overflow-hidden">
@@ -204,7 +213,7 @@ export function BottleAssembly({
       ) : null}
 
       {/* Label (opaque paper) */}
-      <motion.div aria-hidden="true" style={{ y: enterY }} className="absolute inset-0">
+      <motion.div aria-hidden="true" style={{ y: enterY, scale: size, originY: 1 }} className="absolute inset-0">
         <motion.img
           src={bottle.label}
           alt=""
