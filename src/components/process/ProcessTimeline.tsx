@@ -15,7 +15,7 @@ const EASE = [0.16, 1, 0.3, 1] as const;
 export function ProcessTimeline() {
   const root = useRef<HTMLDivElement>(null);
   const reduce = useReducedMotion();
-  const { scrollYProgress } = useScroll({ target: root, offset: ["start 0.45", "end 0.85"] });
+  const { scrollYProgress } = useScroll({ target: root, offset: ["start 0.1", "end 0.85"] });
   const progress = useTransform(scrollYProgress, [0, 1], reduce ? [1, 1] : [0.04, 1]);
   const meter = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
@@ -23,12 +23,12 @@ export function ProcessTimeline() {
     <div ref={root} className="relative grid gap-10 lg:grid-cols-12 lg:gap-8">
       {/* Sticky build stage (desktop) */}
       <div className="hidden lg:col-span-5 lg:block">
-        <div className="sticky top-[96px] flex h-[calc(100vh-120px)] max-h-[820px] flex-col">
-          <div className="relative flex flex-1 justify-center pt-[24vh]">
+        <div className="sticky top-[96px] flex h-[calc(100vh-116px)] max-h-[940px] flex-col">
+          <div className="relative flex flex-1 justify-center">
             {/* Ghost type behind the clear plastic */}
             <span
               aria-hidden="true"
-              className="poster ghost-type absolute inset-x-0 top-[48%] text-center text-[min(11vw,11.5rem)] leading-none"
+              className="poster ghost-type absolute inset-x-0 top-[40%] text-center text-[min(11vw,11.5rem)] leading-none"
             >
               600 ml
             </span>
