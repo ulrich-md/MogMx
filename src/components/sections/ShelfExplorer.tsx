@@ -7,12 +7,12 @@ import { photos } from "@/lib/assets";
  * or tap a hotspot to read the presentation. Positions are % of the image.
  */
 const SPOTS = [
-  { x: 24, y: 34, title: "Botella PET", sub: "600 ml" },
-  { x: 24, y: 58, title: "Lata", sub: "Envase y tapa" },
-  { x: 24, y: 82, title: "Botella de vidrio", sub: "Envase y tapa" },
-  { x: 40.5, y: 34, title: "Limón", sub: "Otras bebidas" },
-  { x: 59.5, y: 58, title: "Jamaica", sub: "Otras bebidas" },
-  { x: 74.5, y: 82, title: "Mango", sub: "Otras bebidas" },
+  { x: 13.4, y: 34, title: "Botella PET", sub: "600 ml" },
+  { x: 13.4, y: 58, title: "Lata", sub: "Envase y tapa" },
+  { x: 13.4, y: 82, title: "Botella de vidrio", sub: "Envase y tapa" },
+  { x: 36.6, y: 34, title: "Limón", sub: "Otras bebidas" },
+  { x: 63.4, y: 58, title: "Jamaica", sub: "Otras bebidas" },
+  { x: 84.5, y: 82, title: "Mango", sub: "Otras bebidas" },
 ] as const;
 
 export function ShelfExplorer({ className = "" }: { className?: string }) {
@@ -26,14 +26,14 @@ export function ShelfExplorer({ className = "" }: { className?: string }) {
         alt="Refrigerador de una tiendita con productos MOG: agua en PET, lata y vidrio, y bebidas de limón, jamaica y mango"
         loading="lazy"
         decoding="async"
-        width={1536}
+        width={1079}
         height={1024}
         className="block w-full"
       />
 
       {SPOTS.map((s, i) => {
         const on = active === i;
-        const flip = s.x > 60;
+        const flip = s.x > 55;
         return (
           <div key={s.title} className="absolute" style={{ left: `${s.x}%`, top: `${s.y}%` }}>
             <button
