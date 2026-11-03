@@ -1,38 +1,43 @@
 /**
  * Raster brand assets (served from /public/assets).
+ * Bump ASSET_VERSION whenever an image is replaced under the same name, so
+ * browsers and the CDN fetch the new file instead of a cached one.
  * The hero bottle layers share one 1024x1536 canvas so they stack
  * pixel-aligned; the assembly animation reveals them in order.
  */
+const ASSET_VERSION = "4";
+const a = (path: string) => `${path}?v=${ASSET_VERSION}`;
+
 export const bottle = {
-  empty: "/assets/hero/bottle-empty.webp",
-  filled: "/assets/hero/bottle-filled.webp",
-  cap: "/assets/hero/bottle-cap.webp",
-  label: "/assets/hero/bottle-label.webp",
-  final: "/assets/hero/bottle-final.webp",
-  filler: "/assets/hero/filler.webp",
+  empty: a("/assets/hero/bottle-empty.webp"),
+  filled: a("/assets/hero/bottle-filled.webp"),
+  cap: a("/assets/hero/bottle-cap.webp"),
+  label: a("/assets/hero/bottle-label.webp"),
+  final: a("/assets/hero/bottle-final.webp"),
+  filler: a("/assets/hero/filler.webp"),
   width: 1024,
   height: 1536,
 } as const;
 
 export const photos = {
-  valley: "/assets/photos/valle-tehuacan.webp",
-  water: "/assets/photos/agua.webp",
-  orizaba: "/assets/photos/pico-de-orizaba.webp",
-  bubbles: "/assets/photos/burbujas.webp",
-  street: "/assets/photos/botella-calle.webp",
-  idea: "/assets/photos/idea.webp",
-  preforms: "/assets/photos/preformas.webp",
-  labels: "/assets/photos/etiquetas.webp",
-  fridge: "/assets/photos/refri-mog.webp",
-  table: "/assets/photos/mesa.webp",
-  caps: "/assets/photos/tapas.webp",
+  valley: a("/assets/photos/valle-tehuacan.webp"),
+  water: a("/assets/photos/agua.webp"),
+  orizaba: a("/assets/photos/pico-de-orizaba.webp"),
+  bubbles: a("/assets/photos/burbujas.webp"),
+  street: a("/assets/photos/botella-calle.webp"),
+  idea: a("/assets/photos/idea.webp"),
+  preforms: a("/assets/photos/preformas.webp"),
+  labels: a("/assets/photos/etiquetas.webp"),
+  fridge: a("/assets/photos/refri-mog.webp"),
+  table: a("/assets/photos/mesa.webp"),
+  caps: a("/assets/photos/tapas.webp"),
 } as const;
 
 export const products = {
-  family: "/assets/products/familia.webp",
-  flavors: "/assets/products/sabores.webp",
-  privateLabels: "/assets/products/marcas-propias.webp",
-  pallet: "/assets/products/tarima.webp",
+  family: a("/assets/products/familia.webp"),
+  flavors: a("/assets/products/sabores.webp"),
+  privateLabels: a("/assets/products/marcas-propias.webp"),
+  pallet: a("/assets/products/tarima.webp"),
 } as const;
 
 /**
