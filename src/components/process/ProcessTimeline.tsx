@@ -25,6 +25,13 @@ export function ProcessTimeline() {
       <div className="hidden lg:col-span-5 lg:block">
         <div className="sticky top-[96px] flex h-[calc(100vh-120px)] max-h-[820px] flex-col">
           <div className="relative flex flex-1 justify-center">
+            {/* Ghost type behind the clear plastic */}
+            <span
+              aria-hidden="true"
+              className="poster ghost-type absolute inset-x-0 top-[34%] text-center text-[min(11vw,11.5rem)] leading-none"
+            >
+              600 ml
+            </span>
             <BottleAssembly progress={progress} className="h-full" />
           </div>
           <div className="mt-4 h-[3px] w-full overflow-hidden bg-line">

@@ -67,17 +67,6 @@
     border-radius: 2px;
   }
 
-  /* Lenis smooth-scroll plumbing */
-  html.lenis,
-  html.lenis body {
-    height: auto;
-  }
-  .lenis.lenis-smooth {
-    scroll-behavior: auto !important;
-  }
-  .lenis.lenis-stopped {
-    overflow: hidden;
-  }
 }
 
 @layer components {
@@ -113,23 +102,16 @@
     color: transparent;
     -webkit-text-stroke: 1.5px rgba(11, 43, 51, 0.4);
   }
+  /* Giant ghost type: outline only, barely there (editorial texture) */
+  .ghost-type {
+    color: transparent;
+    -webkit-text-stroke: 1.5px rgba(11, 43, 51, 0.1);
+    pointer-events: none;
+    user-select: none;
+  }
   .text-outline:hover {
     color: var(--ink);
     -webkit-text-stroke-color: var(--ink);
-  }
-  /* Subtle paper grain so flat surfaces feel printed, not digital. */
-  .grain {
-    position: relative;
-  }
-  .grain::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    opacity: 0.035;
-    mix-blend-mode: multiply;
-    background-image: radial-gradient(rgba(11, 43, 51, 0.9) 0.5px, transparent 0.6px);
-    background-size: 3px 3px;
   }
 }
 

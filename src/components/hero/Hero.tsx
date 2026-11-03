@@ -159,7 +159,7 @@ export function Hero() {
   );
 
   return (
-    <section className="grain relative isolate overflow-hidden bg-paper pt-[72px]">
+    <section className="relative isolate overflow-hidden bg-paper pt-[72px]">
 
       <div className="container-px relative grid min-h-[calc(100dvh-72px)] grid-cols-1 lg:grid-cols-12 lg:gap-x-8">
         {/* Left: headline + CTA card */}
@@ -184,7 +184,7 @@ export function Hero() {
           {/* Mobile / tablet stage (in flow, below the headline) */}
           <div className="relative mx-auto mt-4 h-[min(66vh,620px)] w-full lg:hidden">
             <div className="absolute inset-0 flex justify-center">
-              <BottleAssembly progress={progress} brand={brand} priority className="h-full" />
+              <BottleAssembly progress={progress} brand={brand} filler={false} priority className="h-full" />
             </div>
           </div>
 
@@ -239,6 +239,13 @@ export function Hero() {
           aria-label="Proceso de embotellado"
           className="relative z-10 hidden lg:col-span-3 lg:mt-10 lg:flex lg:flex-col lg:pb-10 lg:pl-8"
         >
+          {/* Ghost type: "Tehuacán" running vertically beside the bottle */}
+          <span
+            aria-hidden="true"
+            className="poster ghost-type absolute right-full top-[-8px] mr-1 rotate-180 whitespace-nowrap text-[min(calc((100dvh-150px)/3.6),10.5rem)] leading-[0.82] [writing-mode:vertical-rl]"
+          >
+            Tehuacán
+          </span>
           <div className="flex items-center justify-between border-b border-line pb-3">
             <span className="label text-graphite">Proceso</span>
             <span className="readout text-slate">{STAGES[step]?.n ?? "06"} / 06</span>

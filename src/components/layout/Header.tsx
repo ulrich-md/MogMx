@@ -75,8 +75,8 @@ export function Header() {
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-[background-color,border-color,backdrop-filter] duration-500 ease-water ${
         scrolled || open
-          ? "border-b border-line bg-paper/80 backdrop-blur-xl backdrop-saturate-150"
-          : "border-b border-transparent bg-transparent"
+          ? "border-b border-line bg-paper/90 backdrop-blur-md"
+          : "border-b border-transparent bg-paper"
       }`}
     >
       <div className="container-px grid h-[72px] grid-cols-[1fr_auto] items-center gap-4 xl:grid-cols-[1fr_auto_1fr]">

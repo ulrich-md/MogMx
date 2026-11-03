@@ -10,6 +10,7 @@ export const bottle = {
   label: "/assets/hero/bottle-label.webp",
   final: "/assets/hero/bottle-final.webp",
   splash: "/assets/hero/splash.webp",
+  filler: "/assets/hero/filler.webp",
   width: 1024,
   height: 1536,
 } as const;

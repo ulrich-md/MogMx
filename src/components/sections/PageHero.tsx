@@ -37,7 +37,7 @@ export function PageHero({
         };
 
   return (
-    <section className="grain relative isolate overflow-hidden bg-paper pt-[72px]">
+    <section className="relative isolate overflow-hidden bg-paper pt-[72px]">
       <div className="container-px relative grid gap-10 pb-14 pt-14 md:pb-20 md:pt-20 lg:grid-cols-12 lg:gap-8">
         <div className={visual === "none" ? "lg:col-span-12" : "lg:col-span-8"}>
           {eyebrow ? (

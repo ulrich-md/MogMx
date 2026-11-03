@@ -8,7 +8,7 @@ export default function NotFound() {
   return (
     <>
       <Seo title="Página no encontrada" path="/404" />
-      <section className="grain relative grid min-h-[100dvh] place-items-center overflow-hidden bg-paper pt-[72px]">
+      <section className="relative grid min-h-[100dvh] place-items-center overflow-hidden bg-paper pt-[72px]">
         <div className="container-px relative py-20 text-center">
           <div className="relative mx-auto inline-block">
             <p className="poster text-[clamp(9rem,34vw,24rem)] leading-[0.8] text-ink">404</p>

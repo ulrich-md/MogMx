@@ -65,6 +65,7 @@ export function BottleAssembly({
   labelOpacity = 1,
   halo = true,
   reflection = true,
+  filler = true,
 }: {
   progress: MotionValue<number>;
   /** Optional size factor (1 = canvas size), scaled from the base of the bottle. */
@@ -77,6 +78,8 @@ export function BottleAssembly({
   halo?: boolean;
   /** Faint mirrored reflection on the floor. */
   reflection?: boolean;
+  /** Show the filling-machine nozzle during the fill. */
+  filler?: boolean;
   className?: string;
   showSplash?: boolean;
   bubbles?: boolean;
@@ -97,10 +100,24 @@ export function BottleAssembly({
   const meniscusTop = useTransform(level, (l) => `${100 - l}%`);
   const meniscusOpacity = useTransform(fill, [0, 0.03, 0.68, 0.76], [0, 1, 1, 0]);
   // Falling stream from above the neck down to the current water line
-  const streamH = useTransform(level, (l) => `${Math.max(0, 100 - l) + 22}%`);
+  // The stream runs from the filler nozzle tip (2.6% of the canvas) to the water line
+  const streamH = useTransform(level, (l) => `${Math.max(0, 100 - l - 2.6)}%`);
   const streamOpacity = useTransform(fill, [0, 0.04, 0.9, 1], [0, 1, 1, 0]);
 
   // 3 · Cap drops from above and seats with a small settle
+  // Filler machine: the nozzle lowers onto the neck, fills, then lifts away
+  const fillerY = useTransform(
+    progress,
+    [ASSEMBLY.fill[0] - 0.07, ASSEMBLY.fill[0] - 0.005, ASSEMBLY.fill[1] + 0.005, ASSEMBLY.fill[1] + 0.06],
+    ["-115%", "0%", "0%", "-115%"],
+    { ease: [out, inOut, drop] },
+  );
+  const fillerOpacity = useTransform(
+    progress,
+    [ASSEMBLY.fill[0] - 0.07, ASSEMBLY.fill[0] - 0.04, ASSEMBLY.fill[1] + 0.03, ASSEMBLY.fill[1] + 0.06],
+    [0, 1, 1, 0],
+  );
+
   const capY = useTransform(progress, [ASSEMBLY.cap[0], ASSEMBLY.cap[0] + 0.08, ASSEMBLY.cap[1]], ["-38%", "0.6%", "0%"], {
     ease: [drop, out],
   });
@@ -134,7 +151,7 @@ export function BottleAssembly({
           style={{ opacity: enterOpacity, scale: size, originY: 1 }}
           className="pointer-events-none absolute inset-x-[8%] bottom-[2%] top-[18%] mix-blend-multiply"
         >
-          <div className="absolute inset-0 rounded-[50%] bg-[radial-gradient(closest-side,rgba(47,193,207,0.34),rgba(95,224,230,0.14)_55%,rgba(95,224,230,0)_100%)] blur-2xl" />
+          <div className="absolute inset-0 rounded-[50%] bg-[radial-gradient(closest-side,rgba(47,193,207,0.34),rgba(95,224,230,0.14)_55%,rgba(95,224,230,0)_100%)] " />
         </motion.div>
       ) : null}
 
@@ -207,7 +224,7 @@ export function BottleAssembly({
         {/* Filling stream */}
         <motion.div
           style={{ height: streamH, opacity: streamOpacity }}
-          className="absolute left-1/2 top-[-22%] w-[1.6%] -translate-x-1/2 rounded-b-full bg-gradient-to-b from-[#9fb7bb]/0 via-[#9fb7bb]/70 to-[#7f9ea3]/80"
+          className="absolute left-1/2 top-[2.6%] w-[1.6%] -translate-x-1/2 rounded-b-full bg-gradient-to-b from-[#9fb7bb]/80 via-[#9fb7bb]/70 to-[#7f9ea3]/80"
         />
         <motion.img
           src={bottle.cap}
@@ -252,6 +269,20 @@ export function BottleAssembly({
         </motion.div>
       ) : null}
 
+      {/* Filler nozzle (opaque steel, transparent PNG). Tip sits just above the neck. */}
+      {filler ? (
+        <motion.div aria-hidden="true" style={{ scale: size, originY: 1 }} className="pointer-events-none absolute inset-0">
+          <motion.img
+            src={bottle.filler}
+            alt=""
+            loading={loading}
+            decoding="async"
+            style={{ y: fillerY, opacity: fillerOpacity }}
+            className="absolute left-0 top-[-31.7%] h-[34.6%] w-full select-none object-contain"
+          />
+        </motion.div>
+      ) : null}
+
       {/* Label (opaque paper) */}
       <motion.div aria-hidden="true" style={{ y: enterY, scale: size, originY: 1, opacity: labelOpacity }} className="absolute inset-0">
         <motion.img
@@ -280,7 +311,7 @@ export function BottleAssembly({
 /** The finished bottle (clear plastic blends with its backdrop, label stays opaque). */
 export function FinishedBottle({ className = "", splash = false }: { className?: string; splash?: boolean }) {
   const done = useMotionValue(1);
-  return <BottleAssembly progress={done} showSplash={splash} className={className} />;
+  return <BottleAssembly progress={done} showSplash={splash} filler={false} className={className} />;
 }
 
 /**
