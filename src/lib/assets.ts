@@ -26,6 +26,7 @@ export const photos = {
   labels: "/assets/photos/etiquetas.webp",
   fridge: "/assets/photos/anaquel.webp",
   table: "/assets/photos/mesa.webp",
+  caps: "/assets/photos/tapas.webp",
 } as const;
 
 export const products = {
@@ -58,9 +59,9 @@ export const serviceImages: Record<string, ServiceImage> = {
     fit: "cover",
   },
   "envases-y-tapas": {
-    src: products.family,
-    alt: "Envases MOG: botella PET, lata y botella de vidrio",
-    fit: "contain",
+    src: photos.caps,
+    alt: "Tapas de rosca para PET y corcholatas para vidrio en varios colores",
+    fit: "cover",
   },
   "otras-bebidas": {
     src: products.flavors,
@@ -78,8 +79,8 @@ export const serviceImages: Record<string, ServiceImage> = {
 export const processImages: Record<string, { src: string; alt: string }> = {
   "01": { src: photos.idea, alt: "Bocetos de etiqueta, lápices y paleta de color junto a una botella sin etiquetar" },
   "02": { src: products.flavors, alt: "Bebidas MOG de limón, jamaica, pepino y mango" },
-  "03": { src: photos.preforms, alt: "Preformas de PET de distintos tamaños junto a una botella terminada" },
-  "04": { src: photos.bubbles, alt: "Agua mineral con gas en primer plano" },
+  "03": { src: photos.caps, alt: "Tapas de rosca para PET y corcholatas para vidrio" },
+  "04": { src: photos.preforms, alt: "Preformas de PET de distintos tamaños junto a una botella terminada" },
   "05": { src: photos.labels, alt: "Rollo de etiquetas impresas listas para aplicarse" },
   "06": { src: products.pallet, alt: "Tarima con paquetes de botellas listas para distribución" },
 };
