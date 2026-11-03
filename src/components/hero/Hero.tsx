@@ -178,7 +178,7 @@ export function Hero() {
             <Eyebrow>AGUA MINERAL DE TEHUACÁN · MARCA PROPIA</Eyebrow>
           </motion.div>
 
-          <h1 className="poster relative z-20 mt-5 text-[15.4vw] text-ink sm:text-[clamp(5rem,14vw,9rem)] lg:text-[clamp(7rem,11.6vw,11.5rem)]">
+          <h1 className="poster mt-5 text-[15.4vw] text-ink sm:text-[clamp(5rem,14vw,9rem)] lg:text-[clamp(7rem,11.6vw,11.5rem)]">
             <span className="block overflow-hidden pb-[0.04em]">
               <motion.span {...line(0.2)} className="block">
                 Tu marca
@@ -298,9 +298,9 @@ export function Hero() {
         </motion.aside>
       </div>
 
-      {/* Desktop stage (z auto): the headline (z-20) paints ABOVE the bottle,
-          label included, so the type always reads. No transform / z-index
-          here, so the clear plastic still multiplies over the panel. */}
+      {/* Desktop stage: the bottle sits ABOVE the headline. The plastic
+          multiplies and the label is slightly translucent, so the type reads
+          through both. No transform / z-index here, or the blend breaks. */}
       <div
         className="pointer-events-none absolute bottom-[5vh] top-[72px] hidden items-end lg:flex"
         style={{ left: "calc(50% + min(6.5vw, 94px) - min(calc((100dvh - 72px - 9vh) / 3), 18vw, 327px))" }}
@@ -308,6 +308,7 @@ export function Hero() {
         <BottleAssembly
           progress={progress}
           brand={brand}
+          labelOpacity={0.84}
           priority
           className="h-[min(calc(100dvh-72px-9vh),54vw)] max-h-[980px]"
         />

@@ -66,15 +66,27 @@ export default function About() {
 
           <div className="mt-14 grid gap-10 border-t border-line pt-10 md:grid-cols-12 md:gap-8">
             <Reveal className="md:col-span-5">
+              <figure className="relative overflow-hidden rounded-card bg-bone">
+                <img
+                  src={photos.street}
+                  alt="Botella de agua mineral MOG en la mano, en una calle de un pueblo mexicano"
+                  loading="lazy"
+                  decoding="async"
+                  width={1024}
+                  height={1536}
+                  className="aspect-[4/5] w-full object-cover"
+                />
+                <span aria-hidden="true" className="absolute left-0 top-0 h-[3px] w-24 bg-accent" />
+              </figure>
+            </Reveal>
+            <Reveal delay={0.08} className="flex flex-col justify-end md:col-span-6 md:col-start-7">
               <p className="text-[1.1rem] leading-[1.8] text-graphite">
                 Tehuacán es históricamente conocida como una de las cunas del
                 agua mineral en México, una región asociada por generaciones a
                 sus manantiales y a la cultura del agua mineral. Ese origen no se
                 fabrica ni se copia: se tiene o no se tiene.
               </p>
-            </Reveal>
-            <Reveal delay={0.08} className="md:col-span-6 md:col-start-7">
-              <p className="text-[1.05rem] leading-[1.8] text-slate">
+              <p className="mt-6 text-[1.05rem] leading-[1.8] text-slate">
                 Desde aquí embotellamos agua mineral y purificada con la marca de
                 cada cliente, y también otras bebidas cuando el proyecto lo pide.
                 Cuidamos el perfil del agua y la consistencia lote a lote, porque

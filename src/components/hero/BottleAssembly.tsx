@@ -62,12 +62,15 @@ export function BottleAssembly({
   priority = false,
   scale,
   brand,
+  labelOpacity = 1,
 }: {
   progress: MotionValue<number>;
   /** Optional size factor (1 = canvas size), scaled from the base of the bottle. */
   scale?: MotionValue<number>;
   /** Live private-label preview: prints this name on the label (empty = the MOG photo label). */
   brand?: string;
+  /** < 1 lets whatever sits behind the bottle read through the paper label. */
+  labelOpacity?: number;
   className?: string;
   showSplash?: boolean;
   bubbles?: boolean;
@@ -216,7 +219,7 @@ export function BottleAssembly({
       ) : null}
 
       {/* Label (opaque paper) */}
-      <motion.div aria-hidden="true" style={{ y: enterY, scale: size, originY: 1 }} className="absolute inset-0">
+      <motion.div aria-hidden="true" style={{ y: enterY, scale: size, originY: 1, opacity: labelOpacity }} className="absolute inset-0">
         <motion.img
           src={bottle.label}
           alt=""
