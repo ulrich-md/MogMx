@@ -20,6 +20,10 @@ export const site = {
     state: "Puebla",
     country: "México",
     label: "Tehuacán, Puebla, México",
+    // EDITABLE: datos geográficos del valle (verifica antes de publicar)
+    coordinates: "18.46° N · 97.39° O",
+    altitude: "1,640 msnm",
+    reserve: "Reserva Tehuacán-Cuicatlán · UNESCO",
   },
   contact: {
     // EDITABLE: número real de WhatsApp (formato internacional, sin signos)

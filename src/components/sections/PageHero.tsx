@@ -64,18 +64,32 @@ export function PageHero({
           {lead || children ? (
             <motion.div
               {...enter(0.25)}
-              className={`mt-10 grid gap-6 border-t border-line pt-8 ${visual === "none" ? "md:grid-cols-12" : ""}`}
+              className={`mt-10 grid gap-8 border-t border-line pt-10 ${visual === "none" ? "md:grid-cols-12 md:items-center" : ""}`}
             >
               {visual === "none" ? (
-                <div className="flex items-start gap-3 md:col-span-4">
-                  <span aria-hidden="true" className="mt-[7px] h-[2px] w-6 shrink-0 bg-accent" />
-                  <span className="readout leading-relaxed text-slate">{site.location.label}</span>
-                </div>
+                <dl className="grid grid-cols-2 gap-x-6 gap-y-4 border-l-2 border-accent pl-5 md:col-span-5">
+                  <div className="col-span-2">
+                    <dt className="readout text-slate">Origen</dt>
+                    <dd className="poster mt-1 text-[1.9rem] text-ink md:text-[2.2rem]">{site.location.label}</dd>
+                  </div>
+                  <div>
+                    <dt className="readout text-slate">Coordenadas</dt>
+                    <dd className="mt-1 text-[14.5px] font-semibold text-graphite">{site.location.coordinates}</dd>
+                  </div>
+                  <div>
+                    <dt className="readout text-slate">Altitud</dt>
+                    <dd className="mt-1 text-[14.5px] font-semibold text-graphite">{site.location.altitude}</dd>
+                  </div>
+                  <div className="col-span-2">
+                    <dt className="readout text-slate">Biosfera</dt>
+                    <dd className="mt-1 text-[14.5px] font-semibold text-graphite">{site.location.reserve}</dd>
+                  </div>
+                </dl>
               ) : null}
               {lead ? (
                 <p
                   className={`max-w-prose text-[1.075rem] leading-[1.7] text-slate ${
-                    visual === "none" ? "md:col-span-7 md:col-start-6 md:text-[1.2rem]" : ""
+                    visual === "none" ? "md:col-span-6 md:col-start-7 md:text-[1.35rem] md:leading-[1.6] text-graphite" : ""
                   }`}
                 >
                   {lead}
