@@ -226,7 +226,7 @@ export function Hero() {
             <Eyebrow>AGUA MINERAL DE TEHUACÁN · MARCA PROPIA</Eyebrow>
           </motion.div>
 
-          <h1 className="poster mt-5 text-[15.4vw] text-ink sm:text-[clamp(5rem,14vw,9rem)] lg:text-[clamp(7rem,11.6vw,10.5rem)]">
+          <h1 className="poster relative z-20 mt-5 text-[15.4vw] text-ink sm:text-[clamp(5rem,14vw,9rem)] lg:text-[clamp(7rem,11.6vw,10.5rem)]">
             <span className="block overflow-hidden pb-[0.04em]">
               <motion.span {...line(0.2)} className="block">
                 Tu marca
@@ -347,8 +347,9 @@ export function Hero() {
         </motion.aside>
       </div>
 
-      {/* Desktop stage. No transform / z-index on this wrapper, so the
-          multiply blend reaches the type and the panel. */}
+      {/* Desktop stage (z auto): the headline (z-20) paints ABOVE the bottle,
+          label included, so the type always reads. No transform / z-index
+          here, so the clear plastic still multiplies over the panel. */}
       {stage ? (
         <div
           className="pointer-events-none absolute hidden lg:block"
