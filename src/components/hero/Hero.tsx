@@ -47,7 +47,10 @@ export function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
   const h1Ref = useRef<HTMLHeadingElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
   const [stageTop, setStageTop] = useState<number | null>(null);
+  /** Extra room under the first screen so the whole bottle (and its shadow) fits. */
+  const [padBottom, setPadBottom] = useState(0);
 
   /*
    * Desktop: keep the bottle big, and drop it so the opaque label starts just
@@ -62,12 +65,18 @@ export function Hero() {
       if (!sec || !h1 || !st || window.innerWidth < 1024) return;
       const headBottom = h1.getBoundingClientRect().bottom - sec.getBoundingClientRect().top;
       const h = st.offsetHeight;
-      setStageTop(Math.max(76, headBottom + 14 - LABEL_TOP * h));
+      const top = Math.max(76, headBottom + 14 - LABEL_TOP * h);
+      setStageTop(top);
+      // The base bleeds past the fold on load, but the section must contain it
+      // so scrolling never reveals a hard crop.
+      const natural = 72 + (gridRef.current?.offsetHeight ?? 0);
+      setPadBottom(Math.max(0, Math.ceil(top + h + 36 - natural)));
     };
     measure();
     const ro = new ResizeObserver(measure);
     if (h1Ref.current) ro.observe(h1Ref.current);
     if (stageRef.current) ro.observe(stageRef.current);
+    if (gridRef.current) ro.observe(gridRef.current);
     document.fonts?.ready.then(measure).catch(() => undefined);
     return () => ro.disconnect();
   }, []);
@@ -188,9 +197,13 @@ export function Hero() {
   );
 
   return (
-    <section ref={sectionRef} className="relative isolate overflow-hidden bg-paper pt-[72px]">
+    <section
+      ref={sectionRef}
+      className="relative isolate overflow-hidden bg-paper pt-[72px]"
+      style={padBottom ? { paddingBottom: padBottom } : undefined}
+    >
 
-      <div className="container-px relative grid min-h-[calc(100dvh-72px)] grid-cols-1 lg:grid-cols-12 lg:gap-x-8">
+      <div ref={gridRef} className="container-px relative grid min-h-[calc(100dvh-72px)] grid-cols-1 lg:grid-cols-12 lg:gap-x-8">
         {/* Left: headline + CTA card */}
         <div className="relative flex flex-col pb-10 pt-6 lg:col-span-9 lg:pb-12 lg:pt-10">
           <motion.div {...rise(0.15)}>
