@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useId, useLayoutEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useId, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   animate,
@@ -23,10 +23,6 @@ const BRAND_MAX = 12;
 
 /** The four build stages map onto the existing process steps 03-06. */
 const STAGES = processSteps.slice(2);
-/** Visible half-width of the bottle, as a fraction of the stage height. */
-const HALF_W = 0.1435;
-
-type Stage = { left: number; top: number; h: number };
 
 function preload(srcs: string[], timeout = 2500) {
   const all = Promise.all(
@@ -51,10 +47,6 @@ export function Hero() {
   const [brand, setBrand] = useState("");
   const fieldId = useId();
 
-  const sectionRef = useRef<HTMLElement>(null);
-  const lineRef = useRef<HTMLSpanElement>(null);
-  const railRef = useRef<HTMLElement>(null);
-  const [stage, setStage] = useState<Stage | null>(null);
 
   useMotionValueEvent(progress, "change", (p) => {
     setStep(assemblyStep(p));
@@ -85,37 +77,6 @@ export function Hero() {
     };
   }, [play, progress, reduce]);
 
-  /*
-   * Desktop placement. The bottle is BIG from the first frame: it spans the
-   * full hero height under the header. Horizontally it lands on the end of
-   * "embotellada." so it pierces the final "A." (the word stays readable,
-   * and the clear plastic shows the letters through it), never touching the rail.
-   */
-  useLayoutEffect(() => {
-    const measure = () => {
-      const sec = sectionRef.current;
-      const line = lineRef.current;
-      const rail = railRef.current;
-      if (!sec || !line || !rail || window.innerWidth < 1024) return setStage(null);
-      const s = sec.getBoundingClientRect();
-      const lineEnd = line.getBoundingClientRect().right - s.left;
-      const railLeft = rail.getBoundingClientRect().left - s.left + 32;
-      const top = 80;
-      const h = Math.min(s.height - top - Math.max(20, window.innerHeight * 0.035), 1040);
-      const cx = Math.min(lineEnd - 0.02 * h, railLeft - 28 - HALF_W * h);
-      setStage({ h, top, left: cx - h / 3 });
-    };
-    measure();
-    const ro = new ResizeObserver(measure);
-    if (sectionRef.current) ro.observe(sectionRef.current);
-    if (lineRef.current) ro.observe(lineRef.current);
-    document.fonts?.ready.then(measure).catch(() => undefined);
-    window.addEventListener("resize", measure);
-    return () => {
-      ro.disconnect();
-      window.removeEventListener("resize", measure);
-    };
-  }, []);
 
   const fill = useTransform(progress, [...ASSEMBLY.fill], [0, 1]);
   const mlText = useTransform(fill, (f) => String(Math.round(f * HERO_ML)).padStart(3, "0"));
@@ -201,23 +162,14 @@ export function Hero() {
   );
 
   return (
-    <section ref={sectionRef} className="grain relative isolate overflow-hidden bg-paper pt-[72px]">
+    <section className="grain relative isolate overflow-hidden bg-paper pt-[72px]">
       {/* Water display panel behind the bottle. Painted BEFORE the type so the
           headline reads over it, and the clear plastic shows both through it. */}
-      {stage ? (
-        <motion.div
-          aria-hidden="true"
-          style={{
-            scaleY: panelScale,
-            originY: 1,
-            left: stage.left + stage.h * (2 / 3) * 0.2,
-            width: stage.h * (2 / 3) * 0.6,
-            top: stage.top + stage.h * 0.08,
-            height: stage.h * 0.66,
-          }}
-          className={`absolute hidden lg:block ${PANEL}`}
-        />
-      ) : null}
+      <motion.div
+        aria-hidden="true"
+        style={{ scaleY: panelScale, originY: 1 }}
+        className={`absolute left-[calc(50%-min(3vw,43px))] top-[19vh] hidden h-[56vh] w-[min(19vw,274px)] lg:block ${PANEL}`}
+      />
 
       <div className="container-px relative grid min-h-[calc(100dvh-72px)] grid-cols-1 lg:grid-cols-12 lg:gap-x-8">
         {/* Left: headline + CTA card */}
@@ -226,7 +178,7 @@ export function Hero() {
             <Eyebrow>AGUA MINERAL DE TEHUACÁN · MARCA PROPIA</Eyebrow>
           </motion.div>
 
-          <h1 className="poster relative z-20 mt-5 text-[15.4vw] text-ink sm:text-[clamp(5rem,14vw,9rem)] lg:text-[clamp(7rem,11.6vw,10.5rem)]">
+          <h1 className="poster relative z-20 mt-5 text-[15.4vw] text-ink sm:text-[clamp(5rem,14vw,9rem)] lg:text-[clamp(7rem,11.6vw,11.5rem)]">
             <span className="block overflow-hidden pb-[0.04em]">
               <motion.span {...line(0.2)} className="block">
                 Tu marca
@@ -234,7 +186,7 @@ export function Hero() {
             </span>
             <span className="block overflow-hidden pb-[0.04em]">
               <motion.span {...line(0.32)} className="block">
-                <span ref={lineRef}>embotellada.</span>
+                embotellada.
               </motion.span>
             </span>
           </h1>
@@ -298,7 +250,6 @@ export function Hero() {
 
         {/* Right rail (desktop): build readout, stages, brand field */}
         <motion.aside
-          ref={railRef}
           {...rise(0.6)}
           aria-label="Proceso de embotellado"
           className="relative z-10 hidden lg:col-span-3 lg:mt-10 lg:flex lg:flex-col lg:pb-10 lg:pl-8"
@@ -350,14 +301,17 @@ export function Hero() {
       {/* Desktop stage (z auto): the headline (z-20) paints ABOVE the bottle,
           label included, so the type always reads. No transform / z-index
           here, so the clear plastic still multiplies over the panel. */}
-      {stage ? (
-        <div
-          className="pointer-events-none absolute hidden lg:block"
-          style={{ left: stage.left, top: stage.top, height: stage.h, width: (stage.h * 2) / 3 }}
-        >
-          <BottleAssembly progress={progress} brand={brand} priority className="h-full" />
-        </div>
-      ) : null}
+      <div
+        className="pointer-events-none absolute bottom-[5vh] top-[72px] hidden items-end lg:flex"
+        style={{ left: "calc(50% + min(6.5vw, 94px) - min(calc((100dvh - 72px - 9vh) / 3), 18vw, 327px))" }}
+      >
+        <BottleAssembly
+          progress={progress}
+          brand={brand}
+          priority
+          className="h-[min(calc(100dvh-72px-9vh),54vw)] max-h-[980px]"
+        />
+      </div>
     </section>
   );
 }
