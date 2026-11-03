@@ -11,7 +11,7 @@ export function CapabilitiesBlock() {
       <div className="container-px section grid gap-14 lg:grid-cols-12 lg:items-center lg:gap-10">
         {/* Product family on a signal block, bleeding off the left edge */}
         <Reveal className="relative lg:col-span-7">
-          <div aria-hidden="true" className="absolute -left-[30%] bottom-[10%] top-[16%] w-[78%] bg-accent" />
+          <div aria-hidden="true" className="absolute -left-[30%] bottom-[10%] top-[16%] w-[78%] bg-[linear-gradient(180deg,#E6F6F9_0%,#CDEDF2_100%)]" />
           <div aria-hidden="true" className="absolute bottom-[10%] left-0 right-[4%] h-px bg-ink/15" />
           <img
             src={products.family}

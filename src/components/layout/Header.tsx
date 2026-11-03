@@ -79,16 +79,16 @@ export function Header() {
           : "border-b border-transparent bg-transparent"
       }`}
     >
-      <div className="container-px grid h-[72px] grid-cols-[1fr_auto] items-center gap-4 lg:grid-cols-[1fr_auto_1fr]">
+      <div className="container-px grid h-[72px] grid-cols-[1fr_auto] items-center gap-4 xl:grid-cols-[1fr_auto_1fr]">
         <Logo />
 
-        <nav className="hidden items-center gap-x-9 lg:flex" aria-label="Navegación principal">
+        <nav className="hidden items-center gap-x-9 xl:flex" aria-label="Navegación principal">
           {nav.map((item) => (
             <DesktopLink key={item.to} to={item.to} label={item.label} />
           ))}
         </nav>
 
-        <div className="hidden justify-end lg:flex">
+        <div className="hidden justify-end xl:flex">
           <Button to={primaryCta.to} withArrow size="md">
             {primaryCta.label}
           </Button>
@@ -99,7 +99,7 @@ export function Header() {
           onClick={() => setOpen(true)}
           aria-label="Abrir menú"
           aria-expanded={open}
-          className="grid h-11 w-11 place-items-center rounded-full border border-ink/15 text-ink transition-colors hover:bg-ink hover:text-white lg:hidden"
+          className="grid h-11 w-11 place-items-center rounded-full border border-ink/15 text-ink transition-colors hover:bg-ink hover:text-white xl:hidden"
         >
           <List size={20} weight="bold" />
         </button>
@@ -113,7 +113,7 @@ export function Header() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3, ease: EASE }}
-            className="fixed inset-0 top-0 z-50 flex h-[100dvh] flex-col bg-paper lg:hidden"
+            className="fixed inset-0 top-0 z-50 flex h-[100dvh] flex-col bg-paper xl:hidden"
           >
             <div className="container-px flex h-[72px] items-center justify-between">
               <Logo />

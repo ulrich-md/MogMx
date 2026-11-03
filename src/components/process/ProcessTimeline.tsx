@@ -27,7 +27,7 @@ export function ProcessTimeline() {
             <motion.div
               aria-hidden="true"
               style={{ scaleY: useTransform(scrollYProgress, [0, 0.12], [0.2, 1]), originY: 1 }}
-              className="absolute bottom-[8%] left-[18%] right-[18%] top-[26%] bg-accent"
+              className="absolute bottom-0 left-[24%] right-[24%] top-0 bg-[linear-gradient(180deg,#E6F6F9_0%,#CDEDF2_100%)]"
             />
             <BottleAssembly progress={progress} className="h-full" />
           </div>

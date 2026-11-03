@@ -125,7 +125,7 @@ export function BottleAssembly({
           loading={loading}
           decoding="async"
           style={{ scale: splashScale, opacity: splashOpacity, x: "-50%", originY: 1 }}
-          className="pointer-events-none absolute bottom-[-5.5%] left-1/2 w-[104%] max-w-none select-none mix-blend-multiply"
+          className="pointer-events-none absolute bottom-[-3%] left-1/2 w-[76%] max-w-none select-none mix-blend-multiply"
         />
       ) : null}
 
@@ -154,7 +154,7 @@ export function BottleAssembly({
             WebkitMaskComposite: "source-in",
             maskComposite: "intersect",
           }}
-          className="absolute inset-0 bg-[linear-gradient(180deg,rgba(116,186,196,0.2),rgba(64,140,152,0.3))]"
+          className="absolute inset-0 bg-[linear-gradient(180deg,rgba(120,196,206,0.16),rgba(47,193,207,0.22))]"
         />
         {/* Filling stream */}
         <motion.div

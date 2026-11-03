@@ -167,3 +167,53 @@
     opacity: 0;
   }
 }
+
+/* Hero build scrubber (native range, restyled; the track is drawn behind it) */
+.scrubber {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 28px;
+  background: transparent;
+  cursor: grab;
+}
+.scrubber:active {
+  cursor: grabbing;
+}
+.scrubber::-webkit-slider-runnable-track {
+  height: 28px;
+  background: transparent;
+}
+.scrubber::-moz-range-track {
+  height: 28px;
+  background: transparent;
+}
+.scrubber::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  margin-top: 5px;
+  height: 18px;
+  width: 18px;
+  border-radius: 9999px;
+  background: var(--accent);
+  border: 3px solid var(--white);
+  box-shadow: 0 0 0 1px rgba(11, 43, 51, 0.18), 0 6px 14px -4px rgba(251, 111, 87, 0.7);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.scrubber::-moz-range-thumb {
+  height: 18px;
+  width: 18px;
+  border-radius: 9999px;
+  background: var(--accent);
+  border: 3px solid var(--white);
+  box-shadow: 0 0 0 1px rgba(11, 43, 51, 0.18), 0 6px 14px -4px rgba(251, 111, 87, 0.7);
+}
+.scrubber:hover::-webkit-slider-thumb,
+.scrubber:focus-visible::-webkit-slider-thumb {
+  transform: scale(1.18);
+}
+.scrubber:focus-visible {
+  outline: none;
+}
+.scrubber:focus-visible::-webkit-slider-thumb {
+  box-shadow: 0 0 0 3px var(--aqua);
+}

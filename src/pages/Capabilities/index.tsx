@@ -49,7 +49,7 @@ export default function Capabilities() {
             </ul>
           </div>
           <Reveal className="relative lg:col-span-7">
-            <div aria-hidden="true" className="absolute -right-[30%] bottom-[12%] top-[14%] w-[72%] bg-accent" />
+            <div aria-hidden="true" className="absolute -right-[30%] bottom-[12%] top-[14%] w-[72%] bg-[linear-gradient(180deg,#E6F6F9_0%,#CDEDF2_100%)]" />
             <img
               src={products.family}
               alt="Envases MOG: botella PET de 600 ml, lata de 355 ml, botella de vidrio y garrafón de 20 L"
