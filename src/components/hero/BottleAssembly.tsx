@@ -61,10 +61,13 @@ export function BottleAssembly({
   bubbles = true,
   priority = false,
   scale,
+  brand,
 }: {
   progress: MotionValue<number>;
   /** Optional size factor (1 = canvas size), scaled from the base of the bottle. */
   scale?: MotionValue<number>;
+  /** Live private-label preview: prints this name on the label (empty = the MOG photo label). */
+  brand?: string;
   className?: string;
   showSplash?: boolean;
   bubbles?: boolean;
@@ -222,6 +225,11 @@ export function BottleAssembly({
           style={{ clipPath: labelClip, WebkitClipPath: labelClip }}
           className={img}
         />
+        {brand ? (
+          <motion.div style={{ clipPath: labelClip, WebkitClipPath: labelClip }} className="absolute inset-0">
+            <BrandLabel name={brand} />
+          </motion.div>
+        ) : null}
         {/* Sheen riding the wrapping edge */}
         <motion.div
           style={{ left: sheenX, opacity: sheenOpacity }}
@@ -236,4 +244,45 @@ export function BottleAssembly({
 export function FinishedBottle({ className = "", splash = false }: { className?: string; splash?: boolean }) {
   const done = useMotionValue(1);
   return <BottleAssembly progress={done} showSplash={splash} className={className} />;
+}
+
+/**
+ * Paper label printed with the visitor's brand, laid exactly over the photo
+ * label band (canvas x 28.6%..71.3%, y 39.1%..65.2%). Cylindrical shading and
+ * the coral stripe match the photographed label so the swap reads as print.
+ */
+function BrandLabel({ name }: { name: string }) {
+  const text = name.trim().toUpperCase();
+  // Anton is ~0.46em per glyph: fit the name into ~84% of the label width.
+  const fit = `min(46cqh, ${(84 / Math.max(text.length, 1) / 0.46).toFixed(2)}cqw)`;
+  return (
+    <div
+      className="absolute overflow-hidden"
+      style={{ left: "28.6%", width: "42.7%", top: "39.1%", height: "26.1%", containerType: "size" }}
+    >
+      <div className="absolute inset-0 bg-[linear-gradient(90deg,#c4bfb4_0%,#dcd8cd_14%,#e6e2d8_46%,#dfdbd0_76%,#bdb8ad_100%)]" />
+      {/* Coral stripe, same place as on the printed label */}
+      <div className="absolute inset-y-0 bg-[#e5541c]" style={{ left: "93.6%", width: "2.6%" }} />
+      <div className="absolute inset-y-0 left-0 flex flex-col items-center justify-center" style={{ width: "92%" }}>
+        <motion.span
+          key={text}
+          initial={{ opacity: 0, y: "8%" }}
+          animate={{ opacity: 1, y: "0%" }}
+          transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+          className="block whitespace-nowrap font-display uppercase leading-[0.9] text-[#141414]"
+          style={{ fontSize: fit }}
+        >
+          {text}
+        </motion.span>
+        <span
+          className="mt-[5cqh] block whitespace-nowrap font-sans font-semibold uppercase text-[#141414]"
+          style={{ fontSize: "6.2cqh", letterSpacing: "0.06em" }}
+        >
+          Agua mineral · Tehuacán
+        </span>
+      </div>
+      {/* Paper grain + soft top/bottom falloff */}
+      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.06),rgba(0,0,0,0)_14%,rgba(0,0,0,0)_86%,rgba(0,0,0,0.07))]" />
+    </div>
+  );
 }

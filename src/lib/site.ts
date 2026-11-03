@@ -314,11 +314,3 @@ export const projectTypes = [
   "Aún lo estoy definiendo",
   "Otro",
 ];
-
-/* ----------------------------------------------------------------- */
-/*  Hero: volume slider (shown after the bottle finishes building)    */
-/* ----------------------------------------------------------------- */
-// EDITABLE: ajusta a las presentaciones reales que manejan (en ml).
-export const bottleVolumes = [250, 355, 500, 600, 750, 1000];
-/** Volume the hero bottle fills to during the animation. */
-export const heroVolume = 600;
