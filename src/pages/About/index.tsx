@@ -48,6 +48,7 @@ export default function About() {
         path="/nosotros"
       />
       <PageHero
+        tight
         eyebrow="Nosotros"
         title="Somos de donde nace el agua mineral"
         lead="Trabajamos desde Tehuacán, Puebla, la región que en México lleva generaciones ligada a los manantiales y al agua mineral."
@@ -55,7 +56,7 @@ export default function About() {
 
       {/* El origen */}
       <section className="bg-paper">
-        <div className="container-px section">
+        <div className="container-px pb-20 pt-12 md:pb-32 md:pt-16">
           <Reveal>
             <Eyebrow>El origen</Eyebrow>
             <h2 className="poster mt-6 max-w-5xl text-[clamp(2.8rem,6.4vw,6.2rem)] text-ink">

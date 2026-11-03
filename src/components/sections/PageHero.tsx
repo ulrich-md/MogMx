@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import { Eyebrow } from "../ui/Eyebrow";
 import { FinishedBottle } from "../hero/BottleAssembly";
 import { products } from "@/lib/assets";
+import { site } from "@/lib/site";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -18,12 +19,15 @@ export function PageHero({
   title,
   lead,
   visual = "none",
+  tight = false,
   children,
 }: {
   eyebrow?: string;
   title: ReactNode;
   lead?: ReactNode;
   visual?: Visual;
+  /** Less space below the hero (when the next section opens with its own headline). */
+  tight?: boolean;
   children?: ReactNode;
 }) {
   const reduce = useReducedMotion();
@@ -38,7 +42,7 @@ export function PageHero({
 
   return (
     <section className="relative isolate overflow-hidden bg-paper pt-[72px]">
-      <div className="container-px relative grid gap-10 pb-14 pt-14 md:pb-20 md:pt-20 lg:grid-cols-12 lg:gap-8">
+      <div className={`container-px relative grid gap-10 pt-14 md:pt-20 lg:grid-cols-12 lg:gap-8 ${tight ? "pb-4 md:pb-6" : "pb-14 md:pb-20"}`}>
         <div className={visual === "none" ? "lg:col-span-12" : "lg:col-span-8"}>
           {eyebrow ? (
             <motion.div {...enter(0)}>
@@ -62,10 +66,16 @@ export function PageHero({
               {...enter(0.25)}
               className={`mt-10 grid gap-6 border-t border-line pt-8 ${visual === "none" ? "md:grid-cols-12" : ""}`}
             >
+              {visual === "none" ? (
+                <div className="flex items-start gap-3 md:col-span-4">
+                  <span aria-hidden="true" className="mt-[7px] h-[2px] w-6 shrink-0 bg-accent" />
+                  <span className="readout leading-relaxed text-slate">{site.location.label}</span>
+                </div>
+              ) : null}
               {lead ? (
                 <p
                   className={`max-w-prose text-[1.075rem] leading-[1.7] text-slate ${
-                    visual === "none" ? "md:col-span-7 md:col-start-6" : ""
+                    visual === "none" ? "md:col-span-7 md:col-start-6 md:text-[1.2rem]" : ""
                   }`}
                 >
                   {lead}
