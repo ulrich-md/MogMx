@@ -9,7 +9,6 @@ export const bottle = {
   cap: "/assets/hero/bottle-cap.webp",
   label: "/assets/hero/bottle-label.webp",
   final: "/assets/hero/bottle-final.webp",
-  splash: "/assets/hero/splash.webp",
   filler: "/assets/hero/filler.webp",
   width: 1024,
   height: 1536,
@@ -24,7 +23,7 @@ export const photos = {
   idea: "/assets/photos/idea.webp",
   preforms: "/assets/photos/preformas.webp",
   labels: "/assets/photos/etiquetas.webp",
-  fridge: "/assets/photos/anaquel.webp",
+  fridge: "/assets/photos/refri-mog.webp",
   table: "/assets/photos/mesa.webp",
   caps: "/assets/photos/tapas.webp",
 } as const;

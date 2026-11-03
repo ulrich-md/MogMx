@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useId, useRef, useState } from "react";
+import { useCallback, useEffect, useId, useLayoutEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   animate,
@@ -23,6 +23,8 @@ const BRAND_MAX = 12;
 
 /** The four build stages map onto the existing process steps 03-06. */
 const STAGES = processSteps.slice(2);
+/** Top of the label band on the 1024x1536 bottle canvas. */
+const LABEL_TOP = 0.391;
 
 function preload(srcs: string[], timeout = 2500) {
   const all = Promise.all(
@@ -42,6 +44,33 @@ export function Hero() {
   const reduce = useReducedMotion();
   const progress = useMotionValue(reduce ? 1 : 0);
   const controls = useRef<AnimationPlaybackControls | null>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+  const h1Ref = useRef<HTMLHeadingElement>(null);
+  const stageRef = useRef<HTMLDivElement>(null);
+  const [stageTop, setStageTop] = useState<number | null>(null);
+
+  /*
+   * Desktop: keep the bottle big, and drop it so the opaque label starts just
+   * under "embotellada." Only the clear neck/shoulder crosses the headline;
+   * the base bleeds past the fold into the next section.
+   */
+  useLayoutEffect(() => {
+    const measure = () => {
+      const sec = sectionRef.current;
+      const h1 = h1Ref.current;
+      const st = stageRef.current;
+      if (!sec || !h1 || !st || window.innerWidth < 1024) return;
+      const headBottom = h1.getBoundingClientRect().bottom - sec.getBoundingClientRect().top;
+      const h = st.offsetHeight;
+      setStageTop(Math.max(76, headBottom + 14 - LABEL_TOP * h));
+    };
+    measure();
+    const ro = new ResizeObserver(measure);
+    if (h1Ref.current) ro.observe(h1Ref.current);
+    if (stageRef.current) ro.observe(stageRef.current);
+    document.fonts?.ready.then(measure).catch(() => undefined);
+    return () => ro.disconnect();
+  }, []);
   const [step, setStep] = useState(reduce ? 3 : 0);
   const [done, setDone] = useState(!!reduce);
   const [brand, setBrand] = useState("");
@@ -159,7 +188,7 @@ export function Hero() {
   );
 
   return (
-    <section className="relative isolate overflow-hidden bg-paper pt-[72px]">
+    <section ref={sectionRef} className="relative isolate overflow-hidden bg-paper pt-[72px]">
 
       <div className="container-px relative grid min-h-[calc(100dvh-72px)] grid-cols-1 lg:grid-cols-12 lg:gap-x-8">
         {/* Left: headline + CTA card */}
@@ -168,7 +197,7 @@ export function Hero() {
             <Eyebrow>AGUA MINERAL DE TEHUACÁN · MARCA PROPIA</Eyebrow>
           </motion.div>
 
-          <h1 className="poster mt-5 text-[15.4vw] text-ink sm:text-[clamp(5rem,14vw,9rem)] lg:text-[clamp(7rem,11.6vw,11.5rem)]">
+          <h1 ref={h1Ref} className="poster mt-5 text-[15.4vw] text-ink sm:text-[clamp(5rem,14vw,9rem)] lg:text-[clamp(7rem,11.6vw,11.5rem)]">
             <span className="block overflow-hidden pb-[0.04em]">
               <motion.span {...line(0.2)} className="block">
                 Tu marca
@@ -290,17 +319,21 @@ export function Hero() {
         </motion.aside>
       </div>
 
-      {/* Desktop stage: the bottle sits ABOVE the headline. The plastic
-          multiplies and the label is slightly translucent, so the type reads
-          through both. No transform / z-index here, or the blend breaks. */}
+      {/* Desktop stage: big bottle, opaque label just below the headline, base
+          bleeding past the fold. No transform / z-index here: the clear plastic
+          multiplies over the type. */}
       <div
-        className="pointer-events-none absolute bottom-[5vh] top-[72px] hidden items-end lg:flex"
-        style={{ left: "calc(50% + min(6.5vw, 94px) - min(calc((100dvh - 72px - 9vh) / 3), 18vw, 327px))" }}
+        ref={stageRef}
+        className="pointer-events-none absolute hidden lg:block"
+        style={{
+          top: stageTop ?? 140,
+          left: "calc(50% + min(6.5vw, 94px) - min(calc((100dvh - 72px - 9vh) / 3), 18vw, 327px))",
+        }}
       >
         <BottleAssembly
           progress={progress}
           brand={brand}
-          labelOpacity={0.84}
+          reflection={false}
           priority
           className="h-[min(calc(100dvh-72px-9vh),54vw)] max-h-[980px]"
         />

@@ -14,7 +14,7 @@ import { bottle } from "@/lib/assets";
  *
  *   envase vacío  ->  llenado (mask rises with a falling stream)
  *   ->  tapa (drops and seats)  ->  etiqueta (wraps on, left to right)
- *   ->  producto final (splash crown blooms at the base)
+ *   ->  producto final (a band of cold light sweeps down the bottle)
  *
  * Everything is driven by ONE progress value (0..1) so the same component
  * can autoplay in the hero or be scrubbed by scroll on the Process page.
@@ -57,7 +57,6 @@ const BUBBLES = [
 export function BottleAssembly({
   progress,
   className = "",
-  showSplash = true,
   bubbles = true,
   priority = false,
   scale,
@@ -81,7 +80,6 @@ export function BottleAssembly({
   /** Show the filling-machine nozzle during the fill. */
   filler?: boolean;
   className?: string;
-  showSplash?: boolean;
   bubbles?: boolean;
   /** Eager-load the layers (above the fold). */
   priority?: boolean;
@@ -131,9 +129,10 @@ export function BottleAssembly({
   const sheenX = useTransform(labelWrap, (w) => `${100 - w}%`);
   const sheenOpacity = useTransform(progress, [ASSEMBLY.label[0], ASSEMBLY.label[0] + 0.02, ASSEMBLY.label[1] - 0.02, ASSEMBLY.label[1]], [0, 1, 1, 0]);
 
-  // 5 · Finish: the splash crown blooms at the base
-  const splashScale = useTransform(progress, [...ASSEMBLY.finish], [0.55, 1], { ease: out });
-  const splashOpacity = useTransform(progress, [ASSEMBLY.finish[0], ASSEMBLY.finish[0] + 0.05], [0, 1]);
+  // 5b · Finish: one band of cold light sweeps down the finished bottle
+  const glintY = useTransform(progress, [...ASSEMBLY.finish], ["-40%", "130%"], { ease: inOut });
+  const glintOpacity = useTransform(progress, [ASSEMBLY.finish[0], ASSEMBLY.finish[0] + 0.02, ASSEMBLY.finish[1] - 0.03, ASSEMBLY.finish[1]], [0, 1, 1, 0]);
+
   const bubbleOpacity = useTransform(progress, [ASSEMBLY.fill[1] - 0.1, ASSEMBLY.fill[1]], [0, 1]);
 
   const one = useMotionValue(1);
@@ -151,7 +150,7 @@ export function BottleAssembly({
           style={{ opacity: enterOpacity, scale: size, originY: 1 }}
           className="pointer-events-none absolute inset-x-[8%] bottom-[2%] top-[18%] mix-blend-multiply"
         >
-          <div className="absolute inset-0 rounded-[50%] bg-[radial-gradient(closest-side,rgba(47,193,207,0.34),rgba(95,224,230,0.14)_55%,rgba(95,224,230,0)_100%)] " />
+          <div className="absolute inset-0 rounded-[50%] bg-[radial-gradient(closest-side,rgba(47,193,207,0.22),rgba(95,224,230,0.09)_55%,rgba(95,224,230,0)_100%)] " />
         </motion.div>
       ) : null}
 
@@ -180,19 +179,6 @@ export function BottleAssembly({
       />
 
       {/* Splash crown behind the base */}
-      {showSplash ? (
-        <motion.div aria-hidden="true" style={{ scale: size, originY: 1 }} className="pointer-events-none absolute inset-0">
-        <motion.img
-          src={bottle.splash}
-          alt=""
-          aria-hidden="true"
-          loading={loading}
-          decoding="async"
-          style={{ scale: splashScale, opacity: splashOpacity, x: "-50%", originY: 1 }}
-          className="pointer-events-none absolute bottom-[-3%] left-1/2 w-[76%] max-w-none select-none mix-blend-multiply"
-        />
-        </motion.div>
-      ) : null}
 
       {/* Clear plastic + water + cap (multiply: the backdrop reads through) */}
       <motion.div
@@ -269,6 +255,26 @@ export function BottleAssembly({
         </motion.div>
       ) : null}
 
+      {/* Finish glint: masked to the bottle silhouette, screen blend = light */}
+      <motion.div
+        aria-hidden="true"
+        style={{
+          scale: size,
+          originY: 1,
+          opacity: glintOpacity,
+          WebkitMaskImage: `url(${bottle.final})`,
+          maskImage: `url(${bottle.final})`,
+          WebkitMaskSize: "100% 100%",
+          maskSize: "100% 100%",
+        }}
+        className="pointer-events-none absolute inset-0 overflow-hidden mix-blend-screen"
+      >
+        <motion.div
+          style={{ y: glintY }}
+          className="absolute inset-x-0 top-0 h-[22%] -skew-y-12 bg-[linear-gradient(180deg,rgba(255,255,255,0)_0%,rgba(255,255,255,0.75)_50%,rgba(255,255,255,0)_100%)]"
+        />
+      </motion.div>
+
       {/* Filler nozzle (opaque steel, transparent PNG). Tip sits just above the neck. */}
       {filler ? (
         <motion.div aria-hidden="true" style={{ scale: size, originY: 1 }} className="pointer-events-none absolute inset-0">
@@ -309,9 +315,9 @@ export function BottleAssembly({
 }
 
 /** The finished bottle (clear plastic blends with its backdrop, label stays opaque). */
-export function FinishedBottle({ className = "", splash = false }: { className?: string; splash?: boolean }) {
+export function FinishedBottle({ className = "" }: { className?: string }) {
   const done = useMotionValue(1);
-  return <BottleAssembly progress={done} showSplash={splash} filler={false} className={className} />;
+  return <BottleAssembly progress={done} filler={false} className={className} />;
 }
 
 /**
