@@ -70,7 +70,8 @@ export function Hero() {
       const st = stageRef.current;
       if (!sec || !h1 || !st || window.innerWidth < 1024) return setHeadFont(null);
       const h = st.offsetHeight;
-      const top = STAGE_TOP;
+      // Leave room above the cap for the filler nozzle body (~20% of the bottle height)
+      const top = Math.round(STAGE_TOP - 16 + 0.2 * h);
       // "embotellada." is ~5.3 em wide in Anton; keep a clear gap to the bottle.
       const base = Math.min(Math.max(112, 0.116 * window.innerWidth), 184);
       const bottleLeft = st.getBoundingClientRect().left + (1 / 3 - BOTTLE_HALF) * h;
