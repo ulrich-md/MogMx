@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import { WhatsappLogo, EnvelopeSimple, Phone, MapPin, ArrowUpRight } from "@phosphor-icons/react";
-import { nav, services, site, whatsappHref, mailtoHref } from "@/lib/site";
+import { WhatsappLogo, Phone, MapPin, ArrowUpRight } from "@phosphor-icons/react";
+import { nav, services, site, whatsappHref, telHref, mapsHref } from "@/lib/site";
 import { Logo } from "./Logo";
 
 export function Footer() {
@@ -13,9 +13,8 @@ export function Footer() {
       href: whatsappHref("Hola, me interesa cotizar un proyecto de embotellado."),
       external: true,
     },
-    { icon: EnvelopeSimple, label: site.contact.email, href: mailtoHref("Cotización de proyecto") },
-    { icon: Phone, label: site.contact.phone },
-    { icon: MapPin, label: site.location.label },
+    { icon: Phone, label: site.contact.phone, href: telHref },
+    { icon: MapPin, label: site.location.label, href: mapsHref, external: true },
   ];
 
   return (

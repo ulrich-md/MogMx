@@ -20,19 +20,20 @@ export const site = {
     state: "Puebla",
     country: "México",
     label: "Tehuacán, Puebla, México",
-    // EDITABLE: datos geográficos del valle (verifica antes de publicar)
-    coordinates: "18.46° N · 97.39° O",
+    // Planta MOG (Google Maps del cliente)
+    coordinates: "18°27′06.9″ N · 97°23′37.8″ O",
+    lat: 18.4519272,
+    lng: -97.3938293,
+    // EDITABLE: altitud aproximada del valle (verifica antes de publicar)
     altitude: "1,640 msnm",
     reserve: "Reserva Tehuacán-Cuicatlán · UNESCO",
   },
   contact: {
-    // EDITABLE: número real de WhatsApp (formato internacional, sin signos)
-    whatsapp: "522380000000",
-    whatsappDisplay: "+52 238 000 0000",
-    // EDITABLE: correo real de contacto
-    email: "contacto@mogmx.com",
-    // EDITABLE: teléfono real
-    phone: "+52 238 000 0000",
+    // WhatsApp (formato internacional, sin signos)
+    whatsapp: "522382074498",
+    whatsappDisplay: "+52 238 207 4498",
+    // Por ahora no hay correo: el canal es WhatsApp / teléfono.
+    phone: "+52 238 207 4498",
   },
 } as const;
 
@@ -41,10 +42,11 @@ export const whatsappHref = (message?: string) =>
     message ? `?text=${encodeURIComponent(message)}` : ""
   }`;
 
-export const mailtoHref = (subject?: string) =>
-  `mailto:${site.contact.email}${
-    subject ? `?subject=${encodeURIComponent(subject)}` : ""
-  }`;
+export const telHref = `tel:${site.contact.phone.replace(/\s/g, "")}`;
+
+/** Exact plant location (Google Maps). */
+export const mapsHref = `https://www.google.com/maps/search/?api=1&query=${site.location.lat},${site.location.lng}`;
+export const mapsEmbed = `https://www.google.com/maps?q=${site.location.lat},${site.location.lng}&z=16&hl=es&output=embed`;
 
 /* ----------------------------------------------------------------- */
 /*  Navigation                                                        */
@@ -58,6 +60,7 @@ export const nav: NavItem[] = [
   { label: "Capacidades", to: "/capacidades" },
   { label: "Nosotros", to: "/nosotros" },
   { label: "Contacto", to: "/contacto" },
+  { label: "Vino", to: "/vino" },
 ];
 
 /** The single primary CTA, used identically everywhere (no duplicate intent). */
@@ -318,3 +321,16 @@ export const projectTypes = [
   "Aún lo estoy definiendo",
   "Otro",
 ];
+
+/* ----------------------------------------------------------------- */
+/*  Hablemos de vino (enlace a Casa Balseca)                          */
+/* ----------------------------------------------------------------- */
+// EDITABLE: texto de la página de vino (pendiente de que el cliente lo defina)
+export const wine = {
+  title: "Hablemos de vino",
+  brand: "Casa Balseca",
+  url: "https://casabalseca.com",
+  domain: "casabalseca.com",
+  lead: "Conoce Casa Balseca.",
+  whatsappMessage: "Hola, me interesa hablar de vino.",
+};

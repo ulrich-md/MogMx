@@ -9,6 +9,7 @@ const Process = lazy(() => import("./pages/Process"));
 const Capabilities = lazy(() => import("./pages/Capabilities"));
 const About = lazy(() => import("./pages/About"));
 const Contact = lazy(() => import("./pages/Contact"));
+const Wine = lazy(() => import("./pages/Wine"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 function PageLoader() {
@@ -72,6 +73,14 @@ export default function App() {
           element={
             <Suspense fallback={<PageLoader />}>
               <Contact />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/vino"
+          element={
+            <Suspense fallback={<PageLoader />}>
+              <Wine />
             </Suspense>
           }
         />

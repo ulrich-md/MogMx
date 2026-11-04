@@ -1,6 +1,5 @@
 import {
   WhatsappLogo,
-  EnvelopeSimple,
   Phone,
   MapPin,
   Clock,
@@ -10,21 +9,14 @@ import { Seo } from "@/lib/seo";
 import { PageHero } from "@/components/sections/PageHero";
 import { Button } from "@/components/ui/Button";
 import { photos, srcSet } from "@/lib/assets";
-import { site, whatsappHref, mailtoHref } from "@/lib/site";
+import { site, whatsappHref, telHref, mapsHref, mapsEmbed } from "@/lib/site";
 
 const directChannels = [
-  {
-    icon: EnvelopeSimple,
-    label: "Correo",
-    value: site.contact.email,
-    href: mailtoHref("Cotización de proyecto"),
-    external: false,
-  },
   {
     icon: Phone,
     label: "Teléfono",
     value: site.contact.phone,
-    href: `tel:${site.contact.phone.replace(/\s/g, "")}`,
+    href: telHref,
     external: false,
   },
 ];
@@ -129,7 +121,7 @@ export default function Contact() {
               {directChannels.map((c) => (
                 <InfoRow key={c.label} icon={c.icon} label={c.label} value={c.value} href={c.href} external={c.external} />
               ))}
-              <InfoRow icon={MapPin} label="Ubicación" value={site.location.label} />
+              <InfoRow icon={MapPin} label="Ubicación" value={site.location.label} href={mapsHref} external />
               {/* EDITABLE: horario real de atención */}
               <InfoRow icon={Clock} label="Horario" value="[horario de atención]" />
             </ul>
@@ -137,17 +129,28 @@ export default function Contact() {
 
           <div className="flex flex-col">
             <div className="relative flex-1 overflow-hidden rounded-card border border-line">
-              {/* EDITABLE: cambia la consulta por la dirección/coordenadas exactas de la planta */}
+              {/* Ubicación exacta de la planta (site.location.lat / lng) */}
               <iframe
                 title="Ubicación de MOG México en Tehuacán, Puebla"
-                src="https://www.google.com/maps?q=Tehuac%C3%A1n%2C%20Puebla%2C%20M%C3%A9xico&output=embed"
+                src={mapsEmbed}
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
                 className="h-[460px] w-full border-0 grayscale-[0.6] lg:h-full lg:min-h-[560px]"
               />
               <span aria-hidden="true" className="pointer-events-none absolute left-0 top-0 h-[3px] w-24 bg-accent" />
             </div>
-            <p className="readout mt-4 text-slate">{site.location.label}</p>
+            <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
+              <p className="readout text-slate">{site.location.coordinates}</p>
+              <a
+                href={mapsHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="label group inline-flex items-center gap-2 text-ink"
+              >
+                Cómo llegar
+                <ArrowUpRight size={14} weight="bold" className="transition-transform duration-300 ease-water group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+              </a>
+            </div>
           </div>
         </div>
       </section>

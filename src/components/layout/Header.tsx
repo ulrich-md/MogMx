@@ -7,8 +7,8 @@ import {
   useReducedMotion,
   useScroll,
 } from "framer-motion";
-import { List, X, WhatsappLogo, EnvelopeSimple } from "@phosphor-icons/react";
-import { nav, primaryCta, site, whatsappHref, mailtoHref } from "@/lib/site";
+import { List, X, WhatsappLogo, Phone } from "@phosphor-icons/react";
+import { nav, primaryCta, site, whatsappHref, telHref } from "@/lib/site";
 import { Logo } from "./Logo";
 import { Button } from "../ui/Button";
 
@@ -166,11 +166,11 @@ export function Header() {
                   WhatsApp
                 </a>
                 <a
-                  href={mailtoHref("Cotización de proyecto")}
+                  href={telHref}
                   className="label flex h-12 flex-1 items-center justify-center gap-2 rounded-full border border-ink/15 text-ink"
                 >
-                  <EnvelopeSimple size={17} weight="bold" className="text-accent" />
-                  Correo
+                  <Phone size={17} weight="bold" className="text-accent" />
+                  Llamar
                 </a>
               </div>
               <p className="readout mt-1 text-center text-slate">{site.location.label}</p>

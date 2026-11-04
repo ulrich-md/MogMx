@@ -60,4 +60,7 @@ export const organizationJsonLd = {
     addressRegion: site.location.state,
     addressCountry: "MX",
   },
+  telephone: site.contact.phone,
+  geo: { "@type": "GeoCoordinates", latitude: site.location.lat, longitude: site.location.lng },
+  hasMap: `https://www.google.com/maps/search/?api=1&query=${site.location.lat},${site.location.lng}`,
 };
