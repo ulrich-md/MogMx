@@ -6,7 +6,8 @@ import { ServiceVisual } from "../ui/ServiceVisual";
 import { Reveal } from "../ui/Reveal";
 import { Button } from "../ui/Button";
 import { serviceImages } from "@/lib/assets";
-import { services } from "@/lib/site";
+import { ArrowUpRight } from "@phosphor-icons/react";
+import { services, whatsappHref } from "@/lib/site";
 
 /**
  * Services ledger with a live preview: hovering (or focusing) a row swaps
@@ -58,7 +59,41 @@ export function ServicesStrip() {
           </div>
         </div>
 
-        <div className="lg:col-span-7">
+        {/* Phones / tablets: swipeable cards with each service's image */}
+        <div className="-mx-5 min-w-0 sm:-mx-8 lg:hidden">
+          <ul
+            aria-label="Servicios"
+            className="flex snap-x snap-mandatory gap-3 overflow-x-auto px-5 pb-4 [scrollbar-width:none] sm:px-8 [&::-webkit-scrollbar]:hidden"
+          >
+            {services.map((service, i) => {
+              const img = serviceImages[service.slug];
+              return (
+                <li key={service.slug} className="w-[82%] shrink-0 snap-start sm:w-[46%]">
+                  <a
+                    href={whatsappHref(`Hola, me interesa el servicio: ${service.title}.`)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group flex h-full flex-col overflow-hidden rounded-card border border-line bg-white"
+                  >
+                    {img ? <ServiceVisual image={img} className="aspect-[4/3] w-full rounded-none" /> : null}
+                    <div className="flex flex-1 flex-col p-5">
+                      <span className="readout text-slate">{String(i + 1).padStart(2, "0")} / 06</span>
+                      <h3 className="poster mt-3 text-[2rem] text-ink">{service.title}</h3>
+                      <p className="mt-2 text-[14.5px] leading-relaxed text-slate">{service.summary}</p>
+                      <span className="label mt-auto inline-flex items-center gap-2 pt-5 text-ink">
+                        WhatsApp
+                        <ArrowUpRight size={14} weight="bold" />
+                      </span>
+                    </div>
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+          <p className="readout px-5 text-slate sm:px-8">Desliza para ver más →</p>
+        </div>
+
+        <div className="hidden lg:col-span-7 lg:block">
           <div className="border-b border-line">
             {services.map((service, i) => (
               <Reveal key={service.slug} delay={i * 0.04}>

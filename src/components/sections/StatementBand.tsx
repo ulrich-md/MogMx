@@ -23,14 +23,27 @@ export function StatementBand() {
         loading="lazy"
         decoding="async"
         style={reduce ? undefined : { y: imgY, scale: imgScale }}
-        className="absolute inset-y-0 right-0 -z-20 h-full w-full object-cover object-[60%_50%] lg:w-[60%]"
+        className="absolute inset-y-0 right-0 -z-20 hidden h-full w-[60%] object-cover object-[60%_50%] lg:block"
       />
       <div
         aria-hidden="true"
-        className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(3,20,26,0.92)_0%,rgba(3,20,26,0.75)_100%)] lg:bg-[linear-gradient(90deg,#03141A_0%,#03141A_40%,rgba(3,20,26,0.55)_52%,rgba(3,20,26,0)_70%)]"
+        className="absolute inset-0 -z-10 hidden lg:block lg:bg-[linear-gradient(90deg,#03141A_0%,#03141A_40%,rgba(3,20,26,0.55)_52%,rgba(3,20,26,0)_70%)]"
       />
 
-      <div className="container-px relative py-28 md:py-40">
+      {/* Phones: the photo stands on its own, then the type on ink */}
+      <div className="relative aspect-[4/3] w-full overflow-hidden lg:hidden">
+        <img
+          src={photos.table}
+          alt=""
+          aria-hidden="true"
+          loading="lazy"
+          decoding="async"
+          className="h-full w-full object-cover object-[72%_50%]"
+        />
+        <div aria-hidden="true" className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-abyss to-transparent" />
+      </div>
+
+      <div className="container-px relative pb-20 pt-6 md:py-40 lg:py-40">
         <motion.div
           initial={reduce ? false : { opacity: 0, y: 28 }}
           whileInView={{ opacity: 1, y: 0 }}

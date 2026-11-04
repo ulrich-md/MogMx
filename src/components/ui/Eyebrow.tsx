@@ -14,8 +14,8 @@ export function Eyebrow({
 }) {
   const color = tone === "dark" ? "text-aqua" : "text-blue-deep";
   return (
-    <span className={`label inline-flex items-center gap-3 ${color} ${className}`}>
-      <span aria-hidden="true" className="h-[2px] w-6 bg-accent" />
+    <span className={`label inline-flex items-center gap-2.5 tracking-[0.11em] sm:gap-3 sm:tracking-eyebrow ${color} ${className}`}>
+      <span aria-hidden="true" className="h-[2px] w-4 shrink-0 bg-accent sm:w-6" />
       {children}
     </span>
   );

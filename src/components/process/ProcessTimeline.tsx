@@ -47,7 +47,7 @@ export function ProcessTimeline() {
             key={step.n}
             initial={reduce ? false : { opacity: 0.25 }}
             whileInView={{ opacity: 1 }}
-            viewport={{ amount: 0.6, margin: "-10% 0px -10% 0px" }}
+            viewport={{ amount: 0.25 }}
             transition={{ duration: 0.5, ease: EASE }}
             className="group grid gap-x-8 gap-y-4 border-b border-ink/15 py-12 sm:grid-cols-[7.5rem_1fr] lg:min-h-[46vh] lg:py-16"
           >

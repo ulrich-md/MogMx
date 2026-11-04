@@ -3,6 +3,7 @@ import { SmoothScroll } from "./SmoothScroll";
 import { ScrollToTop } from "./ScrollToTop";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
+import { MobileCtaBar } from "./MobileCtaBar";
 
 export function Layout() {
   return (
@@ -19,6 +20,7 @@ export function Layout() {
         <Outlet />
       </main>
       <Footer />
+      <MobileCtaBar />
     </SmoothScroll>
   );
 }

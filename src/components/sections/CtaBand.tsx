@@ -30,7 +30,7 @@ export function CtaBand({
         <Reveal className="relative z-10 lg:col-span-7">
           <h2 className="poster text-[clamp(3.2rem,7.4vw,7.4rem)]">{title}</h2>
           <p className="mt-7 max-w-xl text-lg leading-relaxed text-mist">{lead}</p>
-          <div className="mt-10 flex flex-wrap gap-3">
+          <div data-primary-cta className="mt-10 flex flex-wrap gap-3">
             <Button to={primaryCta.to} variant="accent" withArrow size="lg">
               {primaryCta.label}
             </Button>

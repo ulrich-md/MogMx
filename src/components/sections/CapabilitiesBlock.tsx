@@ -12,7 +12,10 @@ export function CapabilitiesBlock() {
         {/* Interactive tiendita shelf: hotspots per presentation */}
         <Reveal className="relative lg:col-span-7">
           <ShelfExplorer />
-          <p className="readout mt-3 text-slate">Pasa el cursor sobre los puntos</p>
+          <p className="readout mt-3 text-slate">
+            <span className="lg:hidden">Toca los puntos</span>
+            <span className="hidden lg:inline">Pasa el cursor sobre los puntos</span>
+          </p>
         </Reveal>
 
         <div className="lg:col-span-5">
@@ -37,7 +40,7 @@ export function CapabilitiesBlock() {
             ))}
           </ul>
 
-          <div className="mt-8 grid grid-cols-2 gap-3">
+          <div className="mt-8 grid gap-3 sm:grid-cols-2">
             <div className="group rounded-card bg-ink p-5 text-white transition-transform duration-500 ease-water hover:-translate-y-1">
               <Icon name="ShieldCheck" size={22} weight="bold" className="text-accent" />
               <h3 className="label mt-5 text-[12px]">Control de calidad</h3>

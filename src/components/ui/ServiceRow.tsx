@@ -70,7 +70,7 @@ export function ServiceRow({
           </span>
         </div>
 
-        {image ? <ServiceVisual image={image} className="aspect-[4/3] w-full lg:col-span-5" /> : null}
+        {image ? <ServiceVisual image={image} className="order-first aspect-[4/3] w-full lg:order-none lg:col-span-5" /> : null}
       </a>
     );
   }

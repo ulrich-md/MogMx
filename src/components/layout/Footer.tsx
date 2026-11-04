@@ -19,7 +19,7 @@ export function Footer() {
   ];
 
   return (
-    <footer className="relative overflow-hidden bg-ink text-white">
+    <footer className="relative overflow-hidden bg-ink pb-20 text-white lg:pb-0">
       <div className="container-px grid gap-12 pb-10 pt-20 md:grid-cols-12 md:pt-24">
         <div className="md:col-span-5">
           <Logo tone="white" />

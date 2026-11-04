@@ -52,6 +52,7 @@ export function Hero() {
   const h1Ref = useRef<HTMLHeadingElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
+  const mobileStageRef = useRef<HTMLDivElement>(null);
   const [stageTop, setStageTop] = useState<number | null>(null);
   /** Desktop headline size, capped so "embotellada." always ends before the bottle. */
   const [headFont, setHeadFont] = useState<number | null>(null);
@@ -179,6 +180,13 @@ export function Hero() {
         spellCheck={false}
         placeholder="MOG"
         onChange={(e) => setBrand(e.target.value.replace(/[^\p{L}\p{N} &.'-]/gu, ""))}
+        enterKeyHint="done"
+        onKeyDown={(e) => e.key === "Enter" && (e.target as HTMLInputElement).blur()}
+        onBlur={() => {
+          // Phones: the keyboard hid the bottle, so bring the printed label back into view
+          if (brand && window.innerWidth < 1024)
+            mobileStageRef.current?.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "center" });
+        }}
         className="poster mt-2 w-full min-w-0 border-b-2 border-ink/80 bg-transparent pb-1 text-[2.4rem] text-ink caret-accent placeholder:text-ink/20 focus:border-blue focus:outline-none sm:text-[2.8rem]"
       />
     </div>
@@ -233,7 +241,7 @@ export function Hero() {
           </h1>
 
           {/* Mobile / tablet: bottle in flow, a quiet readout under it */}
-          <div className="relative mx-auto mt-4 h-[min(66vh,620px)] w-full lg:hidden">
+          <div ref={mobileStageRef} className="relative mx-auto mt-2 h-[min(56svh,520px)] w-full lg:hidden">
             <div className="absolute inset-0 flex justify-center">
               <BottleAssembly progress={progress} brand={brand} filler={false} priority className="h-full" />
             </div>
@@ -250,7 +258,7 @@ export function Hero() {
           <motion.div {...rise(0.5)} className="mt-8 lg:mt-auto lg:max-w-[min(48%,560px)] lg:pt-10">
             {lead}
             <div className="mt-8">{brandField(fieldId)}</div>
-            {actions}
+            <div data-primary-cta>{actions}</div>
           </motion.div>
         </div>
       </div>
