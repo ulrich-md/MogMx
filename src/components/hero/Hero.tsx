@@ -22,8 +22,13 @@ const DURATION = 6.6;
 const HERO_ML = 600;
 const BRAND_MAX = 12;
 
-/** Top of the label band on the 1024x1536 bottle canvas. */
-const LABEL_TOP = 0.391;
+/** Desktop: the bottle starts just under the header and owns the right half. */
+const STAGE_TOP = 88;
+/** Visible half-width of the bottle as a fraction of its canvas height. */
+const BOTTLE_HALF = 0.1435;
+const STAGE_H = "min(calc(100dvh - 88px - 3vh), 62vw, 1000px)";
+/** Centre of the bottle at 74% of the 1440 shell (inside its 48 px gutters). */
+const STAGE_LEFT = `calc((100% - min(100%, 1440px)) / 2 + 48px + 0.74 * (min(100%, 1440px) - 96px) - ${STAGE_H} / 3)`;
 
 function preload(srcs: string[], timeout = 2500) {
   const all = Promise.all(
@@ -48,6 +53,8 @@ export function Hero() {
   const stageRef = useRef<HTMLDivElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
   const [stageTop, setStageTop] = useState<number | null>(null);
+  /** Desktop headline size, capped so "embotellada." always ends before the bottle. */
+  const [headFont, setHeadFont] = useState<number | null>(null);
   /** Extra room under the first screen so the whole bottle (and its shadow) fits. */
   const [padBottom, setPadBottom] = useState(0);
 
@@ -61,10 +68,14 @@ export function Hero() {
       const sec = sectionRef.current;
       const h1 = h1Ref.current;
       const st = stageRef.current;
-      if (!sec || !h1 || !st || window.innerWidth < 1024) return;
-      const headBottom = h1.getBoundingClientRect().bottom - sec.getBoundingClientRect().top;
+      if (!sec || !h1 || !st || window.innerWidth < 1024) return setHeadFont(null);
       const h = st.offsetHeight;
-      const top = Math.max(76, headBottom + 14 - LABEL_TOP * h);
+      const top = STAGE_TOP;
+      // "embotellada." is ~5.3 em wide in Anton; keep a clear gap to the bottle.
+      const base = Math.min(Math.max(112, 0.116 * window.innerWidth), 184);
+      const bottleLeft = st.getBoundingClientRect().left + (1 / 3 - BOTTLE_HALF) * h;
+      const avail = bottleLeft - h1.getBoundingClientRect().left - 32;
+      setHeadFont(Math.floor(Math.min(base, avail / 5.33)));
       setStageTop(top);
       // The base bleeds past the fold on load, but the section must contain it
       // so scrolling never reveals a hard crop.
@@ -207,7 +218,7 @@ export function Hero() {
             <Eyebrow>AGUA MINERAL DE TEHUACÁN · MARCA PROPIA</Eyebrow>
           </motion.div>
 
-          <h1 ref={h1Ref} className="poster mt-5 text-[15.4vw] text-ink sm:text-[clamp(5rem,14vw,9rem)] lg:text-[clamp(7rem,11.6vw,11.5rem)]">
+          <h1 ref={h1Ref} style={headFont ? { fontSize: headFont } : undefined} className="poster mt-5 text-[15.4vw] text-ink sm:text-[clamp(5rem,14vw,9rem)] lg:text-[clamp(7rem,11.6vw,11.5rem)]">
             <span className="block overflow-hidden pb-[0.04em]">
               <motion.span {...line(0.2)} className="block">
                 Tu marca
@@ -235,7 +246,7 @@ export function Hero() {
           </div>
 
           {/* Reading order: headline -> bottle -> lead -> tu marca -> cotizar */}
-          <motion.div {...rise(0.5)} className="mt-8 lg:mt-auto lg:max-w-[min(46%,560px)] lg:pt-10">
+          <motion.div {...rise(0.5)} className="mt-8 lg:mt-auto lg:max-w-[min(48%,560px)] lg:pt-10">
             {lead}
             <div className="mt-8">{brandField(fieldId)}</div>
             {actions}
@@ -250,8 +261,8 @@ export function Hero() {
         ref={stageRef}
         className="pointer-events-none absolute hidden lg:block"
         style={{
-          top: stageTop ?? 140,
-          left: "calc(50% + min(6.5vw, 94px) - min(calc((100dvh - 72px - 6vh) / 3), 20vw, 347px))",
+          top: stageTop ?? STAGE_TOP,
+          left: STAGE_LEFT,
         }}
       >
         <BottleAssembly
@@ -259,7 +270,7 @@ export function Hero() {
           brand={brand}
           reflection={false}
           priority
-          className="h-[min(calc(100dvh-72px-6vh),60vw)] max-h-[1040px]"
+          className="h-[min(calc(100dvh-88px-3vh),62vw,1000px)]"
         />
 
         {/* Ghost type, quieter: "Tehuacán" running up beside the bottle */}
@@ -273,7 +284,7 @@ export function Hero() {
         {/* Fill annotation: a hairline from the water to the readout */}
         <motion.div
           style={{ opacity: noteOpacity }}
-          className="pointer-events-auto absolute left-[73%] top-[74%] flex items-center gap-3 rounded-full bg-paper/85 py-2 pr-2"
+          className="pointer-events-auto absolute left-[73%] top-[70%] flex items-center gap-3 rounded-card bg-paper/85 py-2 pr-2"
         >
           <span aria-hidden="true" className="h-px w-14 bg-ink/40" />
           <div>
@@ -281,9 +292,9 @@ export function Hero() {
               <motion.span className="poster text-[2.6rem] tabular-nums text-ink">{mlText}</motion.span>
               <span className="poster text-[1.2rem] text-ink">ml</span>
             </p>
-            <p className="label mt-2 whitespace-nowrap text-blue-deep">Agua mineral de Tehuacán</p>
+            <p className="label mt-2 max-w-[10.5rem] text-blue-deep">Agua mineral de Tehuacán</p>
           </div>
-          <div className="ml-1">{replay}</div>
+          <div className="ml-1 self-start">{replay}</div>
         </motion.div>
       </div>
     </section>
