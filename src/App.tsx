@@ -1,5 +1,6 @@
 import { Suspense, lazy } from "react";
 import { Routes, Route } from "react-router-dom";
+import { Analytics } from "@vercel/analytics/react";
 import { Layout } from "./components/layout/Layout";
 
 const Home = lazy(() => import("./pages/Home"));
@@ -24,65 +25,68 @@ function PageLoader() {
 
 export default function App() {
   return (
-    <Routes>
-      <Route element={<Layout />}>
-        <Route
-          path="/"
-          element={
-            <Suspense fallback={<PageLoader />}>
-              <Home />
-            </Suspense>
-          }
-        />
-        <Route
-          path="/servicios"
-          element={
-            <Suspense fallback={<PageLoader />}>
-              <Services />
-            </Suspense>
-          }
-        />
-        <Route
-          path="/proceso"
-          element={
-            <Suspense fallback={<PageLoader />}>
-              <Process />
-            </Suspense>
-          }
-        />
-        <Route
-          path="/capacidades"
-          element={
-            <Suspense fallback={<PageLoader />}>
-              <Capabilities />
-            </Suspense>
-          }
-        />
-        <Route
-          path="/nosotros"
-          element={
-            <Suspense fallback={<PageLoader />}>
-              <About />
-            </Suspense>
-          }
-        />
-        <Route
-          path="/contacto"
-          element={
-            <Suspense fallback={<PageLoader />}>
-              <Contact />
-            </Suspense>
-          }
-        />
-        <Route
-          path="*"
-          element={
-            <Suspense fallback={<PageLoader />}>
-              <NotFound />
-            </Suspense>
-          }
-        />
-      </Route>
-    </Routes>
+    <>
+      <Routes>
+        <Route element={<Layout />}>
+          <Route
+            path="/"
+            element={
+              <Suspense fallback={<PageLoader />}>
+                <Home />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/servicios"
+            element={
+              <Suspense fallback={<PageLoader />}>
+                <Services />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/proceso"
+            element={
+              <Suspense fallback={<PageLoader />}>
+                <Process />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/capacidades"
+            element={
+              <Suspense fallback={<PageLoader />}>
+                <Capabilities />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/nosotros"
+            element={
+              <Suspense fallback={<PageLoader />}>
+                <About />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/contacto"
+            element={
+              <Suspense fallback={<PageLoader />}>
+                <Contact />
+              </Suspense>
+            }
+          />
+          <Route
+            path="*"
+            element={
+              <Suspense fallback={<PageLoader />}>
+                <NotFound />
+              </Suspense>
+            }
+          />
+        </Route>
+      </Routes>
+      <Analytics />
+    </>
   );
 }
