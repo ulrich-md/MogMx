@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { BottleAssembly } from "../hero/BottleAssembly";
-import { processImages } from "@/lib/assets";
+import { processImages, srcSet } from "@/lib/assets";
 import { processSteps } from "@/lib/site";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
@@ -45,20 +45,20 @@ export function ProcessTimeline() {
         {processSteps.map((step) => (
           <motion.li
             key={step.n}
-            initial={reduce ? false : { opacity: 0.25 }}
-            whileInView={{ opacity: 1 }}
+            initial={reduce ? false : { y: 24 }}
+            whileInView={{ y: 0 }}
             viewport={{ amount: 0.25 }}
             transition={{ duration: 0.5, ease: EASE }}
             className="group grid gap-x-8 gap-y-4 border-b border-ink/15 py-12 sm:grid-cols-[7.5rem_1fr] lg:min-h-[46vh] lg:py-16"
           >
-            <span className="poster text-[5.5rem] text-accent sm:text-[6.5rem]">{step.n}</span>
+            <span className="poster text-[5.5rem] text-accent-deep sm:text-[6.5rem]">{step.n}</span>
             <div className="sm:pt-3">
               <h3 className="poster text-[2.6rem] text-ink sm:text-[3.4rem]">{step.title}</h3>
               <p className="mt-5 max-w-lg text-[1.05rem] leading-[1.7] text-slate">{step.description}</p>
               {processImages[step.n] ? (
                 <figure className="relative mt-8 overflow-hidden rounded-card bg-bone">
                   <img
-                    src={processImages[step.n].src}
+                    src={processImages[step.n].src} srcSet={srcSet(processImages[step.n].src)} sizes="(min-width: 1024px) 40vw, 90vw"
                     alt={processImages[step.n].alt}
                     loading="lazy"
                     decoding="async"

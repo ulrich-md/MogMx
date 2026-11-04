@@ -3,7 +3,7 @@ import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion
 import { WhatsappLogo } from "@phosphor-icons/react";
 import { Button } from "../ui/Button";
 import { Reveal } from "../ui/Reveal";
-import { bottle } from "@/lib/assets";
+import { bottle, srcSet } from "@/lib/assets";
 import { primaryCta, whatsappHref } from "@/lib/site";
 
 /** Closing band: ink surface, poster title, the finished bottle on a signal block. */
@@ -51,7 +51,7 @@ export function CtaBand({
         <div aria-hidden="true" className="relative mx-auto h-[420px] w-full max-w-[420px] lg:col-span-5 lg:h-[560px]">
           <div className="absolute inset-x-[12%] bottom-[4%] top-[20%] rounded-[50%] bg-[radial-gradient(closest-side,rgba(47,193,207,0.35),rgba(47,193,207,0))] blur-2xl" />
           <motion.img
-            src={bottle.final}
+            src={bottle.final} srcSet={srcSet(bottle.final)} sizes="(min-width: 1024px) 380px, 290px"
             alt=""
             loading="lazy"
             decoding="async"

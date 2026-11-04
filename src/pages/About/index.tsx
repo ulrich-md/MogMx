@@ -6,7 +6,7 @@ import { PageHero } from "@/components/sections/PageHero";
 import { Reveal } from "@/components/ui/Reveal";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { CtaBand } from "@/components/sections/CtaBand";
-import { photos } from "@/lib/assets";
+import { photos, srcSet } from "@/lib/assets";
 import { values, tehuacanFacts, biosphereLink } from "@/lib/site";
 
 function ValleyBand() {
@@ -18,7 +18,7 @@ function ValleyBand() {
   return (
     <section ref={ref} className="relative h-[72vh] min-h-[420px] w-full overflow-hidden bg-abyss">
       <motion.img
-        src={photos.valley}
+        src={photos.valley} srcSet={srcSet(photos.valley)} sizes="100vw"
         alt="El valle de Tehuacán al atardecer, con cactáceas columnares y el Pico de Orizaba al fondo"
         loading="lazy"
         decoding="async"
@@ -61,7 +61,7 @@ export default function About() {
             <Eyebrow>El origen</Eyebrow>
             <h2 className="poster mt-6 max-w-5xl text-[clamp(2.8rem,6.4vw,6.2rem)] text-ink">
               El agua mineral de México nació en{" "}
-              <span className="text-accent">este valle.</span>
+              <span className="text-accent-deep">este valle.</span>
             </h2>
           </Reveal>
 
@@ -69,7 +69,7 @@ export default function About() {
             <Reveal className="md:col-span-5">
               <figure className="relative overflow-hidden rounded-card bg-bone">
                 <img
-                  src={photos.street}
+                  src={photos.street} srcSet={srcSet(photos.street)} sizes="(min-width: 768px) 40vw, 92vw"
                   alt="Botella de agua mineral MOG en la mano, en una calle de un pueblo mexicano"
                   loading="lazy"
                   decoding="async"
@@ -100,7 +100,7 @@ export default function About() {
               </p>
               <figure className="relative mt-10 overflow-hidden rounded-card bg-ink md:mt-auto">
                 <img
-                  src={photos.orizaba}
+                  src={photos.orizaba} srcSet={srcSet(photos.orizaba)} sizes="(min-width: 768px) 48vw, 92vw"
                   alt="El Pico de Orizaba nevado entre las nubes, de donde baja el agua que aflora en Tehuacán"
                   loading="lazy"
                   decoding="async"
@@ -204,9 +204,7 @@ export default function About() {
                   aria-hidden="true"
                   className="absolute left-0 top-[-1px] h-[3px] w-0 bg-accent transition-[width] duration-500 ease-water group-hover:w-full"
                 />
-                <span className="poster block text-[4rem] text-ink/15 transition-colors duration-300 group-hover:text-accent">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
+                <span aria-hidden="true" data-text={String(i + 1).padStart(2, "0")} className="pseudo-text poster block text-[4rem] text-ink/15 transition-colors duration-300 group-hover:text-accent" />
                 <h3 className="poster mt-4 text-[2.3rem] text-ink">{v.title}</h3>
                 <p className="mt-3 text-[14.5px] leading-relaxed text-slate">{v.description}</p>
               </Reveal>

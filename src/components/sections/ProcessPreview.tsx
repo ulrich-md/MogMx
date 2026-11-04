@@ -44,9 +44,7 @@ export function ProcessPreview() {
                   aria-hidden="true"
                   className="absolute left-0 top-[-1px] h-[3px] w-0 bg-accent transition-[width] duration-500 ease-water group-hover:w-full"
                 />
-                <span className="poster row-span-2 block text-[3.4rem] text-ink/15 transition-colors duration-300 group-hover:text-accent sm:text-[4.5rem]">
-                  {step.n}
-                </span>
+                <span aria-hidden="true" data-text={step.n} className="pseudo-text poster row-span-2 block text-[3.4rem] text-ink/15 transition-colors duration-300 group-hover:text-accent sm:text-[4.5rem]" />
                 <h3 className="label mt-1 text-[12.5px] text-ink sm:mt-6">{step.title}</h3>
                 <p className="mt-2 text-[14px] leading-relaxed text-slate sm:mt-3">{step.description}</p>
             </motion.li>

@@ -2,7 +2,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import type { ReactNode } from "react";
 import { Eyebrow } from "../ui/Eyebrow";
 import { FinishedBottle } from "../hero/BottleAssembly";
-import { products } from "@/lib/assets";
+import { products, srcSet } from "@/lib/assets";
 import { site } from "@/lib/site";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
@@ -115,7 +115,7 @@ export function PageHero({
             ) : (
               <>
                 <img
-                  src={products.privateLabels}
+                  src={products.privateLabels} srcSet={srcSet(products.privateLabels)} sizes="33vw"
                   alt=""
                   decoding="async"
                   className="absolute inset-0 m-auto h-full w-auto object-contain"

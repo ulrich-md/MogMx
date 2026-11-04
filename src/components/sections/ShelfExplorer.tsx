@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { photos } from "@/lib/assets";
+import { photos, srcSet } from "@/lib/assets";
 
 /**
  * Interactive shelf: the tiendita fridge photo with hotspots. Hover, focus
@@ -22,7 +22,7 @@ export function ShelfExplorer({ className = "" }: { className?: string }) {
   return (
     <div className={`relative overflow-hidden rounded-card bg-ink ${className}`}>
       <img
-        src={photos.fridge}
+        src={photos.fridge} srcSet={srcSet(photos.fridge)} sizes="(min-width: 1024px) 55vw, 92vw"
         alt="Refrigerador de una tiendita con productos MOG: agua en PET, lata y vidrio, y bebidas de limón, jamaica y mango"
         loading="lazy"
         decoding="async"

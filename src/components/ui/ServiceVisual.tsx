@@ -1,4 +1,5 @@
 import type { ServiceImage } from "@/lib/assets";
+import { srcSet } from "@/lib/assets";
 
 /**
  * Framed service image. Photos fill the frame; product cut-outs sit on the
@@ -21,7 +22,7 @@ export function ServiceVisual({
       } ${className}`}
     >
       <img
-        src={image.src}
+        src={image.src} srcSet={srcSet(image.src)} sizes="(min-width: 1024px) 40vw, 82vw"
         alt={image.alt}
         loading={eager ? "eager" : "lazy"}
         decoding="async"

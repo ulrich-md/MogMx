@@ -140,7 +140,7 @@ export function Header() {
                     end={item.to === "/"}
                     className={({ isActive }) =>
                       `flex items-baseline justify-between border-b border-line py-3 ${
-                        isActive ? "text-accent" : "text-ink"
+                        isActive ? "text-accent-deep" : "text-ink"
                       }`
                     }
                   >

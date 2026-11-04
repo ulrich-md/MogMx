@@ -6,7 +6,7 @@ import {
   cubicBezier,
   type MotionValue,
 } from "framer-motion";
-import { bottle } from "@/lib/assets";
+import { bottle, srcSet } from "@/lib/assets";
 
 /**
  * The bottle builds itself from real photographic layers that share one
@@ -85,7 +85,8 @@ export function BottleAssembly({
   priority?: boolean;
 }) {
   // 1 · Empty container rises into place
-  const enterOpacity = useTransform(progress, [...ASSEMBLY.enter], [0, 1]);
+  // The empty container is visible from the first frame (it is the LCP); it still rises in
+  const enterOpacity = useTransform(progress, [...ASSEMBLY.enter], [1, 1]);
   const enterY = useTransform(progress, [...ASSEMBLY.enter], ["6%", "0%"], { ease: out });
 
   // 2 · Fill: the water line climbs from the base (1%) to the neck (100%)
@@ -93,7 +94,7 @@ export function BottleAssembly({
   const level = useTransform(fill, [0, 1], [0, 101]);
   const levelSoft = useTransform(level, (l) => l + 2.2);
   const fillMask = useMotionTemplate`linear-gradient(to top, #000 ${level}%, transparent ${levelSoft}%)`;
-  const tintMask = useMotionTemplate`url(${bottle.filled}), linear-gradient(to top, #000 ${level}%, transparent ${levelSoft}%)`;
+  const tintMask = useMotionTemplate`url(${bottle.filledMask}), linear-gradient(to top, #000 ${level}%, transparent ${levelSoft}%)`;
   // Meniscus: a bright line riding the water surface while filling
   const meniscusTop = useTransform(level, (l) => `${100 - l}%`);
   const meniscusOpacity = useTransform(fill, [0, 0.03, 0.68, 0.76], [0, 1, 1, 0]);
@@ -167,7 +168,7 @@ export function BottleAssembly({
           }}
           className="pointer-events-none absolute inset-x-0 top-[98.6%] h-full mix-blend-multiply"
         >
-          <img src={bottle.empty} alt="" loading="lazy" decoding="async" className="h-full w-full -scale-y-100 select-none object-contain opacity-60" />
+          <img src={bottle.empty} srcSet={srcSet(bottle.empty)} sizes="(min-width: 1024px) 58vh, 38vh" alt="" loading="lazy" decoding="async" className="h-full w-full -scale-y-100 select-none object-contain opacity-60" />
         </motion.div>
       ) : null}
 
@@ -186,9 +187,9 @@ export function BottleAssembly({
         style={{ opacity: enterOpacity, y: enterY, scale: size, originY: 1 }}
         className="absolute inset-0 mix-blend-multiply"
       >
-        <img src={bottle.empty} alt="" loading={loading} decoding="async" className={img} />
+        <img src={bottle.empty} srcSet={srcSet(bottle.empty)} sizes="(min-width: 1024px) 58vh, 38vh" alt="" loading={loading} decoding="async" className={img} />
         <motion.img
-          src={bottle.filled}
+          src={bottle.filled} srcSet={srcSet(bottle.filled)} sizes="(min-width: 1024px) 58vh, 38vh"
           alt=""
           loading={loading}
           decoding="async"
@@ -213,7 +214,7 @@ export function BottleAssembly({
           className="absolute left-1/2 top-[2.6%] w-[1.6%] -translate-x-1/2 rounded-b-full bg-gradient-to-b from-[#9fb7bb]/80 via-[#9fb7bb]/70 to-[#7f9ea3]/80"
         />
         <motion.img
-          src={bottle.cap}
+          src={bottle.cap} srcSet={srcSet(bottle.cap)} sizes="(min-width: 1024px) 58vh, 38vh"
           alt=""
           loading={loading}
           decoding="async"
@@ -262,8 +263,8 @@ export function BottleAssembly({
           scale: size,
           originY: 1,
           opacity: glintOpacity,
-          WebkitMaskImage: `url(${bottle.final})`,
-          maskImage: `url(${bottle.final})`,
+          WebkitMaskImage: `url(${bottle.finalMask})`,
+          maskImage: `url(${bottle.finalMask})`,
           WebkitMaskSize: "100% 100%",
           maskSize: "100% 100%",
         }}
@@ -292,7 +293,7 @@ export function BottleAssembly({
       {/* Label (opaque paper) */}
       <motion.div aria-hidden="true" style={{ y: enterY, scale: size, originY: 1, opacity: labelOpacity }} className="absolute inset-0">
         <motion.img
-          src={bottle.label}
+          src={bottle.label} srcSet={srcSet(bottle.label)} sizes="(min-width: 1024px) 58vh, 38vh"
           alt=""
           loading={loading}
           decoding="async"

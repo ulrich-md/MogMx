@@ -52,7 +52,7 @@ export function CapabilitiesBlock() {
             <div className="group rounded-card bg-accent p-5 text-ink transition-transform duration-500 ease-water hover:-translate-y-1">
               <Icon name="MapPin" size={22} weight="bold" />
               <h3 className="label mt-5 text-[12px]">Trazabilidad por lote</h3>
-              <p className="mt-2 text-[13.5px] leading-relaxed text-ink/75">
+              <p className="mt-2 text-[13.5px] leading-relaxed text-ink">
                 Cada lote queda identificado, del origen al producto terminado.
               </p>
             </div>

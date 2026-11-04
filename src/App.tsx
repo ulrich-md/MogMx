@@ -2,7 +2,8 @@ import { Suspense, lazy } from "react";
 import { Routes, Route } from "react-router-dom";
 import { Layout } from "./components/layout/Layout";
 
-const Home = lazy(() => import("./pages/Home"));
+// The landing page ships in the main bundle: no extra round trip before the hero (LCP)
+import Home from "./pages/Home";
 const Services = lazy(() => import("./pages/Services"));
 const Process = lazy(() => import("./pages/Process"));
 const Capabilities = lazy(() => import("./pages/Capabilities"));
@@ -13,7 +14,7 @@ const NotFound = lazy(() => import("./pages/NotFound"));
 function PageLoader() {
   return (
     <div
-      className="grid min-h-[70vh] place-items-center"
+      className="grid min-h-[100dvh] place-items-center"
       role="status"
       aria-label="Cargando"
     >

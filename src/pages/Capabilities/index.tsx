@@ -4,7 +4,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
 import { Icon } from "@/components/ui/Icon";
 import { CtaBand } from "@/components/sections/CtaBand";
-import { photos, products } from "@/lib/assets";
+import { photos, products, srcSet } from "@/lib/assets";
 import { waterTypes, qualityPoints } from "@/lib/site";
 
 const strip = (s: string) => s.replace(/\s*\/\/ EDITABLE.*$/, "");
@@ -37,9 +37,7 @@ export default function Capabilities() {
             <ul className="mt-10 border-t border-line">
               {waterTypes.map((t, i) => (
                 <li key={t.title} className="group grid grid-cols-[auto_1fr] gap-x-5 border-b border-line py-6">
-                  <span className="poster text-[2.6rem] text-ink/15 transition-colors duration-300 group-hover:text-accent">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
+                  <span aria-hidden="true" data-text={String(i + 1).padStart(2, "0")} className="pseudo-text poster text-[2.6rem] text-ink/15 transition-colors duration-300 group-hover:text-accent" />
                   <div className="pt-1">
                     <h3 className="label text-[12.5px] text-ink">{t.title}</h3>
                     <p className="mt-2 text-[14.5px] leading-relaxed text-slate">{t.description}</p>
@@ -50,7 +48,7 @@ export default function Capabilities() {
           </div>
           <Reveal className="relative lg:col-span-7">
             <img
-              src={products.family}
+              src={products.family} srcSet={srcSet(products.family)} sizes="(min-width: 1024px) 45vw, 90vw"
               alt="Envases MOG: botella PET de 600 ml, lata de 355 ml y botella de vidrio"
               loading="lazy"
               decoding="async"
@@ -65,7 +63,7 @@ export default function Capabilities() {
       {/* Calidad y trazabilidad: water photography band behind */}
       <section className="relative isolate overflow-hidden bg-water text-white">
         <img
-          src={photos.water}
+          src={photos.water} srcSet={srcSet(photos.water)} sizes="100vw"
           alt=""
           aria-hidden="true"
           loading="lazy"

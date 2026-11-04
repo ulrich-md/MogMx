@@ -13,7 +13,7 @@ import { ArrowRight, ArrowCounterClockwise, PencilSimple } from "@phosphor-icons
 import { Eyebrow } from "../ui/Eyebrow";
 import { ASSEMBLY, BottleAssembly } from "./BottleAssembly";
 import { Button } from "../ui/Button";
-import { bottle } from "@/lib/assets";
+import { bottle, srcSet } from "@/lib/assets";
 import { primaryCta, processSteps } from "@/lib/site";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
@@ -35,8 +35,11 @@ function preload(srcs: string[], timeout = 2500) {
     srcs.map(
       (src) =>
         new Promise<void>((resolve) => {
+          // Same srcset/sizes as the <img> layers, so the browser reuses the download
           const im = new Image();
           im.onload = im.onerror = () => resolve();
+          im.sizes = "(min-width: 1024px) 58vh, 38vh";
+          im.srcset = srcSet(src) ?? "";
           im.src = src;
         }),
     ),

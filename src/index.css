@@ -102,6 +102,10 @@
     color: transparent;
     -webkit-text-stroke: 1.5px rgba(11, 43, 51, 0.4);
   }
+  /* Decorative text painted from data-text (invisible to assistive tech) */
+  .pseudo-text::before {
+    content: attr(data-text);
+  }
   /* Giant ghost type: outline only, barely there (editorial texture) */
   .ghost-type {
     color: transparent;

@@ -9,7 +9,7 @@ import {
 import { Seo } from "@/lib/seo";
 import { PageHero } from "@/components/sections/PageHero";
 import { Button } from "@/components/ui/Button";
-import { photos } from "@/lib/assets";
+import { photos, srcSet } from "@/lib/assets";
 import { site, whatsappHref, mailtoHref } from "@/lib/site";
 
 const directChannels = [
@@ -99,7 +99,7 @@ export default function Contact() {
             {/* WhatsApp: the primary channel, on water photography */}
             <div className="relative isolate overflow-hidden rounded-card bg-water p-7 text-white sm:p-10">
               <img
-                src={photos.water}
+                src={photos.water} srcSet={srcSet(photos.water)} sizes="(min-width: 1024px) 48vw, 92vw"
                 alt=""
                 aria-hidden="true"
                 loading="lazy"

@@ -1,0 +1,23 @@
+/** Generated: available widths per image (smaller variants are name-<w>.webp). */
+export const imageWidths: Record<string, number[]> = {
+  "/assets/hero/bottle-cap.webp": [768, 1024],
+  "/assets/hero/bottle-empty.webp": [768, 1024],
+  "/assets/hero/bottle-filled.webp": [768, 1024],
+  "/assets/hero/bottle-final.webp": [768, 1024],
+  "/assets/hero/bottle-label.webp": [768, 1024],
+  "/assets/photos/agua.webp": [640, 960, 1440],
+  "/assets/photos/botella-calle.webp": [640, 960, 1024],
+  "/assets/photos/burbujas.webp": [640, 960, 1440],
+  "/assets/photos/etiquetas.webp": [640, 960, 1440],
+  "/assets/photos/idea.webp": [640, 960, 1440],
+  "/assets/photos/mesa.webp": [640, 960, 1440],
+  "/assets/photos/pico-de-orizaba.webp": [640, 828],
+  "/assets/photos/preformas.webp": [640, 960, 1440],
+  "/assets/photos/refri-mog.webp": [640, 960, 1079],
+  "/assets/photos/tapas.webp": [640, 960, 1536],
+  "/assets/photos/valle-tehuacan.webp": [640, 960, 1440],
+  "/assets/products/familia.webp": [640, 880],
+  "/assets/products/marcas-propias.webp": [640, 960, 1280],
+  "/assets/products/sabores.webp": [640, 960, 1280],
+  "/assets/products/tarima.webp": [640, 960, 1280],
+};

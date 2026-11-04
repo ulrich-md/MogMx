@@ -12,12 +12,24 @@
       name="description"
       content="MOG México embotella agua mineral de Tehuacán, Puebla, con tu propia marca. Marca propia, mejora de formulación y diversidad de envases y tapas, también para otras bebidas."
     />
+    <!-- Static share tags: WhatsApp / Facebook / LinkedIn read the raw HTML (no JS) -->
+    <meta data-rh="true" property="og:type" content="website" />
+    <meta data-rh="true" property="og:site_name" content="MOG México" />
+    <meta data-rh="true" property="og:locale" content="es_MX" />
+    <meta data-rh="true" property="og:title" content="MOG México · Agua mineral de Tehuacán con tu propia marca" />
+    <meta data-rh="true" property="og:description" content="MOG México embotella agua mineral de Tehuacán, Puebla, con tu propia marca. Marca propia, mejora de formulación y diversidad de envases y tapas, también para otras bebidas." />
+    <meta data-rh="true" property="og:url" content="https://mogmx.com/" />
+    <meta data-rh="true" property="og:image" content="https://mogmx.com/og-mog.jpg" />
+    <meta data-rh="true" property="og:image:width" content="1200" />
+    <meta data-rh="true" property="og:image:height" content="630" />
+    <meta data-rh="true" name="twitter:card" content="summary_large_image" />
+    <meta data-rh="true" name="twitter:image" content="https://mogmx.com/og-mog.jpg" />
     <link rel="preconnect" href="https://wa.me" />
     <!-- Hero bottle layers: needed before the build animation can start -->
-    <link rel="preload" as="image" href="/assets/hero/bottle-empty.webp?v=4" type="image/webp" fetchpriority="high" />
-    <link rel="preload" as="image" href="/assets/hero/bottle-filled.webp?v=4" type="image/webp" fetchpriority="high" />
-    <link rel="preload" as="image" href="/assets/hero/bottle-label.webp?v=4" type="image/webp" />
-    <link rel="preload" as="image" href="/assets/hero/bottle-cap.webp?v=4" type="image/webp" />
+    <link rel="preload" as="image" href="/assets/hero/bottle-empty.webp?v=4" imagesrcset="/assets/hero/bottle-empty-768.webp?v=4 768w, /assets/hero/bottle-empty.webp?v=4 1024w" imagesizes="(min-width: 1024px) 58vh, 38vh" type="image/webp" fetchpriority="high" />
+    <link rel="preload" as="image" href="/assets/hero/bottle-filled.webp?v=4" imagesrcset="/assets/hero/bottle-filled-768.webp?v=4 768w, /assets/hero/bottle-filled.webp?v=4 1024w" imagesizes="(min-width: 1024px) 58vh, 38vh" type="image/webp" fetchpriority="high" />
+    <link rel="preload" as="image" href="/assets/hero/bottle-label.webp?v=4" imagesrcset="/assets/hero/bottle-label-768.webp?v=4 768w, /assets/hero/bottle-label.webp?v=4 1024w" imagesizes="(min-width: 1024px) 58vh, 38vh" type="image/webp" />
+    <link rel="preload" as="image" href="/assets/hero/bottle-cap.webp?v=4" imagesrcset="/assets/hero/bottle-cap-768.webp?v=4 768w, /assets/hero/bottle-cap.webp?v=4 1024w" imagesizes="(min-width: 1024px) 58vh, 38vh" type="image/webp" />
   </head>
   <body>
     <div id="root"></div>

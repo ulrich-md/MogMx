@@ -2,7 +2,7 @@ import { useRef } from "react";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { Button } from "../ui/Button";
 import { Eyebrow } from "../ui/Eyebrow";
-import { photos } from "@/lib/assets";
+import { photos, srcSet } from "@/lib/assets";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -17,7 +17,7 @@ export function StatementBand() {
   return (
     <section ref={ref} className="relative isolate overflow-hidden bg-abyss">
       <motion.img
-        src={photos.table}
+        src={photos.table} srcSet={srcSet(photos.table)} sizes="(min-width: 1024px) 60vw, 100vw"
         alt=""
         aria-hidden="true"
         loading="lazy"
@@ -33,7 +33,7 @@ export function StatementBand() {
       {/* Phones: the photo stands on its own, then the type on ink */}
       <div className="relative aspect-[4/3] w-full overflow-hidden lg:hidden">
         <img
-          src={photos.table}
+          src={photos.table} srcSet={srcSet(photos.table)} sizes="(min-width: 1024px) 60vw, 100vw"
           alt=""
           aria-hidden="true"
           loading="lazy"

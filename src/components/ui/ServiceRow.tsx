@@ -44,9 +44,9 @@ export function ServiceRow({
         </div>
 
         <div className="lg:col-span-6">
-          <h3 className="poster text-[2.6rem] text-ink transition-transform duration-500 ease-water group-hover:translate-x-1.5 md:text-[3.6rem]">
+          <h2 className="poster text-[2.6rem] text-ink transition-transform duration-500 ease-water group-hover:translate-x-1.5 md:text-[3.6rem]">
             {service.title}
-          </h3>
+          </h2>
           <p className="mt-5 max-w-xl text-[1.02rem] leading-relaxed text-slate">{service.detail}</p>
           <ul className="mt-6 grid gap-2.5 border-t border-line pt-5 sm:grid-cols-2">
             {service.points.map((point) => {

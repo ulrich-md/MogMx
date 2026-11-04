@@ -97,17 +97,15 @@ export function Footer() {
 
       {/* Giant wordmark, cropped by the page edge like a label seam */}
       <div aria-hidden="true" className="container-px select-none">
-        <p className="poster -mb-[0.06em] mt-6 text-left text-[30vw] leading-[0.74] text-white/[0.06] lg:text-[21vw]">
-          MOG
-        </p>
+        <p data-text="MOG" className="poster pseudo-text -mb-[0.06em] mt-6 text-left text-[30vw] leading-[0.74] text-white/[0.06] lg:text-[21vw]" />
       </div>
 
       <div className="border-t border-line-dark">
         <div className="container-px flex flex-col gap-3 py-6 sm:flex-row sm:items-center sm:justify-between">
-          <p className="readout text-white/45">
+          <p className="readout text-white/65">
             © {year} {site.name}. Todos los derechos reservados.
           </p>
-          <div className="readout flex items-center gap-5 text-white/45">
+          <div className="readout flex items-center gap-5 text-white/65">
             {/* EDITABLE: enlazar aviso de privacidad y términos reales */}
             <a href="#" className="transition-colors hover:text-white">
               Aviso de privacidad

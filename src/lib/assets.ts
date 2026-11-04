@@ -1,3 +1,4 @@
+import { imageWidths } from "./imageWidths";
 /**
  * Raster brand assets (served from /public/assets).
  * Bump ASSET_VERSION whenever an image is replaced under the same name, so
@@ -14,6 +15,9 @@ export const bottle = {
   cap: a("/assets/hero/bottle-cap.webp"),
   label: a("/assets/hero/bottle-label.webp"),
   final: a("/assets/hero/bottle-final.webp"),
+  // Shape-only masks: the small variants are plenty and are already cached
+  filledMask: a("/assets/hero/bottle-filled-768.webp"),
+  finalMask: a("/assets/hero/bottle-final-768.webp"),
   filler: a("/assets/hero/filler.webp"),
   width: 1024,
   height: 1536,
@@ -88,3 +92,15 @@ export const processImages: Record<string, { src: string; alt: string }> = {
   "05": { src: photos.labels, alt: "Rollo de etiquetas impresas listas para aplicarse" },
   "06": { src: products.pallet, alt: "Tarima con paquetes de botellas listas para distribución" },
 };
+
+/** `srcset` for an asset URL from the generated width map (undefined if no variants). */
+export function srcSet(src: string): string | undefined {
+  const [path, query] = src.split("?");
+  const widths = imageWidths[path];
+  if (!widths || widths.length < 2) return undefined;
+  const full = widths[widths.length - 1];
+  const q = query ? `?${query}` : "";
+  return widths
+    .map((w) => `${w === full ? path : path.replace(/\.webp$/, `-${w}.webp`)}${q} ${w}w`)
+    .join(", ");
+}
