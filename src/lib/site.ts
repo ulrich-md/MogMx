@@ -34,6 +34,8 @@ export const site = {
     whatsappDisplay: "+52 238 207 4498",
     // Por ahora no hay correo: el canal es WhatsApp / teléfono.
     phone: "+52 238 207 4498",
+    // Horario de atención (los días aún por confirmar)
+    hours: "8:00 a.m. – 4:00 p.m.",
   },
 } as const;
 

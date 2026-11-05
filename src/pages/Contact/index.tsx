@@ -75,7 +75,7 @@ export default function Contact() {
     <>
       <Seo
         title="Contacto"
-        description="Contáctanos por WhatsApp, correo o teléfono. MOG México, agua mineral de Tehuacán, Puebla, embotellada con tu marca."
+        description="Contáctanos por WhatsApp o teléfono. MOG México, agua mineral de Tehuacán, Puebla, embotellada con tu marca."
         path="/contacto"
       />
       <PageHero
@@ -122,8 +122,7 @@ export default function Contact() {
                 <InfoRow key={c.label} icon={c.icon} label={c.label} value={c.value} href={c.href} external={c.external} />
               ))}
               <InfoRow icon={MapPin} label="Ubicación" value={site.location.label} href={mapsHref} external />
-              {/* EDITABLE: horario real de atención */}
-              <InfoRow icon={Clock} label="Horario" value="[horario de atención]" />
+              <InfoRow icon={Clock} label="Horario" value={site.contact.hours} />
             </ul>
           </div>
 
